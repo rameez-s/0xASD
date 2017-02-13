@@ -1,13 +1,17 @@
 Java CS Game
 ---
-## Information about the game
-1. Write information about the game here.
+To change things on this page edit the readme.md file
+#### Information about the game
+	Write things about the game here
 ---
 ### Record of Tasks
 |Name|Description|Status|Date|
 |:---:|:---:|:---:|:---:|
 |Example|Example Desc|Example status|2/13/2017|
-|Example2|Example Desc|Example status|Leave blank if not complete|
+
+To add another row to the table just add |name|description|status|date| to the line above this.
+
+If the task is not complete just leave the date blank. Remember to update the readme.md when you sync.
 
 Git Tutorial
 ---
