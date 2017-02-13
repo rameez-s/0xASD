@@ -14,6 +14,7 @@ Git Tutorial
 #### Prerequisites
 1. Git for Windows - <a href = "https://git-scm.com/downloads">Get it here</a>
 ---
+# Usage
 1. Clone the repository to somewhere on your computer.
     1. To do this using Git for Windows open git bash and change the working directory using "cd DIRECTORY"
     2. In git bash again type "git clone https://github.com/rameez-s/JavaCS-Game-01.git" this will download the repository
