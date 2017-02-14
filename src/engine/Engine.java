@@ -19,10 +19,10 @@ public class Engine {
     private long window;
     private int width = 1280, height = 720;
     private boolean fullscreen = false;
-
+    int updateRate = 60;
     public void start(){
         init();
-        update();
+        loop();
         glfwTerminate();
     }
 
@@ -54,28 +54,63 @@ public class Engine {
         GL.createCapabilities();
     }
 
-    private void update(){
-        Quad q = new Quad(32, 0);
-        Texture t = new Texture("default.png");
-        Shader s = new Shader("default");
-        Matrix4f projection = new Matrix4f().orthographic(-512, 512, -512, 512, 10, -10);
-        while(glfwWindowShouldClose(window) != true){
-
-            if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GL_TRUE){
-                glfwSetWindowShouldClose(window, true);
+    Quad q;
+    Texture t;
+    Shader s;
+    Matrix4f projection;
+    Vector3f position;
+    private void loop(){
+        q = new Quad(32, 0);
+        t = new Texture("default.png");
+        s = new Shader("default");
+        projection = new Matrix4f().orthographic(-512, 512, -512, 512, 10, -10);
+        position = new Vector3f(1, 0, 0);
+        long lastTime = System.nanoTime();
+        long updateTime = 1000000000/updateRate;
+        update();
+        while(!glfwWindowShouldClose(window)){
+            long now = System.nanoTime();
+            if(now > (lastTime + updateTime)){
+                System.out.println("Updated");
+                lastTime = now;
+                update();
             }
-
-            glfwPollEvents();
-            glClear(GL_COLOR_BUFFER_BIT);
-            s.bind();
-            s.setUniform("sampler", 1);
-            s.setUniform("projection", projection);
-            t.bind(1);
-            q.render();
-            glfwSwapBuffers(window);
+            render();
         }
+
     }
 
+    private void update(){
+        if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GL_TRUE){
+            glfwSetWindowShouldClose(window, true);
+        }
+        if(glfwGetKey(window, GLFW_KEY_D) == GL_TRUE){
+            position.x += 3;
+        }
+        if(glfwGetKey(window, GLFW_KEY_A) == GL_TRUE){
+            position.x -= 3;
+        }
+        if(glfwGetKey(window, GLFW_KEY_SPACE) == GL_TRUE){
+            position.y++;
+        }
+        if(position.y > -256) {
+            position.y -= 9.81;
+        }else{
+            position.y = -257;
+        }
+        glfwPollEvents();
+        s.bind();
+        s.setUniform("sampler", 1);
+        s.setUniform("projection", projection);
+        s.setUniform("position", position);
+    }
+
+    private void render(){
+        glClear(GL_COLOR_BUFFER_BIT);
+        t.bind(1);
+        q.render();
+        glfwSwapBuffers(window);
+    }
 
     public static void main(String[] args){
         new Engine().start();
