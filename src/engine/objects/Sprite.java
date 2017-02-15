@@ -29,8 +29,8 @@ public class Sprite extends Quad {
 
     public Sprite(float size, float z){
         super(size, z);
-        position = new Vector3f(0, 0, 0);
-        velocity = new Vector3f(0, 0, 0);
+        position = new Vector3f();
+        velocity = new Vector3f();
         texture = new Texture("default.png");
         shader = new Shader("default");
     }

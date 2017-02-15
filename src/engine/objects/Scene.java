@@ -21,11 +21,21 @@ public abstract class Scene {
         element.currentScene = this;
     }
 
+    public boolean remove(Quad element){
+        return elements.remove(element);
+    }
+
     public void update(){
-        elements.forEach(Quad::update);
+        for (int i = elements.size() - 1; i >= 0; i--) {
+            elements.get(i).update();
+        }
+        //elements.forEach(Quad::update);
     }
 
     public void render(){
-        elements.forEach(Quad::render);
+        for (int i = elements.size() - 1; i >= 0; i--) {
+            elements.get(i).render();
+        }
+        //elements.forEach(Quad::render);
     }
 }

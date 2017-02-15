@@ -2,6 +2,7 @@ package example;
 
 import engine.Engine;
 import engine.math.Vector3f;
+import engine.objects.Projectile;
 import engine.objects.Scene;
 import engine.objects.Sprite;
 import engine.rendering.Quad;
@@ -26,11 +27,12 @@ public class ExampleScene extends Scene {
                 }
 
                 if(glfwGetKey(window, GLFW_KEY_ENTER) == GL_TRUE){
-                    Sprite s2 = new Sprite(8f, 1);
+                    Projectile s2 = new Projectile(16f, 1, 500000000);
+                    s2.startTime = System.nanoTime();
                     add(s2);
                     Sprite s1 = (Sprite)elements.get(0);
                     s2.position = new Vector3f(s1.position.x, s1.position.y,s1.position.z);
-                    s2.velocity.x = 50;
+                    s2.velocity.x = 100;
                     s2.velocity.add(new Vector3f(s1.velocity.x, 0, 0));
                     System.out.println(elements.size());
                 }
