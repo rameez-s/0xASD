@@ -14,7 +14,7 @@ import static org.lwjgl.opengl.GL20.*;
  * Created by 18iwahlqvist on 2/12/2017.
  */
 public class Shader {
-    private int program, vertShader, fragShader;
+    public int program, vertShader, fragShader;
 
     public Shader(String filename){
         program = glCreateProgram();

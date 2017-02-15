@@ -34,27 +34,9 @@ public class Sprite extends Quad {
         texture = new Texture("default.png");
         shader = new Shader("default");
     }
-    long window = Engine.instance.getWindow();
 
     public void update(){
-
-        if(glfwGetKey(window, GLFW_KEY_D) == GL_TRUE){
-            velocity.x += 2;
-        }
-        if(glfwGetKey(window, GLFW_KEY_A) == GL_TRUE){
-            velocity.x -= 2;
-        }
-        if(position.y > -256) {
-            velocity.y -= 10;
-        }else{
-            position.y = -257;
-            velocity.y = 0;
-            if(glfwGetKey(window, GLFW_KEY_SPACE) == GL_TRUE){
-                velocity.y = 20;
-            }
-        }
         velocity.set(velocity.x*0.80f, velocity.y*0.80f, velocity.z);
-
         position.add(velocity);
         shader.bind();
         shader.setUniform("sampler", 1);
@@ -63,6 +45,7 @@ public class Sprite extends Quad {
     }
 
     public void render(){
+        shader.bind();
         texture.bind(1);
         super.render();
     }

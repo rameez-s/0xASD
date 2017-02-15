@@ -40,7 +40,7 @@ public class Engine {
 
     private void init(){
         if(glfwInit() == false){
-            System.out.println("GLFW Init is not working");
+            System.out.println("GLHF");
             System.exit(1);
         }
 
@@ -69,7 +69,7 @@ public class Engine {
     private void loop(){
         s = new ExampleScene();
         s.add(new Sprite(32, 1));
-        Sprite sprite = new Sprite(16, 1);
+        Sprite sprite = new Sprite(32, 1);
         sprite.position = new Vector3f(-300, 0, 1);
         s.add(sprite);
         long lastTime = System.nanoTime();
