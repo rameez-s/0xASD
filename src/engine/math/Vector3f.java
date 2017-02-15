@@ -1,5 +1,6 @@
 package engine.math;
 
+
 /**
  * Created by ISAKPC on 2/13/2017.
  */
@@ -16,5 +17,21 @@ public class Vector3f {
         this.x = x;
         this.y = y;
         this.z = z;
+    }
+
+    public void set(float x, float y, float z){
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+
+    public void add(Vector3f vector3f){
+        x += vector3f.x;
+        y += vector3f.y;
+        z += vector3f.z;
+    }
+
+    public String toString(){
+        return "{" + x + ", " + y + ", " + z + "}";
     }
 }

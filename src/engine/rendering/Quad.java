@@ -1,6 +1,7 @@
 package engine.rendering;
 
 import com.sun.deploy.util.BufferUtil;
+import engine.objects.Scene;
 import org.lwjgl.BufferUtils;
 
 import java.nio.FloatBuffer;
@@ -18,6 +19,7 @@ import static org.lwjgl.opengl.GL20.glVertexAttribPointer;
 public class Quad {
     private int v_id, t_id, i_id;
     private int draw_count;
+    public Scene currentScene;
 
     public Quad(){
         this(0.2f, 0.0f);
@@ -59,6 +61,10 @@ public class Quad {
 
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    }
+
+    public void update(){
 
     }
 
