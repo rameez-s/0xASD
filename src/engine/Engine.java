@@ -70,7 +70,7 @@ public class Engine {
         s = new ExampleScene();
         s.add(new Sprite(32, 1));
         Sprite sprite = new Sprite(32, 1);
-        sprite.position = new Vector3f(-300, 0, 1);
+        sprite.position = new Vector3f(-300, -257, 1);
         s.add(sprite);
         long lastTime = System.nanoTime();
         long updateTime = 1000000000/updateRate;

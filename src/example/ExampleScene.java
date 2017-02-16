@@ -46,21 +46,9 @@ public class ExampleScene extends Scene {
                     }
                 }
             }else if(i == 1){
-                Sprite s = (Sprite) elements.get(i);
-                if (glfwGetKey(window, GLFW_KEY_D) == GL_TRUE) {
-                    s.velocity.x += 2;
-                }
-                if (glfwGetKey(window, GLFW_KEY_A) == GL_TRUE) {
-                    s.velocity.x -= 2;
-                }
-                if (s.position.y > -256) {
-                    s.velocity.y -= 10;
-                } else {
-                    s.position.y = -257;
-                    s.velocity.y = 0;
-                    if (glfwGetKey(window, GLFW_KEY_SPACE) == GL_TRUE) {
-                        s.velocity.y = 50;
-                    }
+                Sprite s = (Sprite)elements.get(1);
+                if(s.collidesWith((Sprite) elements.get(0))){
+                    System.out.println("Collides");
                 }
             }
         }

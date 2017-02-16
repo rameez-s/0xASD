@@ -20,12 +20,13 @@ public class Quad {
     private int v_id, t_id, i_id;
     private int draw_count;
     public Scene currentScene;
-
+    public float size;
     public Quad(){
         this(0.2f, 0.0f);
     }
 
     public Quad(float size, float z){
+        this.size = size;
         float[] vertices = {
                 -size, size * (16.0f/9), z,
                 size, size * (16.0f/9), z,

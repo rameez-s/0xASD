@@ -44,6 +44,12 @@ public class Sprite extends Quad {
         shader.setUniform("position", position);
     }
 
+    public boolean collidesWith(Sprite s){
+        boolean collidesX = Math.abs(position.x - s.position.x) < (s.size + size);
+        boolean collidesY = Math.abs(position.y - s.position.y) < (s.size + size);
+        return collidesX && collidesY;
+    }
+
     public void render(){
         shader.bind();
         texture.bind(1);
