@@ -8,6 +8,8 @@ import engine.rendering.Quad;
 import engine.rendering.Shader;
 import engine.rendering.Texture;
 import example.ExampleScene;
+import objects.Player;
+import org.lwjgl.glfw.GLFWFramebufferSizeCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 
@@ -25,6 +27,8 @@ public class Engine {
     private boolean fullscreen = false;
 
     public static Engine instance;
+
+    GLFWFramebufferSizeCallback fsCallback;
     int updateRate = 60;
 
     public long getWindow() {
@@ -60,6 +64,17 @@ public class Engine {
 
         }
 
+
+        glfwSetFramebufferSizeCallback(window, fsCallback = new GLFWFramebufferSizeCallback() {
+            public void invoke(long window, int w, int h) {
+                if (w > 0 && h > 0) {
+                    width = w;
+                    height = h;
+                }
+            }
+        });
+
+
         glfwShowWindow(window);
 
         glfwMakeContextCurrent(window);
@@ -68,20 +83,31 @@ public class Engine {
     Scene s;
     private void loop(){
         s = new ExampleScene();
-        s.add(new Sprite(32, 1));
+        s.add(new Player());
         Sprite sprite = new Sprite(32, 1);
         sprite.position = new Vector3f(-300, -257, 1);
         s.add(sprite);
         long lastTime = System.nanoTime();
         long updateTime = 1000000000/updateRate;
+        long oneSecondTime = lastTime + 1000000000;
         update();
+        int fps = 0;
+        int ups = 0;
         while(!glfwWindowShouldClose(window)){
             long now = System.nanoTime();
             if(now > (lastTime + updateTime)){
                 lastTime = now;
                 update();
+                ups++;
             }
+            fps++;
             render();
+            if(System.nanoTime() > oneSecondTime){
+                System.out.println("Frames per second: " + fps + "\tUpdates per second: " + ups);
+                ups = 0;
+                fps = 0;
+                oneSecondTime += 1000000000;
+            }
         }
 
     }

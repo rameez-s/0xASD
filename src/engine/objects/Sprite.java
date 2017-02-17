@@ -36,7 +36,6 @@ public class Sprite extends Quad {
     }
 
     public void update(){
-        velocity.set(velocity.x*0.80f, velocity.y*0.80f, velocity.z);
         position.add(velocity);
         shader.bind();
         shader.setUniform("sampler", 1);

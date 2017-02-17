@@ -22,7 +22,7 @@ public class Quad {
     public Scene currentScene;
     public float size;
     public Quad(){
-        this(0.2f, 0.0f);
+        this(32f, 0.0f);
     }
 
     public Quad(float size, float z){
