@@ -13,6 +13,8 @@ import org.lwjgl.glfw.GLFWFramebufferSizeCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 
+import java.util.ArrayList;
+
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL13.glActiveTexture;
@@ -28,8 +30,13 @@ public class Engine {
 
     public static Engine instance;
 
+    public int currentScene;
+    public ArrayList<Scene> scenes = new ArrayList<>();
+
+    public boolean vSync = true;
+
     GLFWFramebufferSizeCallback fsCallback;
-    int updateRate = 60;
+    public int updateRate = 120;
 
     public long getWindow() {
         return window;
@@ -57,36 +64,32 @@ public class Engine {
             glfwWindowHint(GLFW_REFRESH_RATE, vidMode.refreshRate());
 
             window = glfwCreateWindow(vidMode.width(), vidMode.height(), "Game", glfwGetPrimaryMonitor(), 0);
-        }else{
+        }else {
             glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
             window = glfwCreateWindow(width, height, "Game", 0, 0);
-            glfwSetWindowPos(window, (vidMode.width()-width)/2, (vidMode.height()-height)/2);
+            glfwSetWindowPos(window, (vidMode.width() - width) / 2, (vidMode.height() - height) / 2);
 
         }
 
-
-        glfwSetFramebufferSizeCallback(window, fsCallback = new GLFWFramebufferSizeCallback() {
-            public void invoke(long window, int w, int h) {
-                if (w > 0 && h > 0) {
-                    width = w;
-                    height = h;
-                }
-            }
-        });
-
+        if (vSync) {
+            glfwSwapInterval(1);
+        }else{
+            glfwSwapInterval(0);
+        }
 
         glfwShowWindow(window);
 
         glfwMakeContextCurrent(window);
         GL.createCapabilities();
     }
-    Scene s;
     private void loop(){
-        s = new ExampleScene();
+        Scene s = new ExampleScene();
         s.add(new Player());
         Sprite sprite = new Sprite(32, 1);
         sprite.position = new Vector3f(-300, -257, 1);
         s.add(sprite);
+        scenes.add(s);
+        currentScene = 0;
         long lastTime = System.nanoTime();
         long updateTime = 1000000000/updateRate;
         long oneSecondTime = lastTime + 1000000000;
@@ -116,14 +119,17 @@ public class Engine {
         if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GL_TRUE){
             glfwSetWindowShouldClose(window, true);
         }
-
-        s.update();
+        for(Scene s : scenes) {
+            if(s.backgroundUpdate) {
+                s.update();
+            }
+        }
         glfwPollEvents();
     }
 
     private void render(){
         glClear(GL_COLOR_BUFFER_BIT);
-        s.render();
+        scenes.get(currentScene).render();
         glfwSwapBuffers(window);
     }
 

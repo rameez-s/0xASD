@@ -22,11 +22,11 @@ public class Player extends Sprite {
     public void update(){
         super.update();
         if (glfwGetKey(window, GLFW_KEY_D) == GL_TRUE) {
-            velocity.x += 3;
+            velocity.x += 1f;
             facingRight = true;
         }
         if (glfwGetKey(window, GLFW_KEY_A) == GL_TRUE) {
-            velocity.x -= 3;
+            velocity.x -= 1f;
             facingRight = false;
         }
         if(fireReady == true) {
@@ -36,9 +36,9 @@ public class Player extends Sprite {
                 currentScene.add(s2);
                 s2.position = new Vector3f(position.x, position.y, position.z);
                 if(facingRight) {
-                    s2.velocity.x = 100;
+                    s2.velocity.x = 50;
                 }else{
-                    s2.velocity.x = -100;
+                    s2.velocity.x = -50;
                 }
                 s2.velocity.add(new Vector3f(velocity.x, 0, 0));
 
@@ -51,14 +51,14 @@ public class Player extends Sprite {
             }
         }
         if (position.y > -256) {
-            velocity.y -= 10;
+            velocity.y -= 2.5f;
         } else {
             position.y = -257;
             velocity.y = 0;
             if (glfwGetKey(window, GLFW_KEY_SPACE) == GL_TRUE) {
-                velocity.y = 70;
+                velocity.y = 45;
             }
         }
-        velocity.set(velocity.x * 0.8f, velocity.y * 0.8f, 0);
+        velocity.set(velocity.x * 0.9f, velocity.y * 0.9f, 0);
     }
 }

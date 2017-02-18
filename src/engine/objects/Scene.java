@@ -12,6 +12,8 @@ public abstract class Scene {
     public ArrayList<Quad> elements = new ArrayList<>();
     public Matrix4f projection = new Matrix4f().orthographic(-512, 512, -512, 512, 10, -10);
 
+    public boolean backgroundUpdate = true;
+
     public Scene(){
         projection = new Matrix4f().orthographic(-512, 512, -512, 512, 10, -10);
     }
@@ -29,13 +31,11 @@ public abstract class Scene {
         for (int i = elements.size() - 1; i >= 0; i--) {
             elements.get(i).update();
         }
-        //elements.forEach(Quad::update);
     }
 
     public void render(){
         for (int i = elements.size() - 1; i >= 0; i--) {
             elements.get(i).render();
         }
-        //elements.forEach(Quad::render);
     }
 }
