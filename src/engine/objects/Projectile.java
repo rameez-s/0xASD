@@ -15,13 +15,10 @@ public class Projectile extends Sprite {
         this.killTime = killTime;
     }
     public void update(){
+        super.update();
         position.add(velocity);
-        shader.bind();
-        shader.setUniform("sampler", 1);
-        shader.setUniform("projection", currentScene.projection);
-        shader.setUniform("position", position);
         if(System.nanoTime() > (startTime + killTime)){
-            currentScene.remove(this);
+            currentScene.remove(this, 2);
         }
     }
 

@@ -1,13 +1,10 @@
 package engine;
 
-import engine.math.Matrix4f;
 import engine.math.Vector3f;
+import engine.multiplayer.client.Client;
 import engine.objects.Scene;
-import engine.objects.Sprite;
-import engine.rendering.Quad;
-import engine.rendering.Shader;
-import engine.rendering.Texture;
 import example.ExampleScene;
+import objects.CreatureMightRename;
 import objects.Player;
 import org.lwjgl.glfw.GLFWFramebufferSizeCallback;
 import org.lwjgl.glfw.GLFWVidMode;
@@ -15,9 +12,9 @@ import org.lwjgl.opengl.GL;
 
 import java.util.ArrayList;
 
+import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL13.glActiveTexture;
 
 /**
  * Created by 18iwahlqvist on 2/12/2017.
@@ -46,8 +43,13 @@ public class Engine {
         instance = this;
         init();
         loop();
+
+        glfwFreeCallbacks(window);
+        glfwDestroyWindow(window);
         glfwTerminate();
     }
+
+
 
     private void init(){
         if(glfwInit() == false){
@@ -81,13 +83,19 @@ public class Engine {
 
         glfwMakeContextCurrent(window);
         GL.createCapabilities();
+
     }
     private void loop(){
+        glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
+            if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
+                glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
+        });
         Scene s = new ExampleScene();
-        s.add(new Player());
-        Sprite sprite = new Sprite(32, 1);
+        s.add(new Player(), 3);
+        CreatureMightRename sprite = new CreatureMightRename();
+        sprite.test = true;
         sprite.position = new Vector3f(-300, -257, 1);
-        s.add(sprite);
+        s.add(sprite, 1);
         scenes.add(s);
         currentScene = 0;
         long lastTime = System.nanoTime();
@@ -96,15 +104,17 @@ public class Engine {
         update();
         int fps = 0;
         int ups = 0;
+        new Client();
         while(!glfwWindowShouldClose(window)){
             long now = System.nanoTime();
-            if(now > (lastTime + updateTime)){
+            if(now >= (lastTime + updateTime)){
                 lastTime = now;
                 update();
                 ups++;
             }
-            fps++;
+
             render();
+            fps++;
             if(System.nanoTime() > oneSecondTime){
                 System.out.println("Frames per second: " + fps + "\tUpdates per second: " + ups);
                 ups = 0;
@@ -116,9 +126,6 @@ public class Engine {
     }
 
     private void update(){
-        if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GL_TRUE){
-            glfwSetWindowShouldClose(window, true);
-        }
         for(Scene s : scenes) {
             if(s.backgroundUpdate) {
                 s.update();
@@ -132,6 +139,8 @@ public class Engine {
         scenes.get(currentScene).render();
         glfwSwapBuffers(window);
     }
+
+
 
     public static void main(String[] args){
         new Engine().start();

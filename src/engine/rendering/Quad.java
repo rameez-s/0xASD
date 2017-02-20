@@ -21,48 +21,33 @@ public class Quad {
     private int draw_count;
     public Scene currentScene;
     public float size;
+    private boolean renderedBefore = false;
     public Quad(){
         this(32f, 0.0f);
     }
-
+    float[] vertices;
+    float[] tcs;
+    int[] indices;
     public Quad(float size, float z){
         this.size = size;
-        float[] vertices = {
+        vertices = new float[]{
                 -size, size * (16.0f/9), z,
                 size, size * (16.0f/9), z,
                 size, -size * (16.0f/9), z,
                 -size, -size * (16.0f/9), z
         };
 
-        float[] tcs = {
+        tcs = new float[]{
                 1, 0,
                 0, 0,
                 0, 1,
                 1, 1
         };
 
-        int[] indices = {
+        indices = new int[]{
                 0, 1, 2,
                 2, 3, 0
         };
-
-        draw_count = indices.length;
-
-        v_id = glGenBuffers();
-        glBindBuffer(GL_ARRAY_BUFFER, v_id);
-        glBufferData(GL_ARRAY_BUFFER, engine.util.BufferUtil.createFloatBuffer(vertices), GL_STATIC_DRAW);
-
-        t_id = glGenBuffers();
-        glBindBuffer(GL_ARRAY_BUFFER, t_id);
-        glBufferData(GL_ARRAY_BUFFER, engine.util.BufferUtil.createFloatBuffer(tcs), GL_STATIC_DRAW);
-
-        i_id = glGenBuffers();
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, i_id);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, engine.util.BufferUtil.createIntBuffer(indices), GL_STATIC_DRAW);
-
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-
     }
 
     public void update(){
@@ -70,6 +55,26 @@ public class Quad {
     }
 
     public void render(){
+        if(!renderedBefore){
+
+            draw_count = indices.length;
+
+            v_id = glGenBuffers();
+            glBindBuffer(GL_ARRAY_BUFFER, v_id);
+            glBufferData(GL_ARRAY_BUFFER, engine.util.BufferUtil.createFloatBuffer(vertices), GL_STATIC_DRAW);
+
+            t_id = glGenBuffers();
+            glBindBuffer(GL_ARRAY_BUFFER, t_id);
+            glBufferData(GL_ARRAY_BUFFER, engine.util.BufferUtil.createFloatBuffer(tcs), GL_STATIC_DRAW);
+
+            i_id = glGenBuffers();
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, i_id);
+            glBufferData(GL_ELEMENT_ARRAY_BUFFER, engine.util.BufferUtil.createIntBuffer(indices), GL_STATIC_DRAW);
+
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+            glBindBuffer(GL_ARRAY_BUFFER, 0);
+            renderedBefore = true;
+        }
         glEnableVertexAttribArray(0);
         glEnableVertexAttribArray(1);
 

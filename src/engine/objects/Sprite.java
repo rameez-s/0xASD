@@ -19,28 +19,33 @@ public class Sprite extends Quad {
     public Texture texture;
     public Shader shader;
 
+    private String texturePath, shaderPath;
+
+    private boolean renderedBeforeSprite;
+
     public Sprite(){
         super();
         position = new Vector3f();
         velocity = new Vector3f();
-        texture = new Texture("default.png");
-        shader = new Shader("default");
+        texturePath = "default.png";
+        shaderPath = "default";
+    }
+
+    public void setTexture(String textureFile){
+        texturePath = textureFile;
+        renderedBeforeSprite = false;
     }
 
     public Sprite(float size, float z){
         super(size, z);
         position = new Vector3f();
         velocity = new Vector3f();
-        texture = new Texture("default.png");
-        shader = new Shader("default");
+        texturePath = "default.png";
+        shaderPath = "default";
     }
 
     public void update(){
         position.add(velocity);
-        shader.bind();
-        shader.setUniform("sampler", 1);
-        shader.setUniform("projection", currentScene.projection);
-        shader.setUniform("position", position);
     }
 
     public boolean collidesWith(Sprite s){
@@ -50,9 +55,17 @@ public class Sprite extends Quad {
     }
 
     public void render(){
+        super.render();
+        if(!renderedBeforeSprite){
+            texture = new Texture(texturePath);
+            shader = new Shader(shaderPath);
+            renderedBeforeSprite = true;
+        }
         shader.bind();
         texture.bind(1);
-        super.render();
+        shader.setUniform("sampler", 1);
+        shader.setUniform("projection", currentScene.projection);
+        shader.setUniform("position", position);
     }
 
 }
