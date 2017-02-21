@@ -92,10 +92,10 @@ public class Engine {
         });
         Scene s = new ExampleScene();
         s.add(new Player(), 3);
-        CreatureMightRename sprite = new CreatureMightRename();
-        sprite.test = true;
-        sprite.position = new Vector3f(-300, -257, 1);
-        s.add(sprite, 1);
+//        CreatureMightRename sprite = new CreatureMightRename();
+//        sprite.test = true;
+//        sprite.position = new Vector3f(-300, -257, 1);
+//        s.add(sprite, 1);
         scenes.add(s);
         currentScene = 0;
         long lastTime = System.nanoTime();

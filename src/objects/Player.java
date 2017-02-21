@@ -33,7 +33,7 @@ public class Player extends CreatureMightRename {
             }
             if (fireReady == true) {
                 if (glfwGetKey(window, GLFW_KEY_ENTER) == GL_TRUE) {
-                    Projectile s2 = new Projectile(2f, 1, 1000000000);
+                    Projectile s2 = new Projectile(16f, 1, 1000000000);
                     s2.setTexture("projectile.png");
                     s2.startTime = System.nanoTime();
                     currentScene.add(s2, 2);

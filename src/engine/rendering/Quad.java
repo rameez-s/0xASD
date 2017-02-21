@@ -21,30 +21,27 @@ public class Quad {
     private int draw_count;
     public Scene currentScene;
     public float size;
-
     public Quad(){
         this(32f, 0.0f);
     }
-    float[] vertices;
-    float[] tcs;
-    int[] indices;
+
     public Quad(float size, float z){
         this.size = size;
-        vertices = new float[]{
+        float[] vertices = {
                 -size, size * (16.0f/9), z,
                 size, size * (16.0f/9), z,
                 size, -size * (16.0f/9), z,
                 -size, -size * (16.0f/9), z
         };
 
-        tcs = new float[]{
+        float[] tcs = {
                 1, 0,
                 0, 0,
                 0, 1,
                 1, 1
         };
 
-        indices = new int[]{
+        int[] indices = {
                 0, 1, 2,
                 2, 3, 0
         };
@@ -65,6 +62,7 @@ public class Quad {
 
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
+
     }
 
     public void update(){

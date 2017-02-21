@@ -40,6 +40,10 @@ public class Sprite extends Quad {
     }
 
     public void update(){
+        shader.bind();
+        shader.setUniform("sampler", 1);
+        shader.setUniform("projection", currentScene.projection);
+        shader.setUniform("position", position);
         position.add(velocity);
     }
 
@@ -50,12 +54,9 @@ public class Sprite extends Quad {
     }
 
     public void render(){
-        super.render();
         shader.bind();
         texture.bind(1);
-        shader.setUniform("sampler", 1);
-        shader.setUniform("projection", currentScene.projection);
-        shader.setUniform("position", position);
+        super.render();
     }
 
 }
