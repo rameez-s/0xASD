@@ -15,10 +15,10 @@ import static org.lwjgl.opengl.GL11.GL_TRUE;
 public class Player extends CreatureMightRename {
     public boolean facingRight = true;
     private boolean fireReady = true;
-    private long fireTime = 1500000000;
+    private long fireTime = 250000000;
     private long previousFireTime;
 
-    public boolean controllable = false;
+    public boolean controllable = true;
     long window = Engine.instance.getWindow();
     public void update(){
         super.update();
@@ -33,7 +33,7 @@ public class Player extends CreatureMightRename {
             }
             if (fireReady == true) {
                 if (glfwGetKey(window, GLFW_KEY_ENTER) == GL_TRUE) {
-                    Projectile s2 = new Projectile(16f, 1, 150000000);
+                    Projectile s2 = new Projectile(2f, 1, 1000000000);
                     s2.setTexture("projectile.png");
                     s2.startTime = System.nanoTime();
                     currentScene.add(s2, 2);
@@ -54,7 +54,7 @@ public class Player extends CreatureMightRename {
                     fireReady = true;
                 }
             }
-        }
+    }
         if (position.y > -256) {
             velocity.y -= 2.5f;
         } else {

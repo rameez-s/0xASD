@@ -104,7 +104,6 @@ public class Engine {
         update();
         int fps = 0;
         int ups = 0;
-        new Client();
         while(!glfwWindowShouldClose(window)){
             long now = System.nanoTime();
             if(now >= (lastTime + updateTime)){

@@ -19,29 +19,24 @@ public class Sprite extends Quad {
     public Texture texture;
     public Shader shader;
 
-    private String texturePath, shaderPath;
-
-    private boolean renderedBeforeSprite;
-
     public Sprite(){
         super();
         position = new Vector3f();
         velocity = new Vector3f();
-        texturePath = "default.png";
-        shaderPath = "default";
+        texture = new Texture("default.png");
+        shader = new Shader("default");
     }
 
     public void setTexture(String textureFile){
-        texturePath = textureFile;
-        renderedBeforeSprite = false;
+        texture = new Texture(textureFile);
     }
 
     public Sprite(float size, float z){
         super(size, z);
         position = new Vector3f();
         velocity = new Vector3f();
-        texturePath = "default.png";
-        shaderPath = "default";
+        texture = new Texture("default.png");
+        shader = new Shader("default");
     }
 
     public void update(){
@@ -56,11 +51,6 @@ public class Sprite extends Quad {
 
     public void render(){
         super.render();
-        if(!renderedBeforeSprite){
-            texture = new Texture(texturePath);
-            shader = new Shader(shaderPath);
-            renderedBeforeSprite = true;
-        }
         shader.bind();
         texture.bind(1);
         shader.setUniform("sampler", 1);
