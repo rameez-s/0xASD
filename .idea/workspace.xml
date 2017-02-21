@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d0de517f-13aa-4b2c-83cd-a4e117f9a8a2" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/projectile.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine/Engine.java" afterPath="$PROJECT_DIR$/src/engine/Engine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine/objects/Sprite.java" afterPath="$PROJECT_DIR$/src/engine/objects/Sprite.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine/rendering/Quad.java" afterPath="$PROJECT_DIR$/src/engine/rendering/Quad.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/objects/Player.java" afterPath="$PROJECT_DIR$/src/objects/Player.java" />
     </list>
     <ignored path="JavaCS game.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -743,7 +738,14 @@
       <option name="project" value="LOCAL" />
       <updated>1487598354822</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="projectile.png">
+      <created>1487667964254</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1487667964254</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -845,7 +847,8 @@
     <MESSAGE value="Continued working on projectiles" />
     <MESSAGE value="Added Collision Detection" />
     <MESSAGE value="First try at multiplayer very unstable and cannot connect on localhost" />
-    <option name="LAST_COMMIT_MESSAGE" value="First try at multiplayer very unstable and cannot connect on localhost" />
+    <MESSAGE value="projectile.png" />
+    <option name="LAST_COMMIT_MESSAGE" value="projectile.png" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
