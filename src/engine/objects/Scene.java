@@ -1,6 +1,7 @@
 package engine.objects;
 
 import engine.math.Matrix4f;
+import engine.math.Vector3f;
 import engine.rendering.Quad;
 import objects.CreatureMightRename;
 
@@ -14,12 +15,19 @@ public abstract class Scene {
     public ArrayList<CreatureMightRename> creatures = new ArrayList<>();
     public ArrayList<CreatureMightRename> players = new ArrayList<>();
     public ArrayList<Projectile> projectiles = new ArrayList<>();
+
+    Map map;
+
     public Matrix4f projection = new Matrix4f().orthographic(-512, 512, -512, 512, 10, -10);
 
     public boolean backgroundUpdate = true;
 
     public Scene(){
         projection = new Matrix4f().orthographic(-512, 512, -512, 512, 10, -10);
+    }
+
+    public void setMap(String fileName){
+        map = new Map(fileName);
     }
 
     public void add(Quad element, int array){
@@ -52,6 +60,39 @@ public abstract class Scene {
                 return projectiles.remove(element);
         }
         return elements.remove(element);
+    }
+
+    public void genMap(){
+        Vector3f position = new Vector3f();
+        for(byte[] r : map.mapData){
+            for(byte data : r){
+                position.add(new Vector3f(32, 0, 0));
+                Sprite s = new Sprite(32, 0f);
+                s.position = position;
+                switch (data) {
+                    case 0:
+                        s.setTexture("tiles/Tile0.png");
+                        break;
+                    case 1:
+                        s.setTexture("tiles/Tile1.png");
+                        break;
+                    case 2:
+                        s.setTexture("tiles/Tile2.png");
+                        break;
+                    case 3:
+                        s.setTexture("tiles/Tile3.png");
+                        break;
+                    case 4:
+                        s.setTexture("tiles/Tile4.png");
+                        break;
+                }
+                s.render();
+                s.currentScene = this;
+                s.update();
+                System.out.println(s.position);
+            }
+            position.add(new Vector3f(0, 32, 0));
+        }
     }
 
     public void update(){

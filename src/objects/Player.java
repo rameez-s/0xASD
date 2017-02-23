@@ -31,6 +31,13 @@ public class Player extends CreatureMightRename {
                 velocity.x -= 0.8f;
                 facingRight = false;
             }
+            if (glfwGetKey(window, GLFW_KEY_W) == GL_TRUE) {
+                velocity.y += 0.8f;
+            }
+            if (glfwGetKey(window, GLFW_KEY_S) == GL_TRUE) {
+                velocity.y -= 0.8f;
+            }
+            currentScene.projection.translate(new Vector3f(position.x, position.y, 0));
             if (fireReady == true) {
                 if (glfwGetKey(window, GLFW_KEY_ENTER) == GL_TRUE) {
                     Projectile s2 = new Projectile(16f, 1, 1000000000);
@@ -55,17 +62,6 @@ public class Player extends CreatureMightRename {
                 }
             }
     }
-        if (position.y > -256) {
-            velocity.y -= 2.5f;
-        } else {
-            position.y = -257;
-            velocity.y = 0;
-            if(controllable) {
-                if (glfwGetKey(window, GLFW_KEY_SPACE) == GL_TRUE) {
-                    velocity.y = 45;
-                }
-            }
-        }
         velocity.set(velocity.x * 0.9f, velocity.y * 0.9f, 0);
     }
 }
