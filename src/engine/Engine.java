@@ -3,6 +3,8 @@ package engine;
 import engine.math.Vector3f;
 import engine.multiplayer.client.Client;
 import engine.objects.Scene;
+import engine.objects.Sprite;
+import engine.rendering.Texture;
 import example.ExampleScene;
 import objects.CreatureMightRename;
 import objects.Player;
@@ -33,7 +35,7 @@ public class Engine {
     public boolean vSync = true;
 
     GLFWFramebufferSizeCallback fsCallback;
-    public int updateRate = 120;
+    public int updateRate = 60;
 
     public long getWindow() {
         return window;
@@ -83,21 +85,21 @@ public class Engine {
 
         glfwMakeContextCurrent(window);
         GL.createCapabilities();
-
+        Texture.init();
     }
     private void loop(){
         glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
             if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
                 glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
         });
+        currentScene = 0;
         Scene s = new ExampleScene();
         s.add(new Player(), 3);
-//        CreatureMightRename sprite = new CreatureMightRename();
-//        sprite.test = true;
-//        sprite.position = new Vector3f(-300, -257, 1);
-//        s.add(sprite, 1);
+        CreatureMightRename sprite = new CreatureMightRename();
+        sprite.test = true;
+        sprite.position = new Vector3f(-300, -257, 1);
+        s.add(sprite, 1);
         scenes.add(s);
-        currentScene = 0;
         long lastTime = System.nanoTime();
         long updateTime = 1000000000/updateRate;
         long oneSecondTime = lastTime + 1000000000;
@@ -135,12 +137,11 @@ public class Engine {
 
     private void render(){
         glClear(GL_COLOR_BUFFER_BIT);
-        scenes.get(currentScene).render();
+        if((currentScene < scenes.size())) {
+            scenes.get(currentScene).render();
+        }
         glfwSwapBuffers(window);
     }
-
-
-
     public static void main(String[] args){
         new Engine().start();
     }

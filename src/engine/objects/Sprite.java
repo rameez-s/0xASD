@@ -2,6 +2,7 @@ package engine.objects;
 
 import engine.Engine;
 import engine.math.Matrix4f;
+import engine.math.Vector2f;
 import engine.math.Vector3f;
 import engine.rendering.Quad;
 import engine.rendering.Shader;
@@ -18,6 +19,7 @@ public class Sprite extends Quad {
     public Vector3f velocity;
     public Texture texture;
     public Shader shader;
+    public Vector2f textureCoords;
 
     public Sprite(){
         super();
@@ -25,10 +27,16 @@ public class Sprite extends Quad {
         velocity = new Vector3f();
         texture = new Texture("default.png");
         shader = new Shader("default");
+        textureCoords = new Vector2f(0, 0);
     }
 
     public void setTexture(String textureFile){
         texture = new Texture(textureFile);
+    }
+
+    public void setTextureCoords(float x, float y){
+        textureCoords.x = x;
+        textureCoords.y = y;
     }
 
     public Sprite(float size, float z){
@@ -37,11 +45,13 @@ public class Sprite extends Quad {
         velocity = new Vector3f();
         texture = new Texture("default.png");
         shader = new Shader("default");
+        textureCoords = new Vector2f(0, 0);
     }
 
     public void update(){
         shader.bind();
         shader.setUniform("sampler", 1);
+        shader.setUniform("texture_coordinate_shift", textureCoords);
         shader.setUniform("projection", currentScene.projection);
         shader.setUniform("position", position);
         position.add(velocity);

@@ -1,6 +1,7 @@
 package engine.rendering;
 
 import engine.math.Matrix4f;
+import engine.math.Vector2f;
 import engine.math.Vector3f;
 
 import java.io.BufferedReader;
@@ -72,6 +73,14 @@ public class Shader {
             glUniformMatrix4fv(location, false, value.toFloatBuffer());
         }
     }
+
+    public void setUniform(String name, Vector2f value){
+        int location = glGetUniformLocation(program, name);
+        if(location != -1){
+            glUniform2f(location, value.x, value.y);
+        }
+    }
+
     public void setUniform(String name, Vector3f value){
         int location = glGetUniformLocation(program, name);
         if(location != -1){

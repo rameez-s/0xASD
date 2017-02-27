@@ -5,10 +5,11 @@ in vec2 texture;
 
 out vec2 tex_coords;
 
+uniform vec2 texture_coordinate_shift;
 uniform mat4 projection;
 uniform vec3 position;
 
 void main(){
-    tex_coords = texture;
+    tex_coords = texture + texture_coordinate_shift;
     gl_Position = projection * (vec4(position, 0.0) + vec4(vertices, 1.0));
 }
