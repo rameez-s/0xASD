@@ -27,21 +27,21 @@ public class Player extends CreatureMightRename {
     public void update(){
         super.update();
         if(controllable) {
-            if (glfwGetKey(window, GLFW_KEY_D) == GL_TRUE) {
+            if (glfwGetKey(window, GLFW_KEY_RIGHT) == GL_TRUE) {
                 velocity.x += 1.6f;
                 facingRight = true;
             }
-            if (glfwGetKey(window, GLFW_KEY_A) == GL_TRUE) {
+            if (glfwGetKey(window, GLFW_KEY_LEFT) == GL_TRUE) {
                 velocity.x -= 1.6f;
                 facingRight = false;
             }
-            if (glfwGetKey(window, GLFW_KEY_W) == GL_TRUE) {
+            if (glfwGetKey(window, GLFW_KEY_UP) == GL_TRUE) {
                 velocity.y += 1.6f;
             }
-            if (glfwGetKey(window, GLFW_KEY_S) == GL_TRUE) {
+            if (glfwGetKey(window, GLFW_KEY_DOWN) == GL_TRUE) {
                 velocity.y -= 1.6f;
             }
-            currentScene.projection.move(new Vector3f(velocity.x/560, velocity.y/560, 0));
+            currentScene.projection.move(new Vector3f(velocity.x/640, velocity.y/640, 0));
             if (fireReady == true) {
                 if (glfwGetKey(window, GLFW_KEY_ENTER) == GL_TRUE) {
                     Projectile s2 = new Projectile(16f, 1, 1000000000);

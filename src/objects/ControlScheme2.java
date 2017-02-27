@@ -24,11 +24,11 @@ public class ControlScheme2 extends CreatureMightRename {
     public void update(){
         super.update();
         if(controllable) {
-            if (glfwGetKey(window, GLFW_KEY_D) == GL_TRUE) {
+            if (glfwGetKey(window, GLFW_KEY_RIGHT) == GL_TRUE) {
                 velocity.x += 0.8f;
                 facingRight = true;
             }
-            if (glfwGetKey(window, GLFW_KEY_A) == GL_TRUE) {
+            if (glfwGetKey(window, GLFW_KEY_LEFT) == GL_TRUE) {
                 velocity.x -= 0.8f;
                 facingRight = false;
             }
