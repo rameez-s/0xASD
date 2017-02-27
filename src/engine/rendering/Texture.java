@@ -16,7 +16,11 @@ import java.nio.ByteBuffer;
  */
 public class Texture {
     private int id, width, height;
-
+    public static void init(){
+        characterSheet = new Texture("characterSheet.png");
+        tileSheet = new Texture("tileSheet.png");
+    }
+    public static Texture characterSheet, tileSheet;
     public Texture(String filename){
         BufferedImage bi;
         try {
@@ -24,16 +28,16 @@ public class Texture {
             width = bi.getWidth();
             height = bi.getHeight();
 
-            int[] pixels = new int[width * height];
+            int[] pixels;
             pixels = bi.getRGB(0, 0, width, height, null, 0, width);
 
             ByteBuffer pixelsNew = BufferUtils.createByteBuffer(width * height * 4);
             for (int i = 0; i < width * height; i++) {
                 int pixel = pixels[i];
-                pixelsNew.put((byte)((pixel >> 16) & 0xFF));//RED
-                pixelsNew.put((byte)((pixel >> 8) & 0xFF));//GREEN
-                pixelsNew.put((byte)(pixel & 0xFF));//BLUE
-                pixelsNew.put((byte)((pixel >> 24) & 0xFF));//ALPHA
+                pixelsNew.put((byte)((pixel >> 16) & 0xFF));    //RED
+                pixelsNew.put((byte)((pixel >> 8) & 0xFF));     //GREEN
+                pixelsNew.put((byte)(pixel & 0xFF));            //BLUE
+                pixelsNew.put((byte)((pixel >> 24) & 0xFF));    //ALPHA
             }
 
             pixelsNew.flip();

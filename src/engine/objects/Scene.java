@@ -3,6 +3,7 @@ package engine.objects;
 import engine.math.Matrix4f;
 import engine.math.Vector3f;
 import engine.rendering.Quad;
+import engine.rendering.Texture;
 import objects.CreatureMightRename;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ public abstract class Scene {
     public ArrayList<CreatureMightRename> creatures = new ArrayList<>();
     public ArrayList<CreatureMightRename> players = new ArrayList<>();
     public ArrayList<Projectile> projectiles = new ArrayList<>();
+    public ArrayList<Sprite> tiles = new ArrayList<>();
 
     Map map;
 
@@ -63,39 +65,45 @@ public abstract class Scene {
     }
 
     public void genMap(){
-        Vector3f position = new Vector3f();
-        for(byte[] r : map.mapData){
-            for(byte data : r){
-                position.add(new Vector3f(32, 0, 0));
-                Sprite s = new Sprite(32, 0f);
-                s.position = position;
-                switch (data) {
+        Vector3f position = new Vector3f(-map.mapData.length/2 * 128, -map.mapData[0].length/2 * 128, 1);
+//        for(byte[] r : map.mapData){
+//            for(byte data : r){
+        for(int x = 0; x < map.mapData.length; x++){
+            for(int y = 0; y < map.mapData[0].length; y++){
+                position.add(new Vector3f(128, 0, 0));
+                Sprite s = new Sprite(128, 0f);
+                s.texture = Texture.tileSheet;
+                s.position.set(position.x, position.y, position.z);
+                switch (map.mapData[x][y]) {
                     case 0:
-                        s.setTexture("tiles/Tile0.png");
+                        s.textureCoords.set(0, 0);
                         break;
                     case 1:
-                        s.setTexture("tiles/Tile1.png");
+                        s.textureCoords.set(0.125f, 0);
                         break;
                     case 2:
-                        s.setTexture("tiles/Tile2.png");
+                        s.textureCoords.set(0, 0.125f);
                         break;
                     case 3:
-                        s.setTexture("tiles/Tile3.png");
+                        s.textureCoords.set(0.125f, 0.125f);
                         break;
                     case 4:
-                        s.setTexture("tiles/Tile4.png");
+                        s.textureCoords.set(0, 0);
                         break;
                 }
-                s.render();
-                s.currentScene = this;
+                add(s, 0);
                 s.update();
-                System.out.println(s.position);
+                s.render();
+                System.out.println("Added + " + "\t x:" + x + "\t y:" + y + "\tSprite Position = " + s.position + "\tWanted Position" + position + "\t\t Shader " + s.shader);
             }
-            position.add(new Vector3f(0, 32, 0));
+            position.add(new Vector3f(-(map.mapData[0].length) * 128, 128, 0));
         }
     }
 
     public void update(){
+//        for(Sprite s : tiles){
+//            s.update();
+//        }
         for (int i = elements.size() - 1; i >= 0; i--) {
             elements.get(i).update();
         }
@@ -111,6 +119,9 @@ public abstract class Scene {
     }
 
     public void render(){
+//        for(Sprite s : tiles){
+//            s.render();
+//        }
         for (int i = elements.size() - 1; i >= 0; i--) {
             elements.get(i).render();
         }

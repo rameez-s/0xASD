@@ -24,6 +24,12 @@ public class Quad {
     public Quad(){
         this(32f, 0.0f);
     }
+    float[] tcs = {
+            0.125f, 0,
+            0, 0,
+            0, 0.125f,
+            0.125f, 0.125f
+    };
 
     public Quad(float size, float z){
         this.size = size;
@@ -34,12 +40,7 @@ public class Quad {
                 -size, -size * (16.0f/9), z
         };
 
-        float[] tcs = {
-                1, 0,
-                0, 0,
-                0, 1,
-                1, 1
-        };
+
 
         int[] indices = {
                 0, 1, 2,
