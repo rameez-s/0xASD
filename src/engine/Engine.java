@@ -32,7 +32,7 @@ public class Engine {
     public int currentScene;
     public ArrayList<Scene> scenes = new ArrayList<>();
 
-    public boolean vSync = true;
+    public boolean vSync = false;
 
     GLFWFramebufferSizeCallback fsCallback;
     public int updateRate = 60;
@@ -87,6 +87,7 @@ public class Engine {
         GL.createCapabilities();
         Texture.init();
     }
+
     private void loop(){
         glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
             if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
