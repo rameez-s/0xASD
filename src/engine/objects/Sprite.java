@@ -57,6 +57,18 @@ public class Sprite extends Quad {
         position.add(velocity);
     }
 
+    public void update(boolean check){
+        shader.bind();
+        if(check) {
+            shader.setUniform("projection", currentScene.projection);
+        }else {
+            shader.setUniform("sampler", 1);
+            shader.setUniform("texture_coordinate_shift", textureCoords);
+            shader.setUniform("position", position);
+            position.add(velocity);
+        }
+    }
+
     public boolean collidesWith(Sprite s){
         boolean collidesX = Math.abs(position.x - s.position.x) < (s.size + size);
         boolean collidesY = Math.abs(position.y - s.position.y) < (s.size + size);

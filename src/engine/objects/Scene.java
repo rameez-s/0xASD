@@ -12,11 +12,10 @@ import java.util.ArrayList;
  * Created by 18iwahlqvist on 2/14/2017.
  */
 public abstract class Scene {
-    public ArrayList<Quad> elements = new ArrayList<>();
+    public ArrayList<Sprite> elements = new ArrayList<>();
     public ArrayList<CreatureMightRename> creatures = new ArrayList<>();
     public ArrayList<CreatureMightRename> players = new ArrayList<>();
     public ArrayList<Projectile> projectiles = new ArrayList<>();
-    public ArrayList<Sprite> tiles = new ArrayList<>();
 
     Map map;
 
@@ -35,7 +34,7 @@ public abstract class Scene {
     public void add(Quad element, int array){
         switch (array){
             case 0:
-                elements.add(element);
+                elements.add((Sprite) element);
                 break;
             case 1:
                 creatures.add((CreatureMightRename) element);
@@ -70,7 +69,7 @@ public abstract class Scene {
 //            for(byte data : r){
         for(int x = 0; x < map.mapData.length; x++){
             for(int y = 0; y < map.mapData[0].length; y++){
-                position.add(new Vector3f(128, 0, 0));
+                position.add(new Vector3f(128 * (16/9), 0, 0));
                 Sprite s = new Sprite(128, 0f);
                 s.texture = Texture.tileSheet;
                 s.position.set(position.x, position.y, position.z);
@@ -93,10 +92,8 @@ public abstract class Scene {
                 }
                 add(s, 0);
                 s.update();
-                s.render();
-                System.out.println("Added + " + "\t x:" + x + "\t y:" + y + "\tSprite Position = " + s.position + "\tWanted Position" + position + "\t\t Shader " + s.shader);
             }
-            position.add(new Vector3f(-(map.mapData[0].length) * 128, 128, 0));
+            position.add(new Vector3f(-(map.mapData[0].length) * 128  * (16/9), 128  * (16/9), 0));
         }
     }
 
@@ -105,7 +102,9 @@ public abstract class Scene {
 //            s.update();
 //        }
         for (int i = elements.size() - 1; i >= 0; i--) {
-            elements.get(i).update();
+            if(elements.get(i).position.distance(players.get(0).position) < 1000) {
+                elements.get(i).update(true);
+            }
         }
         for (int i = creatures.size() - 1; i >= 0; i--) {
             creatures.get(i).update();
@@ -123,7 +122,11 @@ public abstract class Scene {
 //            s.render();
 //        }
         for (int i = elements.size() - 1; i >= 0; i--) {
-            elements.get(i).render();
+            if(elements.get(i).position.distance(players.get(0).position) < 800) {
+                //System.out.println(i + "\t" + elements.get(i).position.distance(players.get(0).position));
+                elements.get(i).render();
+            }
+            //System.out.println(elements.get(i).position.distance(players.get(0).position));
         }
         for (int i = creatures.size() - 1; i >= 0; i--) {
             creatures.get(i).render();

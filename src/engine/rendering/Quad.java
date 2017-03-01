@@ -34,10 +34,10 @@ public class Quad {
     public Quad(float size, float z){
         this.size = size;
         float[] vertices = {
-                -size, size * (16.0f/9), z,
-                size, size * (16.0f/9), z,
-                size, -size * (16.0f/9), z,
-                -size, -size * (16.0f/9), z
+                -size / 2, size * (16.0f/9) / 2, z,
+                size / 2, size * (16.0f/9) / 2, z,
+                size / 2, -size * (16.0f/9) / 2, z,
+                -size / 2, -size * (16.0f/9) / 2, z
         };
 
 
