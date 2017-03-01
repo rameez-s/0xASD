@@ -36,10 +36,10 @@ public class Player extends CreatureMightRename {
                 facingRight = false;
             }
             if (glfwGetKey(window, GLFW_KEY_UP) == GL_TRUE) {
-                velocity.y += 1.6f;
+                velocity.y += 2.8444f;
             }
             if (glfwGetKey(window, GLFW_KEY_DOWN) == GL_TRUE) {
-                velocity.y -= 1.6f;
+                velocity.y -= 2.8444f;
             }
             currentScene.projection.move(new Vector3f(velocity.x/640, velocity.y/640, 0));
             if (fireReady == true) {
