@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Created by 18iwahlqvist on 2/14/2017.
  */
 public abstract class Scene {
-    public ArrayList<Sprite> elements = new ArrayList<>();
+    public ArrayList<Tile> elements = new ArrayList<>();
     public ArrayList<CreatureMightRename> creatures = new ArrayList<>();
     public ArrayList<CreatureMightRename> players = new ArrayList<>();
     public ArrayList<Projectile> projectiles = new ArrayList<>();
@@ -34,7 +34,7 @@ public abstract class Scene {
     public void add(Quad element, int array){
         switch (array){
             case 0:
-                elements.add((Sprite) element);
+                elements.add((Tile) element);
                 break;
             case 1:
                 creatures.add((CreatureMightRename) element);
@@ -69,8 +69,8 @@ public abstract class Scene {
 //            for(byte data : r){
         for(int x = 0; x < map.mapData.length; x++){
             for(int y = 0; y < map.mapData[0].length; y++){
-                position.add(new Vector3f(128 * (16/9), 0, 0));
-                Sprite s = new Sprite(128, 0f);
+                position.add(new Vector3f(128, 0, 0));
+                Tile s = new Tile(128, 0f);
                 s.texture = Texture.tileSheet;
                 s.position.set(position.x, position.y, position.z);
                 switch (map.mapData[x][y]) {
@@ -79,6 +79,7 @@ public abstract class Scene {
                         break;
                     case 1:
                         s.textureCoords.set(0.125f, 0);
+                        s.wall = true;
                         break;
                     case 2:
                         s.textureCoords.set(0, 0.125f);
@@ -93,7 +94,7 @@ public abstract class Scene {
                 add(s, 0);
                 s.update();
             }
-            position.add(new Vector3f(-(map.mapData[0].length) * 128  * (16/9), 128  * (16/9), 0));
+            position.add(new Vector3f(-(map.mapData[0].length) * 128, 128  * 1.777777777777777777777777777f, 0));
         }
     }
 
@@ -102,7 +103,13 @@ public abstract class Scene {
 //            s.update();
 //        }
         for (int i = elements.size() - 1; i >= 0; i--) {
-            if(elements.get(i).position.distance(players.get(0).position) < 1000) {
+            float distance  = elements.get(i).position.distance(players.get(0).position);
+            if(distance < 1000) {
+                if(elements.get(i).wall) {
+                    if (distance < 128) {
+                        elements.get(i).pushBack(players.get(0));
+                    }
+                }
                 elements.get(i).update(true);
             }
         }
@@ -122,7 +129,7 @@ public abstract class Scene {
 //            s.render();
 //        }
         for (int i = elements.size() - 1; i >= 0; i--) {
-            if(elements.get(i).position.distance(players.get(0).position) < 800) {
+            if(elements.get(i).position.distance(players.get(0).position) < 1000) {
                 //System.out.println(i + "\t" + elements.get(i).position.distance(players.get(0).position));
                 elements.get(i).render();
             }

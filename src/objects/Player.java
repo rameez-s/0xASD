@@ -18,46 +18,73 @@ public class Player extends CreatureMightRename {
     private boolean fireReady = true;
     private long fireTime = 250000000;
     private long previousFireTime;
+    private float speed;
 
+    Vector3f cameraPosition = new Vector3f();
     public Player(){
     }
 
     public boolean controllable = true;
     long window = Engine.instance.getWindow();
+    boolean controlCamera = false;
     public void update(){
         super.update();
         if(controllable) {
+            if(glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GL_TRUE){
+                speed = 0.8f;
+                controlCamera = !controlCamera;
+            }else{
+                speed = 1.6f;
+            }
             if (glfwGetKey(window, GLFW_KEY_D) == GL_TRUE) {
-                velocity.x += 1.6f;
+                velocity.x += speed;
                 facingRight = true;
             }
             if (glfwGetKey(window, GLFW_KEY_A) == GL_TRUE) {
-                velocity.x -= 1.6f;
+                velocity.x -= speed;
                 facingRight = false;
             }
             if (glfwGetKey(window, GLFW_KEY_W) == GL_TRUE) {
-                velocity.y += 1.6f;
+                velocity.y += speed;
             }
             if (glfwGetKey(window, GLFW_KEY_S) == GL_TRUE) {
-                velocity.y -= 1.6f;
+                velocity.y -= speed;
             }
-            currentScene.projection.move(new Vector3f(velocity.x/560, velocity.y/560, 0));
+            //currentScene.projection.move(new Vector3f(velocity.x/600, velocity.y/600, 0));
+            if(!controlCamera) {
+                currentScene.projection.setPosition(position);
+                cameraPosition = position;
+            }else{
+                if (glfwGetKey(window, GLFW_KEY_LEFT) == GL_TRUE) {
+                    cameraPosition.x += 1;
+                }
+                if (glfwGetKey(window, GLFW_KEY_RIGHT) == GL_TRUE) {
+                    cameraPosition.x -= 1;
+                }
+                if (glfwGetKey(window, GLFW_KEY_DOWN) == GL_TRUE) {
+                    cameraPosition.y += 1;
+                }
+                if (glfwGetKey(window, GLFW_KEY_UP) == GL_TRUE) {
+                    cameraPosition.y -= 1;
+                }
+                currentScene.projection.setPosition(cameraPosition);
+            }
             if (fireReady == true) {
                 if (glfwGetKey(window, GLFW_KEY_ENTER) == GL_TRUE) {
                     Projectile s2 = new Projectile(16f, 1, 1000000000);
                     s2.setTexture("projectile.png");
-                    System.out.println(this.position);
                     s2.startTime = System.nanoTime();
                     currentScene.add(s2, 2);
                     if (facingRight) {
-                        s2.position = new Vector3f(position.x + 35, position.y, position.z);
+                        s2.position = new Vector3f(position.x + 35, position.y, position.z - 0.05f);
                         s2.velocity.x = 7f;
                     } else {
-                        s2.position = new Vector3f(position.x - 35, position.y, position.z);
+                        s2.position = new Vector3f(position.x - 35, position.y, position.z - 0.05f);
                         s2.velocity.x = -7f;
                     }
                     s2.velocity.add(new Vector3f(velocity.x, 0, 0));
-
+                    System.out.println("POSITION: " + position);
+                    System.out.println("PROJECTION: " + currentScene.projection);
                     fireReady = false;
                     previousFireTime = System.nanoTime();
                 }

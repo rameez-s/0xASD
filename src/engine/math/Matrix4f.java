@@ -44,6 +44,13 @@ public class Matrix4f {
         elements[0 + 3 * 4] -= vector3f.x;
         elements[1 + 3 * 4] -= vector3f.y;
         elements[2 + 3 * 4] += vector3f.z;
+        System.out.println(elements[0 + 3 * 4] + "\t" + elements[1 + 3 * 4] + "\t" + elements[2 + 3 * 4]);
+    }
+
+    public void setPosition(Vector3f vector3f){
+        elements[0 + 3 * 4] = vector3f.x/-700f;
+        elements[1 + 3 * 4] = vector3f.y/-700f;
+        elements[2 + 3 * 4] = 1;
     }
 
     public static Matrix4f translate(Vector3f vector) {
@@ -81,6 +88,10 @@ public class Matrix4f {
             }
         }
         return result;
+    }
+
+    public String toString(){
+        return "{" + elements[0 + 3 * 4] + ", " + elements[1+ 3 * 4] + ", " + elements[2 + 3 * 4] + "}";
     }
 
     public FloatBuffer toFloatBuffer() {
