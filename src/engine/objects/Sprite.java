@@ -7,6 +7,7 @@ import engine.math.Vector3f;
 import engine.rendering.Quad;
 import engine.rendering.Shader;
 import engine.rendering.Texture;
+import java.util.ArrayList;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.GL_TRUE;
@@ -20,6 +21,7 @@ public class Sprite extends Quad {
     public Texture texture;
     public Shader shader;
     public Vector2f textureCoords;
+    public boolean isPlayer = false;
 
     public Sprite(){
         super();
@@ -54,7 +56,10 @@ public class Sprite extends Quad {
         shader.setUniform("texture_coordinate_shift", textureCoords);
         shader.setUniform("projection", currentScene.projection);
         shader.setUniform("position", position);
-        position.add(velocity);
+        if(!isPlayer || !collidesWithColor())
+        {
+            position.add(velocity);
+        }
     }
 
     public void update(boolean check){
@@ -65,7 +70,10 @@ public class Sprite extends Quad {
             shader.setUniform("sampler", 1);
             shader.setUniform("texture_coordinate_shift", textureCoords);
             shader.setUniform("position", position);
-            position.add(velocity);
+            if(!isPlayer || !collidesWithColor())
+            {
+                position.add(velocity);
+            }
         }
     }
 
@@ -73,6 +81,17 @@ public class Sprite extends Quad {
         boolean collidesX = Math.abs(position.x - s.position.x) < (s.size + size);
         boolean collidesY = Math.abs(position.y - s.position.y) < (s.size + size);
         return collidesX && collidesY;
+    }
+
+    public boolean collidesWithColor()
+    {
+        Vector3f hypotheticalPosition = new Vector3f(position.x, position.y, position.z);
+        hypotheticalPosition.add(velocity);
+        for(Vector3f c: Map.collidablePixels) {
+            if(hypotheticalPosition.distance(c)<=80)
+                return true;
+        }
+        return false;
     }
 
     public void render(){

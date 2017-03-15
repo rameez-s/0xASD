@@ -2,6 +2,7 @@ package objects;
 
 import engine.Engine;
 import engine.math.Vector3f;
+import engine.objects.Map;
 import engine.objects.Projectile;
 import engine.rendering.Texture;
 
@@ -13,17 +14,23 @@ import static org.lwjgl.opengl.GL11.GL_TRUE;
 /**
  * Created by 18iwahlqvist on 2/16/2017.
  */
-public class Player extends CreatureMightRename {
+public class Player extends CreatureMightRename
+{
     public boolean facingRight = true;
     private boolean fireReady = true;
     private long fireTime = 250000000;
     private long previousFireTime;
 
     public Player(){
+        super();
+        isPlayer = true;
+        texture = new Texture("circle sprite.png");
+        size = 32f;
     }
 
     public boolean controllable = true;
     long window = Engine.instance.getWindow();
+
     public void update(){
         super.update();
         if(controllable) {
@@ -40,6 +47,11 @@ public class Player extends CreatureMightRename {
             }
             if (glfwGetKey(window, GLFW_KEY_DOWN) == GL_TRUE) {
                 velocity.y -= 2.8444f;
+            }
+            if (collidesWithColor())
+            {
+                velocity.x = 0;
+                velocity.y = 0;
             }
             currentScene.projection.move(new Vector3f(velocity.x/640, velocity.y/640, 0));
             if (fireReady == true) {

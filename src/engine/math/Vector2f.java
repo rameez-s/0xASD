@@ -15,4 +15,13 @@ public class Vector2f {
         this.x = x;
         this.y = y;
     }
+
+    public boolean equals(Vector2f other)
+    {
+        if((int)x==(int)other.x && (int)y==(int)other.y)
+        {
+            return true;
+        }
+        return false;
+    }
 }

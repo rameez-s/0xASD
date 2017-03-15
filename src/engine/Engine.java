@@ -2,6 +2,7 @@ package engine;
 
 import engine.math.Vector3f;
 import engine.multiplayer.client.Client;
+import engine.objects.Map;
 import engine.objects.Scene;
 import engine.objects.Sprite;
 import engine.rendering.Texture;
@@ -95,7 +96,8 @@ public class Engine {
         });
         currentScene = 0;
         Scene s = new ExampleScene();
-        s.add(new Player(), 3);
+        Player thisPlayer = new Player();
+        s.add(thisPlayer, 3);
         CreatureMightRename sprite = new CreatureMightRename();
         sprite.test = true;
         sprite.position = new Vector3f(-300, -257, 1);
@@ -119,6 +121,16 @@ public class Engine {
             fps++;
             if(System.nanoTime() > oneSecondTime){
                 System.out.println("Frames per second: " + fps + "\tUpdates per second: " + ups);
+                float pixelsDistance;
+                float minimum = Float.MAX_VALUE;
+                for(int i=0; i<Map.collidablePixels.size(); i++)
+                {
+                    pixelsDistance = thisPlayer.position.distance(Map.collidablePixels.get(i));
+                    if(pixelsDistance < minimum)
+                        minimum = pixelsDistance;
+                }
+                System.out.println(minimum);
+                System.out.println(Map.collidablePixels.size());
                 ups = 0;
                 fps = 0;
                 oneSecondTime += 1000000000;

@@ -79,6 +79,7 @@ public abstract class Scene {
                         break;
                     case 1:
                         s.textureCoords.set(0.125f, 0);
+                        Map.collidablePixels.add(new Vector3f(s.position.x, s.position.y, s.position.z));
                         break;
                     case 2:
                         s.textureCoords.set(0, 0.125f);
