@@ -1,13 +1,11 @@
 package engine;
 
 import engine.math.Vector3f;
-import engine.multiplayer.client.Client;
 import engine.objects.Map;
 import engine.objects.Scene;
 import engine.objects.Sprite;
 import engine.rendering.Texture;
 import example.ExampleScene;
-import objects.CreatureMightRename;
 import objects.Player;
 import org.lwjgl.glfw.GLFWFramebufferSizeCallback;
 import org.lwjgl.glfw.GLFWVidMode;
@@ -98,8 +96,7 @@ public class Engine {
         Scene s = new ExampleScene();
         Player thisPlayer = new Player();
         s.add(thisPlayer, 3);
-        CreatureMightRename sprite = new CreatureMightRename();
-        sprite.test = true;
+        Sprite sprite = new Sprite();
         sprite.position = new Vector3f(-300, -257, 1);
         s.add(sprite, 1);
         scenes.add(s);

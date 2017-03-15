@@ -3,6 +3,7 @@ package objects;
 import engine.Engine;
 import engine.math.Vector3f;
 import engine.objects.Projectile;
+import engine.objects.Sprite;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_SPACE;
@@ -13,7 +14,7 @@ import static org.lwjgl.opengl.GL11.GL_TRUE;
  * Created by 17aelbashir on 23-Feb-17.
  */
 
-public class ControlScheme2 extends CreatureMightRename {
+public class ControlScheme2 extends Sprite {
     public boolean facingRight = true;
     private boolean fireReady = true;
     private long fireTime = 250000000;

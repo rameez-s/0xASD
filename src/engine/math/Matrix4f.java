@@ -46,6 +46,12 @@ public class Matrix4f {
         elements[2 + 3 * 4] += vector3f.z;
     }
 
+    public void setPosition(Vector3f vector3f){
+        elements[0 + 3 * 4] = vector3f.x/-512f;
+        elements[1 + 3 * 4] = vector3f.y/-512f;
+        elements[2 + 3 * 4] = 1;
+    }
+
     public static Matrix4f translate(Vector3f vector) {
         Matrix4f result = identity();
         result.elements[0 + 3 * 4] = vector.x;

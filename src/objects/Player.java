@@ -4,6 +4,7 @@ import engine.Engine;
 import engine.math.Vector3f;
 import engine.objects.Map;
 import engine.objects.Projectile;
+import engine.objects.Sprite;
 import engine.rendering.Texture;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -14,7 +15,7 @@ import static org.lwjgl.opengl.GL11.GL_TRUE;
 /**
  * Created by 18iwahlqvist on 2/16/2017.
  */
-public class Player extends CreatureMightRename
+public class Player extends Sprite
 {
     public boolean facingRight = true;
     private boolean fireReady = true;
@@ -22,10 +23,9 @@ public class Player extends CreatureMightRename
     private long previousFireTime;
 
     public Player(){
-        super();
+        super(128f, 0f);
         isPlayer = true;
-        texture = new Texture("circle sprite.png");
-        size = 32f;
+        texture = new Texture("characterSheet.png");
     }
 
     public boolean controllable = true;
@@ -58,7 +58,6 @@ public class Player extends CreatureMightRename
                 if (glfwGetKey(window, GLFW_KEY_ENTER) == GL_TRUE) {
                     Projectile s2 = new Projectile(16f, 1, 1000000000);
                     s2.setTexture("projectile.png");
-                    System.out.println(this.position);
                     s2.startTime = System.nanoTime();
                     currentScene.add(s2, 2);
                     if (facingRight) {

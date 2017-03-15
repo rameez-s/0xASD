@@ -2,10 +2,8 @@ package engine.multiplayer.client;
 
 import engine.Engine;
 import engine.objects.Sprite;
-import objects.CreatureMightRename;
 import objects.Player;
 import org.lwjgl.opengl.GL;
-import sun.java2d.pipe.hw.ContextCapabilities;
 
 import java.io.*;
 import java.net.*;
@@ -117,7 +115,7 @@ public class Client
             Engine.instance.scenes.get(Engine.instance.currentScene).add(player, 3);
             System.out.println(Engine.instance.scenes.get(Engine.instance.currentScene).players.size());
         }
-        CreatureMightRename player = Engine.instance.scenes.get(Engine.instance.currentScene).players.get(Integer.parseInt(data[0]));
+        Sprite player = Engine.instance.scenes.get(Engine.instance.currentScene).players.get(Integer.parseInt(data[0]));
         player.position.set(Float.parseFloat(data[1]), Float.parseFloat(data[2]), Float.parseFloat(data[3]));
         player.velocity.set(Float.parseFloat(data[4]), Float.parseFloat(data[5]), Float.parseFloat(data[6]));
     }
