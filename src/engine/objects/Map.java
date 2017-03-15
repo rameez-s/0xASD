@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class Map {
     public static byte[][] mapData;
-    public static ArrayList<Vector3f> collidablePixels = new ArrayList<Vector3f>(500);
+    public static ArrayList<Vector3f> collidablePixels = new ArrayList<Vector3f>();
 
     public Map(String fileName){
         getMapData(fileName);
