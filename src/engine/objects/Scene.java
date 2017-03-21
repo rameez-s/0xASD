@@ -124,7 +124,7 @@ public abstract class Scene {
 //            s.render();
 //        }
         for (int i = elements.size() - 1; i >= 0; i--) {
-            if (elements.get(i).position.distance(players.get(0).position) < 800) {
+            if (elements.get(i).position.distance(players.get(0).position) < 1000) {
                 //System.out.println(i + "\t" + elements.get(i).position.distance(players.get(0).position));
                 if (elements.get(i).position.distance(players.get(0).position) < 1000) {
                     elements.get(i).render();
