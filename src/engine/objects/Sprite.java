@@ -83,13 +83,19 @@ public class Sprite extends Quad {
         return collidesX && collidesY;
     }
 
+    public boolean collidesWith(Sprite s, Vector3f hyp, Vector2f hypSize){
+        boolean collidesX = Math.abs(hyp.x - s.position.x) < (s.size + hypSize.x);
+        boolean collidesY = Math.abs(hyp.y - s.position.y) < (s.size + hypSize.y);
+        return collidesX && collidesY;
+    }
     public boolean collidesWithColor()
     {
         Vector3f hypotheticalPosition = new Vector3f(position.x, position.y, position.z);
         hypotheticalPosition.add(velocity);
-        for(Vector3f c: Map.collidablePixels) {
-            if(hypotheticalPosition.distance(c)<=80)
+        for(Sprite c: Map.collidablePixels) {
+            if(collidesWith(c, hypotheticalPosition, new Vector2f(-50, 85))){
                 return true;
+            }
         }
         return false;
     }

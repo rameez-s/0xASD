@@ -118,15 +118,15 @@ public class Engine {
             fps++;
             if(System.nanoTime() > oneSecondTime){
                 System.out.println("Frames per second: " + fps + "\tUpdates per second: " + ups);
-                float pixelsDistance;
-                float minimum = Float.MAX_VALUE;
-                for(int i=0; i<Map.collidablePixels.size(); i++)
-                {
-                    pixelsDistance = thisPlayer.position.distance(Map.collidablePixels.get(i));
-                    if(pixelsDistance < minimum)
-                        minimum = pixelsDistance;
-                }
-                System.out.println(minimum);
+//                float pixelsDistance;
+//                float minimum = Float.MAX_VALUE;
+//                for(int i=0; i<Map.collidablePixels.size(); i++)
+//                {
+//                    pixelsDistance = thisPlayer.position.distance(Map.collidablePixels.get(i));
+//                    if(pixelsDistance < minimum)
+//                        minimum = pixelsDistance;
+//                }
+//                System.out.println(minimum);
                 System.out.println(Map.collidablePixels.size());
                 ups = 0;
                 fps = 0;

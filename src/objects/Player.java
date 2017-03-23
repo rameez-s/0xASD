@@ -25,7 +25,7 @@ public class Player extends Sprite
     public Player(){
         super(128f, 0f);
         isPlayer = true;
-        texture = new Texture("characterSheet.png");
+        texture = new Texture("charactersheet.png");
     }
 
     public boolean controllable = true;
