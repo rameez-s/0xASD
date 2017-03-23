@@ -10,7 +10,7 @@ public class ExampleScene extends Scene {
     long window = Engine.instance.getWindow();
 
     public ExampleScene(){
-        setMap("ColorTest.png");
+        setMap("mapTest.png");
         genMap();
     }
 
