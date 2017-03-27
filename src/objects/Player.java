@@ -37,17 +37,24 @@ public class Player extends Sprite
         if(controllable) {
             if (glfwGetKey(window, GLFW_KEY_RIGHT) == GL_TRUE) {
                 velocity.x += 1.6f;
+                setTextureCoords(0.125f * 3, 0);
                 facingRight = true;
             }
             if (glfwGetKey(window, GLFW_KEY_LEFT) == GL_TRUE) {
                 velocity.x -= 1.6f;
+                setTextureCoords(0.125f * 2, 0);
                 facingRight = false;
             }
             if (glfwGetKey(window, GLFW_KEY_UP) == GL_TRUE) {
                 velocity.y += 2.8444f;
+                setTextureCoords(0.125f, 0);
             }
             if (glfwGetKey(window, GLFW_KEY_DOWN) == GL_TRUE) {
                 velocity.y -= 2.8444f;
+                setTextureCoords(0, 0);
+            }
+            if (glfwGetKey(window, GLFW_KEY_SPACE) == GL_TRUE){
+                System.out.println(position);
             }
             if (collidesWithColor())
             {
