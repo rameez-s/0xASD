@@ -75,17 +75,17 @@ public abstract class Scene {
                 s.position.set(position.x, position.y, position.z);
                 switch (map.mapData[x][y]) {
                     case 0:
-                        s.textureCoords.set(0f, 0.125f);
+                        s.textureCoords.set(0.125f, 0f);
                         break;
                     case 1:
-                        s.textureCoords.set(0.125f, 0);
+                        s.textureCoords.set(0.125f, 0.125f);
                         Map.collidablePixels.add(s);
                         break;
                     case 2:
                         s.textureCoords.set(0, 0.125f);
                         break;
                     case 3:
-                        s.textureCoords.set(0.125f, 0.125f);
+                        s.textureCoords.set(0.125f, 0f);
                         break;
                     case 4:
                         s.textureCoords.set(0, 0);
