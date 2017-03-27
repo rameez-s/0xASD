@@ -107,4 +107,3 @@ public class Sprite extends Quad {
     }
 
 }
-//heyo

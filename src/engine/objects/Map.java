@@ -10,6 +10,7 @@ import java.util.ArrayList;
 /**
  * Created by 18iwahlqvist on 2/23/2017.
  */
+//and alex
 public class Map {
     public static byte[][] mapData;
     public static ArrayList<Sprite> collidablePixels = new ArrayList<Sprite>();
