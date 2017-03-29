@@ -96,9 +96,6 @@ public class Engine {
         Scene s = new ExampleScene();
         Player thisPlayer = new Player();
         s.add(thisPlayer, 3);
-        Sprite sprite = new Sprite();
-        sprite.position = new Vector3f(-300, -257, 1);
-        s.add(sprite, 1);
         scenes.add(s);
         long lastTime = System.nanoTime();
         long updateTime = 1000000000/updateRate;

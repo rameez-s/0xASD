@@ -46,10 +46,12 @@ public class AnimationManager {
     }
 
     public void run(String animName){
-        animations.stream().filter(a -> a.name.equals(animName)).forEach(a -> {
-            currentAnimation = a;
-            currentAnimation.stopped = false;
-        });
+        for(Animation a : animations){
+            if(a.name.equals(animName)) {
+                currentAnimation = a;
+                currentAnimation.stopped = false;
+            }
+        }
     }
 
     public void stop(){
@@ -58,17 +60,22 @@ public class AnimationManager {
 
 
     public void update(){
-        if(currentAnimation != null) {
+        if(currentAnimation == null){
+            System.out.println("LN");
+        }else {
             if (currentAnimation.stopped || currentAnimation.totalTime == 0 || currentAnimation.frames == 0) {
                 currentAnimation.currentFrame = 0;
+                System.out.println(currentAnimation.stopped + "\t" + currentAnimation.totalTime + "\t" + currentAnimation.frames + "\t");
                 textureCoord = currentAnimation.getPos();
-            } else if (lastTime > System.nanoTime() + (1000000000 * currentAnimation.totalTime / (currentAnimation.frames + 1))) {
+            } else if (System.nanoTime() > lastTime) {
                 if (currentAnimation.currentFrame < currentAnimation.frames) {
                     currentAnimation.currentFrame++;
                 } else {
                     currentAnimation.currentFrame = 0;
                 }
+                lastTime = (long) (System.nanoTime() + (1000000000 * currentAnimation.totalTime/(currentAnimation.frames + 1)));
                 textureCoord = currentAnimation.getPos();
+                System.out.println("textureCoord = " + textureCoord.x + "\t" + textureCoord.y + "\t" + currentAnimation);
             }
         }
     }

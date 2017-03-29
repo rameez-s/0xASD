@@ -32,6 +32,7 @@ public class Animation {
 
 
     public Vector2f getPos(){
+        System.out.println(startPos.x + "");
         return new Vector2f(startPos.x, startPos.y + (float)(0.125 * currentFrame));
     }
 }

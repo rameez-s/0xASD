@@ -1,6 +1,9 @@
 package objects;
 
 import engine.Engine;
+import engine.animation.Animation;
+import engine.animation.AnimationManager;
+import engine.math.Vector2f;
 import engine.math.Vector3f;
 import engine.objects.Map;
 import engine.objects.Projectile;
@@ -10,6 +13,7 @@ import engine.rendering.Texture;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_SPACE;
 import static org.lwjgl.glfw.GLFW.glfwGetKey;
+import static org.lwjgl.opengl.GL11.GL_FALSE;
 import static org.lwjgl.opengl.GL11.GL_TRUE;
 
 /**
@@ -27,7 +31,12 @@ public class Player extends Sprite
     public Player(){
         super(128f, 0f);
         isPlayer = true;
-        texture = new Texture("charactersheet.png");
+        setTexture("characterSheet.png");
+        animationManager.add(new Animation("RunRight", new Vector2f(0.125f * 3, 0), 0.2f, 1));
+        animationManager.add(new Animation("RunLeft", new Vector2f(0.125f * 2, 0), 0.2f, 1));
+        animationManager.add(new Animation("RunUp", new Vector2f(0.125f * 1, 0), 0.5f, 2));
+        animationManager.add(new Animation("RunDown", new Vector2f(0.125f * 0, 0), 0.5f, 2));
+        animationManager.run("RunDown");
     }
 
     public boolean controllable = true;
@@ -38,21 +47,24 @@ public class Player extends Sprite
         if(controllable) {
             if (glfwGetKey(window, GLFW_KEY_RIGHT) == GL_TRUE) {
                 velocity.x += 1.6f;
-                setTextureCoords(0.125f * 3, 0);
+                animationManager.run("RunRight");
                 facingRight = true;
             }
             if (glfwGetKey(window, GLFW_KEY_LEFT) == GL_TRUE) {
                 velocity.x -= 1.6f;
-                setTextureCoords(0.125f * 2, 0);
+                animationManager.run("RunLeft");
                 facingRight = false;
             }
             if (glfwGetKey(window, GLFW_KEY_UP) == GL_TRUE) {
                 velocity.y += 2.8444f;
-                setTextureCoords(0.125f, 0);
+                animationManager.run("RunUp");
             }
             if (glfwGetKey(window, GLFW_KEY_DOWN) == GL_TRUE) {
                 velocity.y -= 2.8444f;
-                setTextureCoords(0, 0);
+                animationManager.run("RunDown");
+            }
+            if(glfwGetKey(window, GLFW_KEY_DOWN) == GL_FALSE && glfwGetKey(window, GLFW_KEY_UP) == GL_FALSE && glfwGetKey(window, GLFW_KEY_RIGHT) == GL_FALSE && glfwGetKey(window, GLFW_KEY_LEFT) == GL_FALSE){
+                animationManager.stop();
             }
             if (glfwGetKey(window, GLFW_KEY_SPACE) == GL_TRUE){
                 System.out.println(position);

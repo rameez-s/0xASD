@@ -23,7 +23,7 @@ public class Sprite extends Quad {
     public Shader shader;
     public Vector2f textureCoords;
     public boolean isPlayer = false;
-    AnimationManager animationManager = new AnimationManager();
+    public AnimationManager animationManager = new AnimationManager();
 
     public Sprite(){
         super();
@@ -62,11 +62,13 @@ public class Sprite extends Quad {
     public void update(){
         shader.bind();
         shader.setUniform("sampler", 1);
-        animationManager.update();
-        setTextureCoords(animationManager.textureCoord);
         shader.setUniform("texture_coordinate_shift", textureCoords);
+        System.out.println(textureCoords.x);
         shader.setUniform("projection", currentScene.projection);
         shader.setUniform("position", position);
+
+        animationManager.update();
+        setTextureCoords(animationManager.textureCoord);
         if(!isPlayer || !collidesWithColor())
         {
             position.add(velocity);
