@@ -1,6 +1,7 @@
 package engine.objects;
 
 import engine.Engine;
+import engine.animation.AnimationManager;
 import engine.math.Matrix4f;
 import engine.math.Vector2f;
 import engine.math.Vector3f;
@@ -22,18 +23,29 @@ public class Sprite extends Quad {
     public Shader shader;
     public Vector2f textureCoords;
     public boolean isPlayer = false;
+    AnimationManager animationManager = new AnimationManager();
 
     public Sprite(){
         super();
         position = new Vector3f();
         velocity = new Vector3f();
-        texture = new Texture("default.png");
+        texture = animationManager.texture;
         shader = new Shader("default");
         textureCoords = new Vector2f(0, 0);
     }
 
+    public Sprite(float size, float z){
+        super(size, z);
+        position = new Vector3f();
+        velocity = new Vector3f();
+        shader = new Shader("default");
+        texture = animationManager.texture;
+        textureCoords = new Vector2f(0, 0);
+    }
+
     public void setTexture(String textureFile){
-        texture = new Texture(textureFile);
+        animationManager.setTexture(textureFile);
+        texture = animationManager.texture;
     }
 
     public void setTextureCoords(float x, float y){
@@ -41,18 +53,17 @@ public class Sprite extends Quad {
         textureCoords.y = y;
     }
 
-    public Sprite(float size, float z){
-        super(size, z);
-        position = new Vector3f();
-        velocity = new Vector3f();
-        texture = new Texture("default.png");
-        shader = new Shader("default");
-        textureCoords = new Vector2f(0, 0);
+    public void setTextureCoords(Vector2f v2f){
+        textureCoords.x = v2f.x;
+        textureCoords.y = v2f.y;
     }
+
 
     public void update(){
         shader.bind();
         shader.setUniform("sampler", 1);
+        animationManager.update();
+        setTextureCoords(animationManager.textureCoord);
         shader.setUniform("texture_coordinate_shift", textureCoords);
         shader.setUniform("projection", currentScene.projection);
         shader.setUniform("position", position);

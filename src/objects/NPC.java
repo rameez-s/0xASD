@@ -1,5 +1,6 @@
 package objects;
 
+import engine.math.Vector2f;
 import engine.objects.Sprite;
 import engine.rendering.Texture;
 
@@ -10,7 +11,7 @@ public class NPC extends Sprite {
 
     public NPC(){
         super();
-        texture = new Texture("npcSheet.png");
+
     }
 
 }
