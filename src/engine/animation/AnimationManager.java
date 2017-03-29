@@ -16,6 +16,9 @@ public class AnimationManager {
     private long lastTime;
 
     public AnimationManager(){
+        texture = Texture.defaultSheet;
+        textureCoord = new Vector2f(0, 0);
+        lastTime = System.nanoTime();
     }
 
     public void setTexture(String textureFile){
@@ -43,12 +46,10 @@ public class AnimationManager {
     }
 
     public void run(String animName){
-        for(Animation a : animations){
-            if(a.name.equals(animName)){
-                currentAnimation = a;
-                currentAnimation.stopped = false;
-            }
-        }
+        animations.stream().filter(a -> a.name.equals(animName)).forEach(a -> {
+            currentAnimation = a;
+            currentAnimation.stopped = false;
+        });
     }
 
     public void stop(){
@@ -57,16 +58,18 @@ public class AnimationManager {
 
 
     public void update(){
-        if(currentAnimation.stopped || currentAnimation.totalTime == 0 || currentAnimation.frames == 0){
-            currentAnimation.currentFrame = 0;
-            textureCoord = currentAnimation.getPos();
-        }else if(lastTime > System.nanoTime() + (1000000000 * currentAnimation.totalTime / (currentAnimation.frames + 1))){
-            if(currentAnimation.currentFrame < currentAnimation.frames){
-                currentAnimation.currentFrame++;
-            }else{
+        if(currentAnimation != null) {
+            if (currentAnimation.stopped || currentAnimation.totalTime == 0 || currentAnimation.frames == 0) {
                 currentAnimation.currentFrame = 0;
+                textureCoord = currentAnimation.getPos();
+            } else if (lastTime > System.nanoTime() + (1000000000 * currentAnimation.totalTime / (currentAnimation.frames + 1))) {
+                if (currentAnimation.currentFrame < currentAnimation.frames) {
+                    currentAnimation.currentFrame++;
+                } else {
+                    currentAnimation.currentFrame = 0;
+                }
+                textureCoord = currentAnimation.getPos();
             }
-            textureCoord = currentAnimation.getPos();
         }
     }
 }

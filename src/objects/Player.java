@@ -16,6 +16,7 @@ import static org.lwjgl.opengl.GL11.GL_TRUE;
  * Created by 18iwahlqvist on 2/16/2017.
  */
 //and alex
+//mostly Isak
 public class Player extends Sprite
 {
     public boolean facingRight = true;
@@ -67,6 +68,7 @@ public class Player extends Sprite
                     Projectile s2 = new Projectile(16f, 1, 1000000000);
                     s2.setTexture("projectile.png");
                     s2.startTime = System.nanoTime();
+                    System.out.println("TEST");
                     currentScene.add(s2, 2);
                     if (facingRight) {
                         s2.position = new Vector3f(position.x + 35, position.y, position.z);
