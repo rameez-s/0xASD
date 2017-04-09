@@ -63,7 +63,6 @@ public class Sprite extends Quad {
         shader.bind();
         shader.setUniform("sampler", 1);
         shader.setUniform("texture_coordinate_shift", textureCoords);
-        System.out.println(textureCoords.x);
         shader.setUniform("projection", currentScene.projection);
         shader.setUniform("position", position);
 

@@ -32,10 +32,10 @@ public class Player extends Sprite
         super(128f, 0f);
         isPlayer = true;
         setTexture("characterSheet.png");
-        animationManager.add(new Animation("RunRight", new Vector2f(0.125f * 3, 0), 0.2f, 1));
-        animationManager.add(new Animation("RunLeft", new Vector2f(0.125f * 2, 0), 0.2f, 1));
-        animationManager.add(new Animation("RunUp", new Vector2f(0.125f * 1, 0), 0.5f, 2));
-        animationManager.add(new Animation("RunDown", new Vector2f(0.125f * 0, 0), 0.5f, 2));
+        animationManager.add(new Animation("RunRight", new Vector2f(0.125f * 3, 0), 0.15f, 1));
+        animationManager.add(new Animation("RunLeft", new Vector2f(0.125f * 2, 0), 0.15f, 1));
+        animationManager.add(new Animation("RunUp", new Vector2f(0.125f * 1, 0), 0.2f, 2));
+        animationManager.add(new Animation("RunDown", new Vector2f(0.125f * 0, 0), 0.2f, 2));
         animationManager.run("RunDown");
     }
 

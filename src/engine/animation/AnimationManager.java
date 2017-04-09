@@ -61,11 +61,9 @@ public class AnimationManager {
 
     public void update(){
         if(currentAnimation == null){
-            System.out.println("LN");
         }else {
             if (currentAnimation.stopped || currentAnimation.totalTime == 0 || currentAnimation.frames == 0) {
                 currentAnimation.currentFrame = 0;
-                System.out.println(currentAnimation.stopped + "\t" + currentAnimation.totalTime + "\t" + currentAnimation.frames + "\t");
                 textureCoord = currentAnimation.getPos();
             } else if (System.nanoTime() > lastTime) {
                 if (currentAnimation.currentFrame < currentAnimation.frames) {
@@ -75,7 +73,6 @@ public class AnimationManager {
                 }
                 lastTime = (long) (System.nanoTime() + (1000000000 * currentAnimation.totalTime/(currentAnimation.frames + 1)));
                 textureCoord = currentAnimation.getPos();
-                System.out.println("textureCoord = " + textureCoord.x + "\t" + textureCoord.y + "\t" + currentAnimation);
             }
         }
     }

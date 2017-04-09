@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public abstract class Scene {
     public ArrayList<Sprite> elements = new ArrayList<>();
-    public ArrayList<Sprite> creatures = new ArrayList<>();
+    public ArrayList<Sprite> npc = new ArrayList<>();
     public ArrayList<Sprite> players = new ArrayList<>();
     public ArrayList<Projectile> projectiles = new ArrayList<>();
 
@@ -36,7 +36,7 @@ public abstract class Scene {
                 elements.add((Sprite) element);
                 break;
             case 1:
-                creatures.add((Sprite) element);
+                npc.add((Sprite) element);
                 break;
             case 2:
                 projectiles.add((Projectile) element);
@@ -55,7 +55,7 @@ public abstract class Scene {
             case 0:
                 return elements.remove(element);
             case 1:
-                return creatures.remove(element);
+                return npc.remove(element);
             case 2:
                 return projectiles.remove(element);
         }
@@ -108,8 +108,8 @@ public abstract class Scene {
                 elements.get(i).update(true);
             }
         }
-        for (int i = creatures.size() - 1; i >= 0; i--) {
-            creatures.get(i).update();
+        for (int i = npc.size() - 1; i >= 0; i--) {
+            npc.get(i).update();
         }
         for (int i = projectiles.size() - 1; i >= 0; i--) {
             projectiles.get(i).update();
@@ -131,8 +131,8 @@ public abstract class Scene {
                 }
             }
         }
-        for (int i = creatures.size() - 1; i >= 0; i--) {
-            creatures.get(i).render();
+        for (int i = npc.size() - 1; i >= 0; i--) {
+            npc.get(i).render();
         }
         for (int i = projectiles.size() - 1; i >= 0; i--) {
             projectiles.get(i).render();
