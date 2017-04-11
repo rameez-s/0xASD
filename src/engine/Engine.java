@@ -1,15 +1,13 @@
 package engine;
 
-import engine.math.Vector3f;
 import engine.objects.Map;
 import engine.objects.Scene;
-import engine.objects.Sprite;
 import engine.rendering.Texture;
-import example.ExampleScene;
 import objects.Player;
 import org.lwjgl.glfw.GLFWFramebufferSizeCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
+import scenes.Hallway;
 
 import java.util.ArrayList;
 
@@ -93,7 +91,7 @@ public class Engine {
                 glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
         });
         currentScene = 0;
-        Scene s = new ExampleScene();
+        Scene s = new Hallway();
         Player thisPlayer = new Player();
         s.add(thisPlayer, 3);
         scenes.add(s);

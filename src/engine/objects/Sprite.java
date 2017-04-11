@@ -100,6 +100,15 @@ public class Sprite extends Quad {
         boolean collidesY = Math.abs(hyp.y - s.position.y) < (s.size + hypSize.y);
         return collidesX && collidesY;
     }
+
+    public boolean collidesHypotheticalWith(Sprite s, Vector2f hypSize){
+        Vector3f s1posHyp = new Vector3f(position.x + velocity.x, position.y + velocity.y, position.z + velocity.z), s2posHyp = new Vector3f(s.position.x + s.velocity.x, s.position.y + s.velocity.y, s.position.z + s.velocity.z);
+
+        boolean collidesX = Math.abs(s2posHyp.x - s1posHyp.x) < (s.size + hypSize.x);
+        boolean collidesY = Math.abs(s2posHyp.y - s1posHyp.y) < (s.size + hypSize.y);
+        return collidesX && collidesY;
+    }
+
     public boolean collidesWithColor()
     {
         Vector3f hypotheticalPosition = new Vector3f(position.x, position.y, position.z);

@@ -25,6 +25,7 @@ public class Map {
             BufferedImage bi = ImageIO.read(new File("maps/" + fileName));
             int height = bi.getHeight();
             int width = bi.getWidth();
+            System.out.println("Width: " + width + "\n" + "Height: " + height);
             mapData = new byte[width][height];
             for(int x = 0; x < width; x++){
                 for(int y = 0; y < height; y++){
