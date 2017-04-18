@@ -1,20 +1,18 @@
 package engine.objects;
 
-import engine.math.Vector3f;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 
 /**
- * Created by 18iwahlqvist on 2/23/2017.
+ * Created by Isak Wahlqvist
  */
 //and alex
 //mostly Isak
 public class Map {
-    public static byte[][] mapData;
-    public static ArrayList<Sprite> collidablePixels = new ArrayList<Sprite>();
+    public byte[][] mapData;
+    public ArrayList<Sprite> collidablePixels = new ArrayList<Sprite>();
 
     public Map(String fileName){
         getMapData(fileName);

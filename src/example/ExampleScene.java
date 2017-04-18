@@ -4,12 +4,12 @@ import engine.Engine;
 import engine.objects.Scene;
 
 /**
- * Created by 18iwahlqvist on 2/14/2017.
+ * Created by Isak Wahlqvist
  */
 public class ExampleScene extends Scene {
-    long window = Engine.instance.getWindow();
 
     public ExampleScene(){
+        super();
         setMap("robertsOffice.png");
         genMap();
     }

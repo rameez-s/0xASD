@@ -1,20 +1,14 @@
 package engine.objects;
 
-import engine.Engine;
 import engine.animation.AnimationManager;
-import engine.math.Matrix4f;
 import engine.math.Vector2f;
 import engine.math.Vector3f;
 import engine.rendering.Quad;
 import engine.rendering.Shader;
 import engine.rendering.Texture;
-import java.util.ArrayList;
-
-import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL11.GL_TRUE;
 
 /**
- * Created by 18iwahlqvist on 2/14/2017.
+ * Created by Isak Wahlqvist
  */
 public class Sprite extends Quad {
     public Vector3f position;
@@ -95,7 +89,7 @@ public class Sprite extends Quad {
         return collidesX && collidesY;
     }
 
-    public boolean collidesWith(Sprite s, Vector3f hyp, Vector2f hypSize){
+    private boolean collidesWith(Sprite s, Vector3f hyp, Vector2f hypSize){
         boolean collidesX = Math.abs(hyp.x - s.position.x) < (s.size + hypSize.x);
         boolean collidesY = Math.abs(hyp.y - s.position.y) < (s.size + hypSize.y);
         return collidesX && collidesY;
@@ -109,11 +103,11 @@ public class Sprite extends Quad {
         return collidesX && collidesY;
     }
 
-    public boolean collidesWithColor()
+    protected boolean collidesWithColor()
     {
         Vector3f hypotheticalPosition = new Vector3f(position.x, position.y, position.z);
         hypotheticalPosition.add(velocity);
-        for(Sprite c: Map.collidablePixels) {
+        for(Sprite c: currentScene.map.collidablePixels) {
             if(collidesWith(c, hypotheticalPosition, new Vector2f(-50, 85))){
                 return true;
             }

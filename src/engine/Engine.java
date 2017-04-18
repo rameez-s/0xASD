@@ -1,8 +1,10 @@
 package engine;
 
+import engine.math.Vector3f;
 import engine.objects.Map;
 import engine.objects.Scene;
 import engine.rendering.Texture;
+import example.ExampleScene;
 import objects.Player;
 import org.lwjgl.glfw.GLFWFramebufferSizeCallback;
 import org.lwjgl.glfw.GLFWVidMode;
@@ -16,7 +18,7 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
 /**
- * Created by 18iwahlqvist on 2/12/2017.
+ * Created by Isak Wahlqvist
  */
 public class Engine {
     private long window;
@@ -29,16 +31,16 @@ public class Engine {
     public int currentScene;
     public ArrayList<Scene> scenes = new ArrayList<>();
 
-    public boolean vSync = false;
+    private boolean vSync = false;
 
     GLFWFramebufferSizeCallback fsCallback;
-    public int updateRate = 60;
+    private int updateRate = 60;
 
     public long getWindow() {
         return window;
     }
 
-    public void start(){
+    private void start(){
         instance = this;
         init();
         loop();
@@ -51,7 +53,7 @@ public class Engine {
 
 
     private void init(){
-        if(glfwInit() == false){
+        if(!glfwInit()){
             System.out.println("GLHF");
             System.exit(1);
         }
@@ -95,6 +97,9 @@ public class Engine {
         Player thisPlayer = new Player();
         s.add(thisPlayer, 3);
         scenes.add(s);
+        Scene s2 = new ExampleScene();
+        scenes.add(s2);
+        //s2.add(thisPlayer, 3);
         long lastTime = System.nanoTime();
         long updateTime = 1000000000/updateRate;
         long oneSecondTime = lastTime + 1000000000;
@@ -122,7 +127,6 @@ public class Engine {
 //                        minimum = pixelsDistance;
 //                }
 //                System.out.println(minimum);
-                System.out.println(Map.collidablePixels.size());
                 ups = 0;
                 fps = 0;
                 oneSecondTime += 1000000000;
@@ -132,10 +136,8 @@ public class Engine {
     }
 
     private void update(){
-        for(Scene s : scenes) {
-            if(s.backgroundUpdate) {
-                s.update();
-            }
+        if((currentScene < scenes.size())) {
+            scenes.get(currentScene).update();
         }
         glfwPollEvents();
     }

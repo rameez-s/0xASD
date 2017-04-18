@@ -8,7 +8,7 @@ import engine.rendering.Texture;
 import java.util.ArrayList;
 
 /**
- * Created by 18iwahlqvist on 2/14/2017.
+ * Created by Isak Wahlqvist
  */
 public abstract class Scene {
     public ArrayList<Sprite> elements = new ArrayList<>();
@@ -79,7 +79,7 @@ public abstract class Scene {
                         break;
                     case 1:
                         s.textureCoords.set(0.125f, 0.125f);
-                        Map.collidablePixels.add(s);
+                        map.collidablePixels.add(s);
                         break;
                     case 2:
                         s.textureCoords.set(0, 0.125f);
@@ -100,12 +100,11 @@ public abstract class Scene {
     }
 
     public void update(){
-//        for(Sprite s : tiles){
-//            s.update();
-//        }
         for (int i = elements.size() - 1; i >= 0; i--) {
-            if(elements.get(i).position.distance(players.get(0).position) < 1000) {
-                elements.get(i).update(true);
+            if(players.size() > 0) {
+                if (elements.get(i).position.distance(players.get(0).position) < 1000) {
+                    elements.get(i).update(true);
+                }
             }
         }
         for (int i = npc.size() - 1; i >= 0; i--) {
@@ -120,14 +119,12 @@ public abstract class Scene {
     }
 
     public void render(){
-//        for(Sprite s : tiles){
-//            s.render();
-//        }
         for (int i = elements.size() - 1; i >= 0; i--) {
-            if (elements.get(i).position.distance(players.get(0).position) < 1000) {
-                //System.out.println(i + "\t" + elements.get(i).position.distance(players.get(0).position));
+            if(players.size() > 0) {
                 if (elements.get(i).position.distance(players.get(0).position) < 1000) {
-                    elements.get(i).render();
+                    if (elements.get(i).position.distance(players.get(0).position) < 1000) {
+                        elements.get(i).render();
+                    }
                 }
             }
         }
