@@ -90,9 +90,6 @@ public class Player extends Sprite
                     animationManager.stop();
                 }
             }
-            if (glfwGetKey(window, GLFW_KEY_SPACE) == GL_TRUE){
-                System.out.println(position);
-            }
             if (collidesWithColor())
             {
                 velocity.x = 0;

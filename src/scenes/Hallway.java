@@ -42,7 +42,7 @@ public class Hallway extends Scene{
         super.update();
         for(Sprite elem : door){
             elem.update();
-            if(elem.position.distance(players.get(0).position) < 80){
+            if(elem.position.distance(players.get(0).position) < 100){
                 if(glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_SPACE) == GL_TRUE){
                     if(elem.equals(doorTo1)){
                         switchToScene(1);
@@ -55,7 +55,7 @@ public class Hallway extends Scene{
                     }else if(elem.equals(doorTo5)){
                         switchToScene(5);
                     }else{
-                        System.out.println("test");
+
                     }
                 }
             }
