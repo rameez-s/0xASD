@@ -8,6 +8,7 @@ import engine.objects.Sprite;
 import java.util.ArrayList;
 
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_F;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_SPACE;
 import static org.lwjgl.glfw.GLFW.glfwGetKey;
 import static org.lwjgl.opengl.GL11.GL_TRUE;
 
@@ -42,7 +43,7 @@ public class Hallway extends Scene{
         for(Sprite elem : door){
             elem.update();
             if(elem.position.distance(players.get(0).position) < 80){
-                if(glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_F) == GL_TRUE){
+                if(glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_SPACE) == GL_TRUE){
                     if(elem.equals(doorTo1)){
                         switchToScene(1);
                     }else if(elem.equals(doorTo2)){
@@ -56,7 +57,6 @@ public class Hallway extends Scene{
                     }else{
                         System.out.println("test");
                     }
-                    System.out.println(elem.position.distance(players.get(0).position));
                 }
             }
         }
@@ -64,9 +64,7 @@ public class Hallway extends Scene{
 
     public void render(){
         super.render();
-        for(Sprite d : door){
-            d.render();
-        }
+        door.forEach(Sprite::render);
     }
 
     private void switchToScene(int scene){

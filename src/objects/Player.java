@@ -27,7 +27,7 @@ public class Player extends Sprite
     private boolean fireReady = true;
     private long fireTime = 250000000;
     private long previousFireTime;
-
+    private boolean useArrowKeys = false;
     public Player(){
         super(128f, 0f);
         isPlayer = true;
@@ -45,26 +45,50 @@ public class Player extends Sprite
     public void update(){
         super.update();
         if(controllable) {
-            if (glfwGetKey(window, GLFW_KEY_RIGHT) == GL_TRUE) {
-                velocity.x += 1.6f;
-                animationManager.run("RunRight");
-                facingRight = true;
-            }
-            if (glfwGetKey(window, GLFW_KEY_LEFT) == GL_TRUE) {
-                velocity.x -= 1.6f;
-                animationManager.run("RunLeft");
-                facingRight = false;
-            }
-            if (glfwGetKey(window, GLFW_KEY_UP) == GL_TRUE) {
-                velocity.y += 2.8444f;
-                animationManager.run("RunUp");
-            }
-            if (glfwGetKey(window, GLFW_KEY_DOWN) == GL_TRUE) {
-                velocity.y -= 2.8444f;
-                animationManager.run("RunDown");
-            }
-            if(glfwGetKey(window, GLFW_KEY_DOWN) == GL_FALSE && glfwGetKey(window, GLFW_KEY_UP) == GL_FALSE && glfwGetKey(window, GLFW_KEY_RIGHT) == GL_FALSE && glfwGetKey(window, GLFW_KEY_LEFT) == GL_FALSE){
-                animationManager.stop();
+            if(useArrowKeys) {
+                if (glfwGetKey(window, GLFW_KEY_RIGHT) == GL_TRUE) {
+                    velocity.x += 1.6f;
+                    animationManager.run("RunRight");
+                    facingRight = true;
+                }
+                if (glfwGetKey(window, GLFW_KEY_LEFT) == GL_TRUE) {
+                    velocity.x -= 1.6f;
+                    animationManager.run("RunLeft");
+                    facingRight = false;
+                }
+                if (glfwGetKey(window, GLFW_KEY_UP) == GL_TRUE) {
+                    velocity.y += 2.8444f;
+                    animationManager.run("RunUp");
+                }
+                if (glfwGetKey(window, GLFW_KEY_DOWN) == GL_TRUE) {
+                    velocity.y -= 2.8444f;
+                    animationManager.run("RunDown");
+                }
+                if (glfwGetKey(window, GLFW_KEY_DOWN) == GL_FALSE && glfwGetKey(window, GLFW_KEY_UP) == GL_FALSE && glfwGetKey(window, GLFW_KEY_RIGHT) == GL_FALSE && glfwGetKey(window, GLFW_KEY_LEFT) == GL_FALSE) {
+                    animationManager.stop();
+                }
+            }else{
+                if (glfwGetKey(window, GLFW_KEY_D) == GL_TRUE) {
+                    velocity.x += 1.6f;
+                    animationManager.run("RunRight");
+                    facingRight = true;
+                }
+                if (glfwGetKey(window, GLFW_KEY_A) == GL_TRUE) {
+                    velocity.x -= 1.6f;
+                    animationManager.run("RunLeft");
+                    facingRight = false;
+                }
+                if (glfwGetKey(window, GLFW_KEY_W) == GL_TRUE) {
+                    velocity.y += 2.8444f;
+                    animationManager.run("RunUp");
+                }
+                if (glfwGetKey(window, GLFW_KEY_S) == GL_TRUE) {
+                    velocity.y -= 2.8444f;
+                    animationManager.run("RunDown");
+                }
+                if (glfwGetKey(window, GLFW_KEY_S) == GL_FALSE && glfwGetKey(window, GLFW_KEY_W) == GL_FALSE && glfwGetKey(window, GLFW_KEY_D) == GL_FALSE && glfwGetKey(window, GLFW_KEY_A) == GL_FALSE) {
+                    animationManager.stop();
+                }
             }
             if (glfwGetKey(window, GLFW_KEY_SPACE) == GL_TRUE){
                 System.out.println(position);
