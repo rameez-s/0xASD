@@ -19,12 +19,14 @@ import static org.lwjgl.opengl.GL11.GL_TRUE;
 public class Door extends Sprite {
     Character direction;
     Texture texture1 = new Texture ("Door Spritesheet.png");
+    public Vector2f hypotheticalSize;
 
     public Door()
     {
-        super();
+        super(160, 1);
         texture = texture1;
         setHypotheticalSize();
+        direction = 'D';
     }
     public Door(float x, float y, Character dir)
     {
@@ -43,19 +45,19 @@ public class Door extends Sprite {
         boolean collidesY = Math.abs(position.y - ply.position.y) < (150);
 
         boolean characterIsFacingHere = false;
-        if(ply.facingUp && direction=='D')
+        if(ply.direction == 'U' && direction=='D')
         {
             characterIsFacingHere = true;
         }
-        if(ply.facingDown && direction=='U')
+        if(ply.direction == 'D' && direction=='U')
         {
             characterIsFacingHere = true;
         }
-        if(ply.facingRight && direction=='L')
+        if(ply.direction == 'R' && direction=='L')
         {
             characterIsFacingHere = true;
         }
-        if(ply.facingLeft && direction == 'R')
+        if(ply.direction == 'L' && direction == 'R')
         {
             characterIsFacingHere = true;
         }

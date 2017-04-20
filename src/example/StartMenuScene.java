@@ -22,8 +22,8 @@ public class StartMenuScene extends Scene {
         for (int i = elements.size() - 1; i >= 0; i--) {
             elements.get(i).update(true);
         }
-        for (int i = creatures.size() - 1; i >= 0; i--) {
-            creatures.get(i).update();
+        for (int i = npc.size() - 1; i >= 0; i--) {
+            npc.get(i).update();
         }
         for (int i = projectiles.size() - 1; i >= 0; i--) {
             projectiles.get(i).update();
@@ -41,8 +41,8 @@ public class StartMenuScene extends Scene {
         for (int i = elements.size() - 1; i >= 0; i--) {
             elements.get(i).render();
         }
-        for (int i = creatures.size() - 1; i >= 0; i--) {
-            creatures.get(i).render();
+        for (int i = npc.size() - 1; i >= 0; i--) {
+            npc.get(i).render();
         }
         for (int i = projectiles.size() - 1; i >= 0; i--) {
             projectiles.get(i).render();

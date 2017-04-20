@@ -23,7 +23,7 @@ import static org.lwjgl.opengl.GL11.GL_TRUE;
 //mostly Isak
 public class Player extends Sprite
 {
-    public boolean facingRight = true;
+    public Character direction = 'D';
     private boolean fireReady = true;
     private long fireTime = 250000000;
     private long previousFireTime;
@@ -49,20 +49,20 @@ public class Player extends Sprite
                 if (glfwGetKey(window, GLFW_KEY_RIGHT) == GL_TRUE) {
                     velocity.x += 1.6f;
                     animationManager.run("RunRight");
-                    facingRight = true;
+                    direction = 'R';
                 }
                 if (glfwGetKey(window, GLFW_KEY_LEFT) == GL_TRUE) {
                     velocity.x -= 1.6f;
                     animationManager.run("RunLeft");
-                    facingRight = false;
+                    direction = 'L';
                 }
                 if (glfwGetKey(window, GLFW_KEY_UP) == GL_TRUE) {
                     velocity.y += 2.8444f;
-                    animationManager.run("RunUp");
+                    direction = 'U';
                 }
                 if (glfwGetKey(window, GLFW_KEY_DOWN) == GL_TRUE) {
                     velocity.y -= 2.8444f;
-                    animationManager.run("RunDown");
+                    direction = 'D';
                 }
                 if (glfwGetKey(window, GLFW_KEY_DOWN) == GL_FALSE && glfwGetKey(window, GLFW_KEY_UP) == GL_FALSE && glfwGetKey(window, GLFW_KEY_RIGHT) == GL_FALSE && glfwGetKey(window, GLFW_KEY_LEFT) == GL_FALSE) {
                     animationManager.stop();
@@ -71,20 +71,20 @@ public class Player extends Sprite
                 if (glfwGetKey(window, GLFW_KEY_D) == GL_TRUE) {
                     velocity.x += 1.6f;
                     animationManager.run("RunRight");
-                    facingRight = true;
+                    direction = 'R';
                 }
                 if (glfwGetKey(window, GLFW_KEY_A) == GL_TRUE) {
                     velocity.x -= 1.6f;
                     animationManager.run("RunLeft");
-                    facingRight = false;
+                    direction = 'L';
                 }
                 if (glfwGetKey(window, GLFW_KEY_W) == GL_TRUE) {
                     velocity.y += 2.8444f;
-                    animationManager.run("RunUp");
+                    direction = 'U';
                 }
                 if (glfwGetKey(window, GLFW_KEY_S) == GL_TRUE) {
                     velocity.y -= 2.8444f;
-                    animationManager.run("RunDown");
+                    direction = 'D';
                 }
                 if (glfwGetKey(window, GLFW_KEY_S) == GL_FALSE && glfwGetKey(window, GLFW_KEY_W) == GL_FALSE && glfwGetKey(window, GLFW_KEY_D) == GL_FALSE && glfwGetKey(window, GLFW_KEY_A) == GL_FALSE) {
                     animationManager.stop();
@@ -103,7 +103,7 @@ public class Player extends Sprite
                     s2.startTime = System.nanoTime();
                     System.out.println("TEST");
                     currentScene.add(s2, 2);
-                    if (facingRight) {
+                    if (direction == 'R') {
                         s2.position = new Vector3f(position.x + 35, position.y, position.z);
                         s2.velocity.x = 7f;
                     } else {

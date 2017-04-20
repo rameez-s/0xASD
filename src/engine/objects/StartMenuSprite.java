@@ -14,8 +14,8 @@ import java.util.ArrayList;
 public class StartMenuSprite extends Sprite {
     public StartMenuSprite()
     {
-        super(720, 1);
-        texture = new Texture ("Door Spritesheet.png");
+        super(1000, 1);
+        texture = new Texture ("startMenu.png");
         position = new Vector3f(0, 0, 1);
     }
 }
