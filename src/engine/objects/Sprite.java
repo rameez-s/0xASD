@@ -1,19 +1,14 @@
 package engine.objects;
 
-import engine.Engine;
-import engine.math.Matrix4f;
+import engine.animation.AnimationManager;
 import engine.math.Vector2f;
 import engine.math.Vector3f;
 import engine.rendering.Quad;
 import engine.rendering.Shader;
 import engine.rendering.Texture;
-import java.util.ArrayList;
-
-import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL11.GL_TRUE;
 
 /**
- * Created by 18iwahlqvist on 2/14/2017.
+ * Created by Isak Wahlqvist
  */
 public class Sprite extends Quad {
     public Vector3f position;
@@ -22,19 +17,29 @@ public class Sprite extends Quad {
     public Shader shader;
     public Vector2f textureCoords;
     public boolean isPlayer = false;
-    public Vector2f hypotheticalSize = new Vector2f(0, 0);
+    public AnimationManager animationManager = new AnimationManager();
 
     public Sprite(){
         super();
         position = new Vector3f();
         velocity = new Vector3f();
-        texture = new Texture("default.png");
+        texture = animationManager.texture;
         shader = new Shader("default");
         textureCoords = new Vector2f(0, 0);
     }
 
+    public Sprite(float size, float z){
+        super(size, z);
+        position = new Vector3f();
+        velocity = new Vector3f();
+        shader = new Shader("default");
+        texture = animationManager.texture;
+        textureCoords = new Vector2f(0, 0);
+    }
+
     public void setTexture(String textureFile){
-        texture = new Texture(textureFile);
+        animationManager.setTexture(textureFile);
+        texture = animationManager.texture;
     }
 
     public void setTextureCoords(float x, float y){
@@ -42,14 +47,11 @@ public class Sprite extends Quad {
         textureCoords.y = y;
     }
 
-    public Sprite(float size, float z){
-        super(size, z);
-        position = new Vector3f();
-        velocity = new Vector3f();
-        texture = new Texture("default.png");
-        shader = new Shader("default");
-        textureCoords = new Vector2f(0, 0);
+    public void setTextureCoords(Vector2f v2f){
+        textureCoords.x = v2f.x;
+        textureCoords.y = v2f.y;
     }
+
 
     public void update(){
         shader.bind();
@@ -57,6 +59,9 @@ public class Sprite extends Quad {
         shader.setUniform("texture_coordinate_shift", textureCoords);
         shader.setUniform("projection", currentScene.projection);
         shader.setUniform("position", position);
+
+        animationManager.update();
+        setTextureCoords(animationManager.textureCoord);
         if(!isPlayer || !collidesWithColor())
         {
             position.add(velocity);
@@ -84,24 +89,26 @@ public class Sprite extends Quad {
         return collidesX && collidesY;
     }
 
-    public boolean collidesWith(Sprite s, Vector3f hyp, Vector2f hypSize){
+    private boolean collidesWith(Sprite s, Vector3f hyp, Vector2f hypSize){
         boolean collidesX = Math.abs(hyp.x - s.position.x) < (s.size + hypSize.x);
         boolean collidesY = Math.abs(hyp.y - s.position.y) < (s.size + hypSize.y);
         return collidesX && collidesY;
     }
-    public boolean collidesWithColor()
+
+    public boolean collidesHypotheticalWith(Sprite s, Vector2f hypSize){
+        Vector3f s1posHyp = new Vector3f(position.x + velocity.x, position.y + velocity.y, position.z + velocity.z), s2posHyp = new Vector3f(s.position.x + s.velocity.x, s.position.y + s.velocity.y, s.position.z + s.velocity.z);
+
+        boolean collidesX = Math.abs(s2posHyp.x - s1posHyp.x) < (s.size + hypSize.x);
+        boolean collidesY = Math.abs(s2posHyp.y - s1posHyp.y) < (s.size + hypSize.y);
+        return collidesX && collidesY;
+    }
+
+    protected boolean collidesWithColor()
     {
         Vector3f hypotheticalPosition = new Vector3f(position.x, position.y, position.z);
         hypotheticalPosition.add(velocity);
-        for(Sprite c: Map.collidablePixels) {
+        for(Sprite c: currentScene.map.collidablePixels) {
             if(collidesWith(c, hypotheticalPosition, new Vector2f(-50, 85))){
-                return true;
-            }
-        }
-        for(Sprite c: currentScene.collidables)
-        {
-            if(collidesWith(c, hypotheticalPosition, c.hypotheticalSize))
-            {
                 return true;
             }
         }
@@ -113,6 +120,7 @@ public class Sprite extends Quad {
         texture.bind(1);
         super.render();
     }
+
 }
 //heyo
 //my

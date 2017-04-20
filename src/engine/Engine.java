@@ -1,26 +1,24 @@
 package engine;
 
 import engine.math.Vector3f;
-import engine.objects.*;
+import engine.objects.Map;
+import engine.objects.Scene;
 import engine.rendering.Texture;
 import example.ExampleScene;
-import example.StartMenuScene;
 import objects.Player;
 import org.lwjgl.glfw.GLFWFramebufferSizeCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
-import org.lwjgl.glfw.GLFWCursorPosCallback;
-import org.lwjgl.BufferUtils;
+import scenes.Hallway;
 
 import java.util.ArrayList;
-import java.nio.DoubleBuffer;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
 /**
- * Created by 18iwahlqvist on 2/12/2017.
+ * Created by Isak Wahlqvist
  */
 public class Engine {
     private long window;
@@ -30,22 +28,19 @@ public class Engine {
 
     public static Engine instance;
 
-    private DoubleBuffer b1 = BufferUtils.createDoubleBuffer(1);
-    private DoubleBuffer b2 = BufferUtils.createDoubleBuffer(1);
-
     public int currentScene;
     public ArrayList<Scene> scenes = new ArrayList<>();
 
-    public boolean vSync = false;
+    private boolean vSync = false;
 
     GLFWFramebufferSizeCallback fsCallback;
-    public int updateRate = 60;
+    private int updateRate = 60;
 
     public long getWindow() {
         return window;
     }
 
-    public void start(){
+    private void start(){
         instance = this;
         init();
         loop();
@@ -58,7 +53,7 @@ public class Engine {
 
 
     private void init(){
-        if(glfwInit() == false){
+        if(!glfwInit()){
             System.out.println("GLHF");
             System.exit(1);
         }
@@ -98,24 +93,13 @@ public class Engine {
                 glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
         });
         currentScene = 0;
-
-        Scene startMenu = new StartMenuScene();
-        Sprite menuImage = new StartMenuSprite();
-        startMenu.add(menuImage, 0);
-        scenes.add(startMenu);
-
-
-        Scene s = new ExampleScene();
+        Scene s = new Hallway();
         Player thisPlayer = new Player();
         s.add(thisPlayer, 3);
-        Sprite sprite = new Sprite();
-        sprite.position = new Vector3f(-300, -257, 1);
-        s.add(sprite, 1);
-        Door door = new Door(-300, -257, 'D');
-        s.add(door, 1);
-        s.collidables.add(door);
         scenes.add(s);
-
+        Scene s2 = new ExampleScene();
+        scenes.add(s2);
+        //s2.add(thisPlayer, 3);
         long lastTime = System.nanoTime();
         long updateTime = 1000000000/updateRate;
         long oneSecondTime = lastTime + 1000000000;
@@ -134,7 +118,6 @@ public class Engine {
             fps++;
             if(System.nanoTime() > oneSecondTime){
                 System.out.println("Frames per second: " + fps + "\tUpdates per second: " + ups);
-                System.out.println("Element 0's position: "+scenes.get(currentScene).elements.get(0).position.x+","+scenes.get(currentScene).elements.get(0).position.y);
 //                float pixelsDistance;
 //                float minimum = Float.MAX_VALUE;
 //                for(int i=0; i<Map.collidablePixels.size(); i++)
@@ -153,10 +136,8 @@ public class Engine {
     }
 
     private void update(){
-        for(Scene s : scenes) {
-            if(s.backgroundUpdate) {
-                s.update();
-            }
+        if((currentScene < scenes.size())) {
+            scenes.get(currentScene).update();
         }
         glfwPollEvents();
     }

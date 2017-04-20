@@ -17,10 +17,12 @@ import java.nio.ByteBuffer;
 public class Texture {
     private int id, width, height;
     public static void init(){
+        defaultSheet = new Texture("default.png");
         characterSheet = new Texture("characterSheet.png");
         tileSheet = new Texture("tileSheet.png");
+        npcSheet = new Texture("npcSheet.png");
     }
-    public static Texture characterSheet, tileSheet;
+    public static Texture defaultSheet, characterSheet, tileSheet, npcSheet;
     public Texture(String filename){
         BufferedImage bi;
         try {
