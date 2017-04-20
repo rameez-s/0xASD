@@ -22,6 +22,7 @@ public class Sprite extends Quad {
     public Shader shader;
     public Vector2f textureCoords;
     public boolean isPlayer = false;
+    public Vector2f hypotheticalSize = new Vector2f(0, 0);
 
     public Sprite(){
         super();
@@ -97,6 +98,13 @@ public class Sprite extends Quad {
                 return true;
             }
         }
+        for(Sprite c: currentScene.collidables)
+        {
+            if(collidesWith(c, hypotheticalPosition, c.hypotheticalSize))
+            {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -105,7 +113,6 @@ public class Sprite extends Quad {
         texture.bind(1);
         super.render();
     }
-
 }
 //heyo
 //my

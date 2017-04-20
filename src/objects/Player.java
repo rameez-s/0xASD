@@ -18,6 +18,9 @@ import static org.lwjgl.opengl.GL11.GL_TRUE;
 public class Player extends Sprite
 {
     public boolean facingRight = true;
+    public boolean facingLeft;
+    public boolean facingUp;
+    public boolean facingDown;
     private boolean fireReady = true;
     private long fireTime = 250000000;
     private long previousFireTime;
@@ -37,16 +40,30 @@ public class Player extends Sprite
             if (glfwGetKey(window, GLFW_KEY_RIGHT) == GL_TRUE) {
                 velocity.x += 1.6f;
                 facingRight = true;
+                facingLeft = false;
+                facingUp = false;
+                facingDown = false;
             }
             if (glfwGetKey(window, GLFW_KEY_LEFT) == GL_TRUE) {
                 velocity.x -= 1.6f;
                 facingRight = false;
+                facingLeft = true;
+                facingUp = false;
+                facingDown = false;
             }
             if (glfwGetKey(window, GLFW_KEY_UP) == GL_TRUE) {
                 velocity.y += 2.8444f;
+                facingRight = false;
+                facingLeft = false;
+                facingUp = true;
+                facingDown = false;
             }
             if (glfwGetKey(window, GLFW_KEY_DOWN) == GL_TRUE) {
                 velocity.y -= 2.8444f;
+                facingRight = false;
+                facingLeft = false;
+                facingUp = false;
+                facingDown = true;
             }
             if (collidesWithColor())
             {

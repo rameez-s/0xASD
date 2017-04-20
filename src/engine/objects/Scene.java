@@ -15,6 +15,7 @@ public abstract class Scene {
     public ArrayList<Sprite> creatures = new ArrayList<>();
     public ArrayList<Sprite> players = new ArrayList<>();
     public ArrayList<Projectile> projectiles = new ArrayList<>();
+    public ArrayList<Sprite> collidables = new ArrayList<>();
 
     Map map;
 
