@@ -46,15 +46,15 @@ public class Hallway extends Scene{
             if(elem.isClose()){
                 if(glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_SPACE) == GL_TRUE){
                     if(elem.equals(doorTo1)){
-                        switchToScene(1);
-                    }else if(elem.equals(doorTo2)){
                         switchToScene(2);
-                    }else if(elem.equals(doorTo3)){
+                    }else if(elem.equals(doorTo2)){
                         switchToScene(3);
-                    }else if(elem.equals(doorTo4)){
+                    }else if(elem.equals(doorTo3)){
                         switchToScene(4);
-                    }else if(elem.equals(doorTo5)){
+                    }else if(elem.equals(doorTo4)){
                         switchToScene(5);
+                    }else if(elem.equals(doorTo5)){
+                        switchToScene(6);
                     }else{
 
                     }
