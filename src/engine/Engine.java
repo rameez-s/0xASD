@@ -11,6 +11,7 @@ import objects.Player;
 import org.lwjgl.glfw.GLFWFramebufferSizeCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
+import scenes.Gym;
 import scenes.Hallway;
 
 import java.util.ArrayList;
@@ -103,10 +104,13 @@ public class Engine {
 
         Scene s = new Hallway();
         Player thisPlayer = new Player();
+        thisPlayer.setTexture("characterSheet.png");
         s.add(thisPlayer, 3);
         scenes.add(s);
         Scene s2 = new ExampleScene();
         scenes.add(s2);
+        Scene gym = new Gym();
+        scenes.add(gym);
         //s2.add(thisPlayer, 3);
         long lastTime = System.nanoTime();
         long updateTime = 1000000000/updateRate;
