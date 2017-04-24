@@ -4,6 +4,7 @@ import engine.Engine;
 import engine.math.Vector3f;
 import engine.objects.Scene;
 import engine.objects.Sprite;
+import engine.objects.Door;
 
 import java.util.ArrayList;
 
@@ -16,15 +17,15 @@ import static org.lwjgl.opengl.GL11.GL_TRUE;
  * Created by Isak Wahlqvist
  */
 public class Hallway extends Scene{
-    private ArrayList<Sprite> door = new ArrayList<>();
-    private Sprite doorTo1 = new Sprite(), doorTo2 = new Sprite(), doorTo3 = new Sprite(), doorTo4 = new Sprite(), doorTo5 = new Sprite();
+    private ArrayList<Door> door = new ArrayList<>();
+    private Door doorTo1 = new Door(), doorTo2 = new Door(), doorTo3 = new Door(), doorTo4 = new Door(), doorTo5 = new Door();
     public Hallway(){
         setMap("hallway.png");
-        doorTo1.position = new Vector3f(-1000,  1180, -1);
-        doorTo2.position = new Vector3f(-500,   1180, -1);
-        doorTo3.position = new Vector3f(0,      1180, -1);
-        doorTo4.position = new Vector3f(500,    1180, -1);
-        doorTo5.position = new Vector3f(1000,   1180, -1);
+        doorTo1.position = new Vector3f(-1000,  1080, -1);
+        doorTo2.position = new Vector3f(-500,   1080, -1);
+        doorTo3.position = new Vector3f(0,      1080, -1);
+        doorTo4.position = new Vector3f(500,    1080, -1);
+        doorTo5.position = new Vector3f(1000,   1080, -1);
         add(doorTo1);
         add(doorTo2);
         add(doorTo3);
@@ -33,16 +34,16 @@ public class Hallway extends Scene{
         genMap();
     }
 
-    public void add(Sprite s){
+    public void add(Door s){
         door.add(s);
         s.currentScene = this;
     }
 
     public void update(){
         super.update();
-        for(Sprite elem : door){
+        for(Door elem : door){
             elem.update();
-            if(elem.position.distance(players.get(0).position) < 100){
+            if(elem.isClose()){
                 if(glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_SPACE) == GL_TRUE){
                     if(elem.equals(doorTo1)){
                         switchToScene(1);

@@ -1,10 +1,12 @@
 package engine;
 
 import engine.math.Vector3f;
-import engine.objects.Map;
+import engine.objects.*;
 import engine.objects.Scene;
+import engine.objects.StartMenuSprite;
 import engine.rendering.Texture;
 import example.ExampleScene;
+import example.StartMenuScene;
 import objects.Player;
 import org.lwjgl.glfw.GLFWFramebufferSizeCallback;
 import org.lwjgl.glfw.GLFWVidMode;
@@ -94,6 +96,12 @@ public class Engine {
                 glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
         });
         currentScene = 0;
+
+        Scene startMenu = new StartMenuScene();
+        StartMenuSprite startMenuSprite = new StartMenuSprite();
+        startMenu.add(startMenuSprite, 1);
+        scenes.add(startMenu);
+
         Scene s = new Hallway();
         Player thisPlayer = new Player();
         thisPlayer.setTexture("characterSheet.png");
