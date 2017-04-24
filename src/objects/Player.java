@@ -96,30 +96,6 @@ public class Player extends Sprite
                 velocity.y = 0;
             }
             currentScene.projection.move(new Vector3f(velocity.x/640, velocity.y/640, 0));
-            if (fireReady == true) {
-                if (glfwGetKey(window, GLFW_KEY_ENTER) == GL_TRUE) {
-                    Projectile s2 = new Projectile(16f, 1, 1000000000);
-                    s2.setTexture("projectile.png");
-                    s2.startTime = System.nanoTime();
-                    System.out.println("TEST");
-                    currentScene.add(s2, 2);
-                    if (facingRight) {
-                        s2.position = new Vector3f(position.x + 35, position.y, position.z);
-                        s2.velocity.x = 7f;
-                    } else {
-                        s2.position = new Vector3f(position.x - 35, position.y, position.z);
-                        s2.velocity.x = -7f;
-                    }
-                    s2.velocity.add(new Vector3f(velocity.x, 0, 0));
-
-                    fireReady = false;
-                    previousFireTime = System.nanoTime();
-                }
-            } else {
-                if ((previousFireTime + fireTime) < System.nanoTime()) {
-                    fireReady = true;
-                }
-            }
         }
         velocity.set(velocity.x * 0.8f, velocity.y * 0.8f, 0);
     }
