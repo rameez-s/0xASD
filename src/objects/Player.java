@@ -28,6 +28,7 @@ public class Player extends Sprite
     private long fireTime = 250000000;
     private long previousFireTime;
     private boolean useArrowKeys = false;
+    public Character direction = 'D';
     public Player(){
         super(128f, 0f);
         isPlayer = true;
@@ -71,20 +72,24 @@ public class Player extends Sprite
                 if (glfwGetKey(window, GLFW_KEY_D) == GL_TRUE) {
                     velocity.x += 1.6f;
                     animationManager.run("RunRight");
+                    direction = 'R';
                     facingRight = true;
                 }
                 if (glfwGetKey(window, GLFW_KEY_A) == GL_TRUE) {
                     velocity.x -= 1.6f;
                     animationManager.run("RunLeft");
+                    direction = 'L';
                     facingRight = false;
                 }
                 if (glfwGetKey(window, GLFW_KEY_W) == GL_TRUE) {
                     velocity.y += 2.8444f;
                     animationManager.run("RunUp");
+                    direction = 'U';
                 }
                 if (glfwGetKey(window, GLFW_KEY_S) == GL_TRUE) {
                     velocity.y -= 2.8444f;
                     animationManager.run("RunDown");
+                    direction = 'D';
                 }
                 if (glfwGetKey(window, GLFW_KEY_S) == GL_FALSE && glfwGetKey(window, GLFW_KEY_W) == GL_FALSE && glfwGetKey(window, GLFW_KEY_D) == GL_FALSE && glfwGetKey(window, GLFW_KEY_A) == GL_FALSE) {
                     animationManager.stop();

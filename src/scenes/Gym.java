@@ -7,7 +7,7 @@ import engine.objects.Scene;
  */
 public class Gym extends Scene {
     public Gym(){
-        setMap("gym.png");
+//        setMap("gym.png");
         genMap();
 
     }

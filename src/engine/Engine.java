@@ -109,8 +109,8 @@ public class Engine {
         scenes.add(s);
         Scene s2 = new ExampleScene();
         scenes.add(s2);
-        Scene gym = new Gym();
-        scenes.add(gym);
+/*        Scene gym = new Gym();
+        scenes.add(gym);*/
         //s2.add(thisPlayer, 3);
         long lastTime = System.nanoTime();
         long updateTime = 1000000000/updateRate;
