@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d0de517f-13aa-4b2c-83cd-a4e117f9a8a2" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/scenes/Gym.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine/Engine.java" afterPath="$PROJECT_DIR$/src/engine/Engine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/objects/Player.java" afterPath="$PROJECT_DIR$/src/objects/Player.java" />
     </list>
     <ignored path="JavaCS game.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,7 +31,7 @@
         <entry file="file://$PROJECT_DIR$/src/objects/Player.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1826">
-              <caret line="97" column="90" selection-start-line="97" selection-start-column="90" selection-end-line="97" selection-end-column="90" />
+              <caret line="97" column="21" selection-start-line="97" selection-start-column="21" selection-end-line="97" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -100,7 +97,7 @@
         <entry file="file://$PROJECT_DIR$/src/engine/Engine.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1892">
-              <caret line="104" column="24" selection-start-line="104" selection-start-column="24" selection-end-line="104" selection-end-column="24" />
+              <caret line="111" column="24" selection-start-line="111" selection-start-column="24" selection-end-line="111" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -127,7 +124,7 @@
         <entry file="file://$PROJECT_DIR$/src/scenes/Hallway.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1232">
-              <caret line="66" column="37" selection-start-line="66" selection-start-column="37" selection-end-line="66" selection-end-column="37" />
+              <caret line="67" column="37" selection-start-line="67" selection-start-column="37" selection-end-line="67" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -939,7 +936,14 @@
       <option name="project" value="LOCAL" />
       <updated>1492513191795</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Added hallway to lead to the different rooms&#10;Just test for now">
+      <created>1493030433119</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1493030433120</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1269,7 +1273,7 @@
     <entry file="file://$PROJECT_DIR$/src/scenes/Hallway.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1232">
-          <caret line="66" column="37" selection-start-line="66" selection-start-column="37" selection-end-line="66" selection-end-column="37" />
+          <caret line="67" column="37" selection-start-line="67" selection-start-column="37" selection-end-line="67" selection-end-column="37" />
           <folding />
         </state>
       </provider>
@@ -1277,7 +1281,7 @@
     <entry file="file://$PROJECT_DIR$/src/objects/Player.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1826">
-          <caret line="97" column="90" selection-start-line="97" selection-start-column="90" selection-end-line="97" selection-end-column="90" />
+          <caret line="97" column="21" selection-start-line="97" selection-start-column="21" selection-end-line="97" selection-end-column="21" />
           <folding />
         </state>
       </provider>
@@ -1285,7 +1289,7 @@
     <entry file="file://$PROJECT_DIR$/src/engine/Engine.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1892">
-          <caret line="104" column="24" selection-start-line="104" selection-start-column="24" selection-end-line="104" selection-end-column="24" />
+          <caret line="111" column="24" selection-start-line="111" selection-start-column="24" selection-end-line="111" selection-end-column="24" />
           <folding />
         </state>
       </provider>
