@@ -20,7 +20,7 @@ import static org.lwjgl.opengl.GL11.GL_TRUE;
  * Created by 18iwahlqvist on 2/16/2017.
  */
 //and alex
-//mostly Isak
+//mostly Alex
 public class Player extends Sprite
 {
     public boolean facingRight = true;

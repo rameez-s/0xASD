@@ -97,11 +97,6 @@ public class Engine {
         });
         currentScene = 0;
 
-        Scene startMenu = new StartMenuScene();
-        StartMenuSprite startMenuSprite = new StartMenuSprite();
-        startMenu.add(startMenuSprite, 1);
-        scenes.add(startMenu);
-
         Scene s = new Hallway();
         Player thisPlayer = new Player();
         thisPlayer.setTexture("characterSheet.png");
