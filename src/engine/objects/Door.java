@@ -17,14 +17,13 @@ import static org.lwjgl.opengl.GL11.GL_TRUE;
  * Created by 17aelbashir on 23-Mar-17.
  */
 public class Door extends Sprite {
-    Character direction;
-    Texture texture1 = new Texture ("Door Spritesheet.png");
-    public Vector2f hypotheticalSize;
+    private Character direction;
+    private Vector2f hypotheticalSize;
 
     public Door()
     {
         super(160, 1);
-        texture = texture1;
+        texture = new Texture("Door Spritesheet.png");
         setHypotheticalSize();
         direction = 'D';
     }
@@ -43,25 +42,7 @@ public class Door extends Sprite {
         Player ply = (Player)(currentScene.players.get(0));
         boolean collidesX = Math.abs(position.x - ply.position.x) < (60);
         boolean collidesY = Math.abs(position.y - ply.position.y) < (150);
-
-        boolean characterIsFacingHere = false;
-        if(ply.direction == 'U' && direction=='D')
-        {
-            characterIsFacingHere = true;
-        }
-        if(ply.direction == 'D' && direction=='U')
-        {
-            characterIsFacingHere = true;
-        }
-        if(ply.direction == 'R' && direction=='L')
-        {
-            characterIsFacingHere = true;
-        }
-        if(ply.direction == 'L' && direction == 'R')
-        {
-            characterIsFacingHere = true;
-        }
-        return(collidesX && collidesY && characterIsFacingHere);
+        return(collidesX && collidesY);
     }
     public void update()
     {
