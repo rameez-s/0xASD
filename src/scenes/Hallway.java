@@ -68,10 +68,16 @@ public class Hallway extends Scene{
         door.forEach(Sprite::render);
     }
 
-    private void switchToScene(int scene){
-        Engine.instance.currentScene = scene;
-        Engine.instance.scenes.get(Engine.instance.currentScene).add(players.get(0), 3);
-        players.get(0).currentScene = Engine.instance.scenes.get(Engine.instance.currentScene);
-        players.get(0).position = new Vector3f(0, 0, 0);
+    private int switchToScene(int scene){
+        if(Engine.instance.scenes.size() > scene) {
+            Engine.instance.currentScene = scene;
+            Engine.instance.scenes.get(Engine.instance.currentScene).add(players.get(0), 3);
+            players.get(0).currentScene = Engine.instance.scenes.get(Engine.instance.currentScene);
+            players.get(0).position = new Vector3f(0, 0, 0);
+            return 0;
+        }else{
+            System.out.println("Scene does not works");
+            return -1;
+        }
     }
 }

@@ -18,4 +18,5 @@ public class StartMenuSprite extends Sprite {
         texture = new Texture ("startMenu.png");
         position = new Vector3f(0, 0, 1);
     }
+    //hey mr loomer
 }

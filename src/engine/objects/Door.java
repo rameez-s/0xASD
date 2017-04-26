@@ -43,25 +43,7 @@ public class Door extends Sprite {
         Player ply = (Player)(currentScene.players.get(0));
         boolean collidesX = Math.abs(position.x - ply.position.x) < (60);
         boolean collidesY = Math.abs(position.y - ply.position.y) < (150);
-
-        boolean characterIsFacingHere = false;
-        if(ply.direction == 'U' && direction=='D')
-        {
-            characterIsFacingHere = true;
-        }
-        if(ply.direction == 'D' && direction=='U')
-        {
-            characterIsFacingHere = true;
-        }
-        if(ply.direction == 'R' && direction=='L')
-        {
-            characterIsFacingHere = true;
-        }
-        if(ply.direction == 'L' && direction == 'R')
-        {
-            characterIsFacingHere = true;
-        }
-        return(collidesX && collidesY && characterIsFacingHere);
+        return(collidesX && collidesY);
     }
     public void update()
     {
