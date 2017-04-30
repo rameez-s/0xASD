@@ -10,21 +10,31 @@ import example.StartMenuScene;
 import objects.Player;
 import org.lwjgl.glfw.GLFWFramebufferSizeCallback;
 import org.lwjgl.glfw.GLFWVidMode;
+import org.lwjgl.openal.AL;
+import org.lwjgl.openal.ALC;
+import org.lwjgl.openal.ALCCapabilities;
 import org.lwjgl.opengl.GL;
+import scenes.English;
 import scenes.Gym;
 import scenes.Hallway;
 
+import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
 import java.util.ArrayList;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.openal.ALC10.*;
+import static org.lwjgl.openal.EXTThreadLocalContext.alcSetThreadContext;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.system.MemoryUtil.NULL;
+import static sun.audio.AudioDevice.device;
 
 /**
  * Created by Isak Wahlqvist
  */
 public class Engine {
-    private long window;
+    private long window, audioDevice, context;
 
     private int width = 1280, height = 720;
     private boolean fullscreen = false;
@@ -87,6 +97,17 @@ public class Engine {
 
         glfwMakeContextCurrent(window);
         GL.createCapabilities();
+
+        audioDevice = alcOpenDevice((ByteBuffer) null);
+        if(audioDevice == NULL)
+            throw new Error("Device not found");
+
+        ALCCapabilities deviceCaps = ALC.createCapabilities(audioDevice);
+
+        context = alcCreateContext(audioDevice, (IntBuffer)null);
+        alcSetThreadContext(context);
+        AL.createCapabilities(deviceCaps);
+
         Texture.init();
     }
 
@@ -96,11 +117,18 @@ public class Engine {
                 glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
         });
         currentScene = 0;
+        Scene english = new English();
+        scenes.add(english);
+        //Start
+        Scene startMenu = new StartMenuScene();
+        StartMenuSprite startMenuSprite = new StartMenuSprite();
+        startMenu.add(startMenuSprite, 1);
+        scenes.add(startMenu);
 
         Scene s = new Hallway();
         Player thisPlayer = new Player();
         thisPlayer.setTexture("characterSheet.png");
-        s.add(thisPlayer, 3);
+        english.add(thisPlayer, 3);
         scenes.add(s);
         Scene s2 = new ExampleScene();
         scenes.add(s2);
@@ -139,6 +167,10 @@ public class Engine {
                 oneSecondTime += 1000000000;
             }
         }
+
+        alcMakeContextCurrent(NULL);
+        alcDestroyContext(context);
+        alcCloseDevice(audioDevice);
 
     }
 

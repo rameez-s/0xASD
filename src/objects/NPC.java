@@ -14,4 +14,8 @@ public class NPC extends Sprite {
 
     }
 
+    public NPC(int size){
+        super(size, 0);
+    }
+
 }
