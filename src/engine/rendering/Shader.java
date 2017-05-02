@@ -59,7 +59,7 @@ public class Shader {
         glDeleteShader(fragShader);
         glDeleteShader(vertShader);
     }
-
+    //Test
     public void setUniform(String name, int value){
         int location = glGetUniformLocation(program, name);
         if(location != -1){

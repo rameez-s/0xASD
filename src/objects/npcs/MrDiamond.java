@@ -16,18 +16,21 @@ public class MrDiamond extends NPC {
     private int atPosition = -1;
     private Vector2f sideA, sideB, sideC;
     char facing;
-    Sprite n1, n2;
+    Sprite visionCone;
     public MrDiamond(){
         super(128);
         setTexture("characterSheet.png");
         animationManager.textureCoord = new Vector2f(0, 0.5f);
-        n1 = new Sprite();
-        n2 = new Sprite();
+        visionCone = new Sprite(256, 0);
+        visionCone.setTexture("characterSheet.png");
+        visionCone.animationManager.textureCoord = new Vector2f(0.25f, 0.25f);
+        visionCone.animationManager.add(new Animation("idle", new Vector2f(0.25f, 0.25f), 0.1f, 1));
         animationManager.add(new Animation("Down", new Vector2f(0, 0.375f), 0.2f, 2));
         animationManager.add(new Animation("Up", new Vector2f((0.125f * 1), 0.375f), 0.2f, 2));
         animationManager.add(new Animation("Left", new Vector2f((0.125f * 2), 0.375f), 0.2f, 1));
         animationManager.add(new Animation("Right", new Vector2f((0.125f * 3), 0.375f), 0.2f, 1));
 
+        //Test
         positions.add(new Vector2f(0, 0));
         positions.add(new Vector2f(0, 1000));
         positions.add(new Vector2f(500, 1000));
@@ -41,9 +44,8 @@ public class MrDiamond extends NPC {
     }
 
     public void update(){
-        if(n1.currentScene == null){
-            n1.currentScene = currentScene;
-            n2.currentScene = currentScene;
+        if(visionCone.currentScene == null){
+            visionCone.currentScene = currentScene;
         }
         if((Math.abs(velocity.y) - Math.abs(velocity.x)) > 0){
             if(velocity.y > 0){
@@ -60,6 +62,7 @@ public class MrDiamond extends NPC {
         }
         super.update();
         sideA = new Vector2f(position.x, position.y);
+
         switch (facing){
             case 'U':
                 sideB = new Vector2f(sideA.x - 150, position.y + (int)(500.0 * (16/9.0)));
@@ -86,11 +89,8 @@ public class MrDiamond extends NPC {
                 sideC = new Vector2f(sideA.x + 150, position.y + (int)(500.0 * (16/9.0)));
                 break;
         }
-
-        n1.position = new Vector3f(sideB.x, sideB.y, 0);
-        n2.position = new Vector3f(sideC.x, sideC.y, 0);
-        n1.update();
-        n2.update();
+        visionCone.position = new Vector3f(sideB.x, sideB.y, 0);
+        visionCone.update();
         if(position.distance(currentScene.players.get(0).position) < 600){
             if(triangularCollision(currentScene.players.get(0))){
                 System.out.print("HEJ");
@@ -115,8 +115,7 @@ public class MrDiamond extends NPC {
 
     public void render(){
         super.render();
-        n1.render();
-        n2.render();
+        visionCone.render();
     }
     private boolean triangularCollision(Sprite other){
         Vector2f p = new Vector2f(other.position.x, other.position.y);

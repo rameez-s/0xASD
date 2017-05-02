@@ -12,6 +12,7 @@ public class Tile extends Sprite {
 
     public void pushBack(Sprite s){
         boolean stillPush = collidesWith(s);
+        //Test
         while(stillPush){
             if(s.velocity.x < 0){
                 s.position.set(position.x + (size + 10), s.position.y, s.position.z);

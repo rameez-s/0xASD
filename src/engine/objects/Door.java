@@ -19,7 +19,7 @@ import static org.lwjgl.opengl.GL11.GL_TRUE;
 public class Door extends Sprite {
     private Character direction;
     private Vector2f hypotheticalSize;
-
+    //Test
     public Door()
     {
         super(160, 1);

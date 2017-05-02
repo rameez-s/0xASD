@@ -5,6 +5,7 @@ import java.util.ArrayList;
  */
 public class Teacher {
     public String name;
+    //Test
     public String teachingClass;
     public int number;
     ArrayList<String> dialogue = new ArrayList<String>();

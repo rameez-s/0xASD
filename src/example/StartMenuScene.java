@@ -10,6 +10,7 @@ import static org.lwjgl.opengl.GL11.GL_TRUE;
  * Created by 17aelbashir on 11-Apr-17.
  */
 public class StartMenuScene extends Scene {
+    //Test
     long window = Engine.instance.getWindow();
     public StartMenuScene()
     {

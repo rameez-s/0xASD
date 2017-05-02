@@ -15,6 +15,7 @@ public class StartMenuSprite extends Sprite {
     public StartMenuSprite()
     {
         super(800, 1);
+        //Test
         texture = new Texture ("startMenu.png");
         position = new Vector3f(0, 0, 1);
     }

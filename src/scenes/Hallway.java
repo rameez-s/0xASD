@@ -68,6 +68,7 @@ public class Hallway extends Scene{
         door.forEach(Sprite::render);
     }
 
+    //Test
     private int switchToScene(int scene){
         if(Engine.instance.scenes.size() > scene) {
             Engine.instance.currentScene = scene;

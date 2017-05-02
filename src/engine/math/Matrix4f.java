@@ -45,7 +45,7 @@ public class Matrix4f {
         elements[1 + 3 * 4] -= vector3f.y;
         elements[2 + 3 * 4] += vector3f.z;
     }
-
+    //Test
     public void setPosition(Vector3f vector3f){
         elements[0 + 3 * 4] = vector3f.x/-512f;
         elements[1 + 3 * 4] = vector3f.y/-512f;
