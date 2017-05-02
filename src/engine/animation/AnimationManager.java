@@ -9,6 +9,7 @@ import java.util.ArrayList;
  * Created by 18iwahlqvist on 3/29/2017.
  */
 public class AnimationManager {
+    //Test
     ArrayList<Animation> animations = new ArrayList<>();
     public Texture texture;
     public Vector2f textureCoord;

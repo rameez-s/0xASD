@@ -29,6 +29,7 @@ public class Player extends Sprite
     private long previousFireTime;
     private boolean useArrowKeys = false;
     public Character direction = 'D';
+    //Test
     public Player(){
         super(128f, 0f);
         isPlayer = true;

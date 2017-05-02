@@ -6,6 +6,7 @@ import engine.math.Vector2f;
  * Created by 18iwahlqvist on 3/29/2017.
  */
 public class Animation {
+    //Test
     public String name;
     public boolean stopped = false;
     public int frames = 3; //How many frames the animation is -1

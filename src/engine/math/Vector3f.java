@@ -52,6 +52,7 @@ public class Vector3f {
         v.subtract(other);
         return (float) Math.sqrt(Math.pow(v.x, 2) + Math.pow(v.y, 2));
     }
+    //Test
 
     public Vector2f pointTowards(Vector2f other){
         Vector2f v = new Vector2f(x, y);

@@ -30,6 +30,7 @@ public class MrDiamond extends NPC {
         animationManager.add(new Animation("Left", new Vector2f((0.125f * 2), 0.375f), 0.2f, 1));
         animationManager.add(new Animation("Right", new Vector2f((0.125f * 3), 0.375f), 0.2f, 1));
 
+        //Test
         positions.add(new Vector2f(0, 0));
         positions.add(new Vector2f(0, 1000));
         positions.add(new Vector2f(500, 1000));

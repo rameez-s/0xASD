@@ -6,7 +6,7 @@ import engine.math.Vector3f;
  * Created by 18iwahlqvist on 2/15/2017.
  */
 public class Projectile extends Sprite {
-
+    //Test
     public long startTime;
     private long killTime;
 

@@ -22,6 +22,7 @@ public class Texture {
         tileSheet = new Texture("tileSheet.png");
         npcSheet = new Texture("npcSheet.png");
     }
+    //Test
     public static Texture defaultSheet, characterSheet, tileSheet, npcSheet;
     public Texture(String filename){
         BufferedImage bi;

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 /**
  * Created by Isak Wahlqvist
  */
+//Test
 public abstract class Scene {
     public ArrayList<Sprite> elements = new ArrayList<>();
     public ArrayList<Sprite> npc = new ArrayList<>();

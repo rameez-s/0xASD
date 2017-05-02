@@ -25,6 +25,7 @@ public class ControlScheme2 extends Sprite {
     public void update(){
         super.update();
         if(controllable) {
+            //Test
             if (glfwGetKey(window, GLFW_KEY_RIGHT) == GL_TRUE) {
                 velocity.x += 0.8f;
                 facingRight = true;
