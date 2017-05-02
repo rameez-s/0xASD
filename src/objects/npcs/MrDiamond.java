@@ -25,8 +25,8 @@ public class MrDiamond extends NPC {
         n2 = new Sprite();
         animationManager.add(new Animation("Down", new Vector2f(0, 0.375f), 0.2f, 2));
         animationManager.add(new Animation("Up", new Vector2f((0.125f * 1), 0.375f), 0.2f, 2));
-        animationManager.add(new Animation("Left", new Vector2f((0.125f * 1), 0.5f), 0.2f, 1));
-        animationManager.add(new Animation("Right", new Vector2f((0.125f * 1), 0.5f), 0.2f, 1));
+        animationManager.add(new Animation("Left", new Vector2f((0.125f * 2), 0.375f), 0.2f, 1));
+        animationManager.add(new Animation("Right", new Vector2f((0.125f * 3), 0.375f), 0.2f, 1));
 
         positions.add(new Vector2f(0, 0));
         positions.add(new Vector2f(0, 1000));
@@ -62,13 +62,13 @@ public class MrDiamond extends NPC {
         sideA = new Vector2f(position.x, position.y);
         switch (facing){
             case 'U':
-                sideB = new Vector2f(sideA.x - 150, position.y + 500);
-                sideC = new Vector2f(sideA.x + 150, position.y + 500);
+                sideB = new Vector2f(sideA.x - 150, position.y + (int)(500.0 * (16/9.0)));
+                sideC = new Vector2f(sideA.x + 150, position.y + (int)(500.0 * (16/9.0)));
                 animationManager.run("Up");
                 break;
             case 'D':
-                sideB = new Vector2f(sideA.x - 150, position.y - 500);
-                sideC = new Vector2f(sideA.x + 150, position.y - 500);
+                sideB = new Vector2f(sideA.x - 150, position.y - (int)(500.0 * (16/9.0)));
+                sideC = new Vector2f(sideA.x + 150, position.y - (int)(500.0 * (16/9.0)));
                 animationManager.run("Down");
                 break;
             case 'L':
@@ -82,8 +82,8 @@ public class MrDiamond extends NPC {
                 animationManager.run("Right");
                 break;
             default:
-                sideB = new Vector2f(sideA.x - 150, position.y + 500);
-                sideC = new Vector2f(sideA.x + 150, position.y + 500);
+                sideB = new Vector2f(sideA.x - 150, position.y + (int)(500.0 * (16/9.0)));
+                sideC = new Vector2f(sideA.x + 150, position.y + (int)(500.0 * (16/9.0)));
                 break;
         }
 
