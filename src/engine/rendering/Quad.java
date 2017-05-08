@@ -87,6 +87,10 @@ public class Quad {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, i_id);
         glDrawElements(GL_TRIANGLES, draw_count, GL_UNSIGNED_INT, 0);
 
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+        glCullFace(GL_BACK);
+
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
 
