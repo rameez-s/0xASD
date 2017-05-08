@@ -150,3 +150,4 @@ public class MrDiamond extends NPC {
     }
 
 }
+//isak is dumbo
