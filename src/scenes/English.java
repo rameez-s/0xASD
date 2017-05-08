@@ -3,6 +3,7 @@ package scenes;
 import engine.math.Vector2f;
 import engine.objects.Scene;
 import engine.objects.Sprite;
+import objects.EmptyChair;
 import objects.npcs.MrDiamond;
 
 import java.util.ArrayList;
@@ -13,19 +14,23 @@ import java.util.ArrayList;
 public class English extends Scene {
     //Test
     MrDiamond mrDiamond;
+    EmptyChair emptyChair;
     ArrayList<Sprite> chairMain = new ArrayList<>();
     public English(){
         setMap("hallway.png");
         genMap();
-        for (int i = 0; i < 10; i++) {
-            chairMain.add(new Sprite(128, 0));
+        for (int x = 0; x < 10; x++) {
+            for (int y = 0; y < 10; y++) {
+                chairMain.add(new Sprite(128, 0));
+                chairMain.get(x*y).setTexture("characterSheet.png");
+                chairMain.get(x*y).animationManager.textureCoord = new Vector2f(0.125f, 1 - 0.125f);
+                chairMain.get(x*y).position.set((-1000 + 200 * x), (1000*y), 0);
+                System.out.println(chairMain.get(x*y).position + "\t" + ((x+1)*y));
+            }
         }
-        for(Sprite chair : chairMain) {
-            chair.setTexture("characterSheet.png");
-            chair.animationManager.textureCoord = new Vector2f(0.125f*(int)(Math.random() * 6), 1 - 0.125f);
-            chair.currentScene = this;
-            chair.position.set((int)(1000 * Math.random()-1000), (int)(1000 * Math.random()), 0);
-        }
+
+        emptyChair = new EmptyChair();
+        emptyChair.currentScene = this;
 
         mrDiamond = new MrDiamond();
         mrDiamond.currentScene = this;
@@ -34,7 +39,12 @@ public class English extends Scene {
     public void update(){
         super.update();
         for(Sprite chair : chairMain) {
-            chair.update();
+            if(chair.currentScene != null) {
+                chair.update();
+            }else{
+                chair.currentScene = this;
+                System.out.println("still not working if continues");
+            }
         }
         mrDiamond.update();
     }

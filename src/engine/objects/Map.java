@@ -58,4 +58,19 @@ public class Map {
             e.printStackTrace();
         }
     }
+
+    public static void main(String args[]){
+        int red = 255;
+        int green = 0;
+        int blue = 0;
+        int rgb = red;
+        rgb = (rgb << 8) + green;
+        rgb = (rgb << 8) + blue;
+        System.out.println(rgb);
+        rgb = -1;
+        int redb = (rgb >> 16) & 0xFF;
+        int greenb = (rgb >> 8) & 0xFF;
+        int blueb = rgb & 0xFF;
+        System.out.println(redb + ", " + greenb + ", " + blueb);
+    }
 }
