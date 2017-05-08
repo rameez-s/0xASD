@@ -5,6 +5,7 @@ import engine.math.Vector2f;
 import engine.math.Vector3f;
 import engine.objects.Sprite;
 import objects.NPC;
+import scenes.English;
 
 import java.util.ArrayList;
 
@@ -103,6 +104,12 @@ public class MrDiamond extends NPC {
         visionCone.update();
         if(position.distance(currentScene.players.get(0).position) < 600){
             if(triangularCollision(currentScene.players.get(0))){
+                //Here is collision with player
+                if(((English)currentScene).sittingInChair){
+
+                }else{
+
+                }
             }
         }
         n1.position.set(sideB.x, sideB.y, 0);
