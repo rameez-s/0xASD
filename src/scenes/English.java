@@ -22,10 +22,10 @@ public class English extends Scene {
         for (int x = 0; x < 10; x++) {
             for (int y = 0; y < 10; y++) {
                 chairMain.add(new Sprite(128, 0));
-                chairMain.get(x*y).setTexture("characterSheet.png");
-                chairMain.get(x*y).animationManager.textureCoord = new Vector2f(0.125f, 1 - 0.125f);
-                chairMain.get(x*y).position.set((-1000 + 200 * x), (1000*y), 0);
-                System.out.println(chairMain.get(x*y).position + "\t" + ((x+1)*y));
+                chairMain.get((x*10)+y).setTexture("characterSheet.png");
+                chairMain.get((x*10)+y).animationManager.textureCoord = new Vector2f(0.125f, 1 - 0.125f);
+                chairMain.get((x*10)+y).position.set((-1000 + 200 * x), (0+(100*y)), 0);
+                System.out.println(chairMain.get((x*10)+y).position + "\t" + ((x*10)+y));
             }
         }
 
