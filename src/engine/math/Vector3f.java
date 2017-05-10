@@ -57,8 +57,8 @@ public class Vector3f {
     public Vector2f pointTowards(Vector2f other){
         Vector2f v = new Vector2f(x, y);
         v.subtractInv(other);
-        v.x = (float)Math.tanh(v.x/10);
-        v.y = (float)Math.tanh(v.y/10) * 16.0F/9.0F;
+        v.x = (float)Math.tanh(v.x/20);
+        v.y = (float)Math.tanh(v.y/20) * 16.0F/9.0F;
         return v;
     }
 

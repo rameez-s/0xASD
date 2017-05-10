@@ -31,21 +31,21 @@ public class Map {
                     int pixel = bi.getRGB(x, y);
                     switch (pixel){
                         //Floors
-                        case -1:
+                        case -1://White
                             mapData[x][y] = 0;
                             break;
 
                         //Walls
-                        case -16777216:
+                        case -16777216://Black
                             mapData[x][y] = 1;
                             break;
-                        case -16711936:
+                        case -16711936://Green
                             mapData[x][y] = 2;
                             break;
-                        case -65536:
+                        case -65536://Red
                             mapData[x][y] = 3;
                             break;
-                        case 16776961:
+                        case 16776961://Blue
                             mapData[x][y] = 4;
                             break;
                         default:
@@ -57,5 +57,20 @@ public class Map {
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+    public static void main(String args[]){
+        int red = 255;
+        int green = 0;
+        int blue = 0;
+        int rgb = red;
+        rgb = (rgb << 8) + green;
+        rgb = (rgb << 8) + blue;
+        System.out.println(rgb);
+        rgb = -1;
+        int redb = (rgb >> 16) & 0xFF;
+        int greenb = (rgb >> 8) & 0xFF;
+        int blueb = rgb & 0xFF;
+        System.out.println(redb + ", " + greenb + ", " + blueb);
     }
 }
