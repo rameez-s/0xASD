@@ -5,6 +5,7 @@ import engine.math.Vector3f;
 import engine.objects.Scene;
 import engine.objects.Sprite;
 import engine.objects.Door;
+import objects.Player;
 
 import java.util.ArrayList;
 
@@ -69,12 +70,13 @@ public class Hallway extends Scene{
     }
 
     //Test
-    private int switchToScene(int scene){
+    public static int switchToScene(int scene){
         if(Engine.instance.scenes.size() > scene) {
+            Player p = (Player)Engine.instance.scenes.get(Engine.instance.currentScene).players.get(0);
             Engine.instance.currentScene = scene;
-            Engine.instance.scenes.get(Engine.instance.currentScene).add(players.get(0), 3);
-            players.get(0).currentScene = Engine.instance.scenes.get(Engine.instance.currentScene);
-            players.get(0).position = new Vector3f(0, 0, 0);
+            Engine.instance.scenes.get(Engine.instance.currentScene).add(p, 3);
+            p.currentScene = Engine.instance.scenes.get(Engine.instance.currentScene);
+            p.position = new Vector3f(0, 0, 0);
             return 0;
         }else{
             System.out.println("Scene does not works");

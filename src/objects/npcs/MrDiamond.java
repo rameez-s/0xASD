@@ -108,7 +108,7 @@ public class MrDiamond extends NPC {
                 if(((English)currentScene).sittingInChair){
 
                 }else{
-
+                    ((English) currentScene).reset();
                 }
             }
         }

@@ -25,7 +25,8 @@ public class English extends Scene {
     public boolean sittingInChair;
     MrDiamond mrDiamond;
     EmptyChair emptyChair;
-    ArrayList<Sprite> chairMain = new ArrayList<>();
+    ArrayList<Sprite> chairs = new ArrayList<>();
+    ArrayList<Sprite> tables = new ArrayList<>();
     int currentPersonToCheat = -1;
     int currentCheatingProgress = 0;
     Sprite arrow;
@@ -35,16 +36,20 @@ public class English extends Scene {
         genMap();
         for (int x = 0; x < 5; x++) {
             for (int y = 0; y < 3; y++) {
-                chairMain.add(new Sprite(128, 0));
-                chairMain.get((x*3)+y).setTexture("characterSheet.png");
-                chairMain.get((x*3)+y).animationManager.textureCoord = new Vector2f(0.125f * (int)(Math.random() * 4 + 1), 1 - 0.125f);
-                chairMain.get((x*3)+y).position.set((-1000 + 400 * x), (100+(400*y)), 0);
-                System.out.println(chairMain.get((x*3)+y).position + "\t" + ((x*3)+y));
+                tables.add(new Sprite(128, 0));
+                chairs.add(new Sprite(128, 0));
+                tables.get((x*3)+y).setTexture("characterSheet.png");
+                chairs.get((x*3)+y).setTexture("characterSheet.png");
+                tables.get((x*3)+y).animationManager.textureCoord = new Vector2f(0.125f, 1-0.125f*2);
+                chairs.get((x*3)+y).animationManager.textureCoord = new Vector2f(0.125f * (int)(Math.random() * 4 + 1), 1 - 0.125f);
+                tables.get((x*3)+y).position.set((-1025 + 400 * x), (100+(400*y)), 0);
+                chairs.get((x*3)+y).position.set((-1000 + 400 * x), (100+(400*y)), 0);
+                System.out.println(chairs.get((x*3)+y).position + "\t" + ((x*3)+y));
             }
         }
         arrow = new Sprite(128, 0);
         arrow.setTexture("characterSheet.png");
-        arrow.animationManager.textureCoord = new Vector2f(0.125f, 1-0.125f*3);
+        arrow.animationManager.textureCoord = new Vector2f(0.125f*2, 1-0.125f*2);
         arrow.currentScene = this;
         emptyChair = new EmptyChair();
         emptyChair.currentScene = this;
@@ -55,19 +60,20 @@ public class English extends Scene {
     long spaceTimer = 0;
 
     public void update(){
-        if((currentPersonToCheat == -1 || currentCheatingProgress == 100)&&hasCopiedAnswers){
+        if((currentCheatingProgress == 100 && hasCopiedAnswers) || currentPersonToCheat == -1){
             currentPersonToCheat = (int)(Math.random() * 15);
             currentCheatingProgress = 0;
             hasCopiedAnswers = false;
             timesCheated++;
         }
-        if(timesCheated > 3){
+        if(timesCheated > 1){
             //WIN
+            Hallway.switchToScene(2);
         }
         if(currentCheatingProgress == 100) {
-            arrow.position = new Vector3f(chairMain.get(currentPersonToCheat).position.x, chairMain.get(currentPersonToCheat).position.y + 50, chairMain.get(currentPersonToCheat).position.z);
+            arrow.position = new Vector3f(emptyChair.position.x + 10, emptyChair.position.y + 120, emptyChair.position.z);
         }else{
-            arrow.position = new Vector3f(chairMain.get(currentPersonToCheat).position.x, chairMain.get(currentPersonToCheat).position.y + 50, chairMain.get(currentPersonToCheat).position.z);
+            arrow.position = new Vector3f(chairs.get(currentPersonToCheat).position.x + 10, chairs.get(currentPersonToCheat).position.y + 150, chairs.get(currentPersonToCheat).position.z);
         }
         arrow.update();
 
@@ -80,7 +86,7 @@ public class English extends Scene {
                     sittingInChair = !sittingInChair;
                     spaceTimer = System.nanoTime() + 150000000;
                 }
-            }else if(players.get(0).position.distance(chairMain.get(currentPersonToCheat).position)< 75){
+            }else if(players.get(0).position.distance(chairs.get(currentPersonToCheat).position)< 75){
                 if (spaceTimer < System.nanoTime()) {
                     if(currentCheatingProgress <= 90) {
                         currentCheatingProgress += 10;
@@ -110,7 +116,15 @@ public class English extends Scene {
             super.update();
         }
         emptyChair.update();
-        for(Sprite chair : chairMain) {
+        for(Sprite table : tables){
+            if(table.currentScene != null) {
+                table.update();
+            }else{
+                table.currentScene = this;
+                System.out.println("still not working if continues");
+            }
+        }
+        for(Sprite chair : chairs) {
             if(chair.currentScene != null) {
                 chair.update();
             }else{
@@ -146,12 +160,24 @@ public class English extends Scene {
         }else {
             super.render();
         }
-
-        for(Sprite chair : chairMain) {
+        for(Sprite chair : chairs) {
             chair.render();
+        }
+        for(Sprite table : tables){
+            table.render();
         }
         emptyChair.render();
         mrDiamond.render();
         arrow.render();
+    }
+
+    public void reset(){
+        timesCheated = -1;
+        hasCopiedAnswers = false;
+        currentCheatingProgress = 0;
+        currentPersonToCheat = -1;
+        players.get(0).position = new Vector3f();
+        mrDiamond.position = new Vector3f(0, 1000, 0);
+        projection.setPosition(new Vector3f());
     }
 }
