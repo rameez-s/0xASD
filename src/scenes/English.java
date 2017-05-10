@@ -66,7 +66,7 @@ public class English extends Scene {
             hasCopiedAnswers = false;
             timesCheated++;
         }
-        if(timesCheated > 1){
+        if(timesCheated > 4){
             //WIN
             Hallway.switchToScene(2);
         }
