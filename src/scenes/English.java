@@ -67,7 +67,7 @@ public class English extends Scene {
             timesCheated++;
         }
         if(timesCheated > 4){
-            //WIN
+            //Win
             Hallway.switchToScene(2);
         }
         if(currentCheatingProgress == 100) {
