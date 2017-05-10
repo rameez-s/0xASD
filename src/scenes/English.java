@@ -21,10 +21,15 @@ import static org.lwjgl.opengl.GL11.GL_TRUE;
  */
 public class English extends Scene {
     //Test
+    private boolean hasCopiedAnswers;
     public boolean sittingInChair;
     MrDiamond mrDiamond;
     EmptyChair emptyChair;
     ArrayList<Sprite> chairMain = new ArrayList<>();
+    int currentPersonToCheat = -1;
+    int currentCheatingProgress = 0;
+    Sprite arrow;
+    int timesCheated = -1;
     public English(){
         setMap("hallway.png");
         genMap();
@@ -37,7 +42,10 @@ public class English extends Scene {
                 System.out.println(chairMain.get((x*3)+y).position + "\t" + ((x*3)+y));
             }
         }
-
+        arrow = new Sprite(128, 0);
+        arrow.setTexture("characterSheet.png");
+        arrow.animationManager.textureCoord = new Vector2f(0.125f, 1-0.125f*3);
+        arrow.currentScene = this;
         emptyChair = new EmptyChair();
         emptyChair.currentScene = this;
 
@@ -47,6 +55,42 @@ public class English extends Scene {
     long spaceTimer = 0;
 
     public void update(){
+        if((currentPersonToCheat == -1 || currentCheatingProgress == 100)&&hasCopiedAnswers){
+            currentPersonToCheat = (int)(Math.random() * 15);
+            currentCheatingProgress = 0;
+            hasCopiedAnswers = false;
+            timesCheated++;
+        }
+        if(timesCheated > 3){
+            //WIN
+        }
+        if(currentCheatingProgress == 100) {
+            arrow.position = new Vector3f(chairMain.get(currentPersonToCheat).position.x, chairMain.get(currentPersonToCheat).position.y + 50, chairMain.get(currentPersonToCheat).position.z);
+        }else{
+            arrow.position = new Vector3f(chairMain.get(currentPersonToCheat).position.x, chairMain.get(currentPersonToCheat).position.y + 50, chairMain.get(currentPersonToCheat).position.z);
+        }
+        arrow.update();
+
+        if (glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_SPACE) == GL_TRUE) {
+            if(players.get(0).position.distance(emptyChair.position) < 75) {
+                if (spaceTimer < System.nanoTime()) {
+                    if(currentCheatingProgress == 100){
+                        hasCopiedAnswers = true;
+                    }
+                    sittingInChair = !sittingInChair;
+                    spaceTimer = System.nanoTime() + 150000000;
+                }
+            }else if(players.get(0).position.distance(chairMain.get(currentPersonToCheat).position)< 75){
+                if (spaceTimer < System.nanoTime()) {
+                    if(currentCheatingProgress <= 90) {
+                        currentCheatingProgress += 10;
+                    }
+                    spaceTimer = System.nanoTime() + 500000000;
+                    System.out.println(currentCheatingProgress);
+                }
+            }
+        }
+
 
         if(sittingInChair){
             for (int i = elements.size() - 1; i >= 0; i--) {
@@ -72,15 +116,6 @@ public class English extends Scene {
             }else{
                 chair.currentScene = this;
                 System.out.println("still not working if continues");
-            }
-        }
-
-        if(players.get(0).position.distance(emptyChair.position) < 100){
-            if (glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_SPACE) == GL_TRUE) {
-                if(spaceTimer < System.nanoTime()) {
-                    sittingInChair = !sittingInChair;
-                    spaceTimer = System.nanoTime() + 150000000;
-                }
             }
         }
         if(sittingInChair){
@@ -117,6 +152,6 @@ public class English extends Scene {
         }
         emptyChair.render();
         mrDiamond.render();
+        arrow.render();
     }
 }
-

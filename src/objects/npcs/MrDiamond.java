@@ -117,7 +117,7 @@ public class MrDiamond extends NPC {
         if(positions.size() > atPosition + 1) {
             if (this.position.distance(positions.get(atPosition + 1)) > 0.1) {
                 Vector2f v2 = position.pointTowards(positions.get(atPosition + 1));
-                this.velocity = new Vector3f(v2.x * 2f, v2.y * 2f, velocity.z);
+                this.velocity = new Vector3f(v2.x * 3f, v2.y * 3f, velocity.z);
             }else{
                 atPosition++;
                 velocity.x = 0;velocity.y = 0;
