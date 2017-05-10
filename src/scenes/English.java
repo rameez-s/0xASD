@@ -18,7 +18,7 @@ import static org.lwjgl.opengl.GL11.GL_TRUE;
 
 /**
  * Created by 18iwahlqvist on 4/26/2017.
- */
+ */ // isak is idiot
 public class English extends Scene {
     //Test
     private boolean hasCopiedAnswers;
