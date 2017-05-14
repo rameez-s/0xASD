@@ -18,6 +18,7 @@ public abstract class Scene {
     public ArrayList<Projectile> projectiles = new ArrayList<>();
     public ArrayList<Sprite> collidables = new ArrayList<>();
 
+    boolean optimize = true;
     Map map;
 
     public Matrix4f projection = new Matrix4f().orthographic(-512, 512, -512, 512, 10, -10);
@@ -87,7 +88,7 @@ public abstract class Scene {
                         s.textureCoords.set(0, 0.125f);
                         break;
                     case 3:
-                        s.textureCoords.set(0.125f, 0f);
+                        s.textureCoords.set(0.25f, 0.125f);
                         break;
                     case 4:
                         s.textureCoords.set(0, 0);
@@ -122,12 +123,14 @@ public abstract class Scene {
 
     public void render(){
         for (int i = elements.size() - 1; i >= 0; i--) {
-            if(players.size() > 0) {
+            if(players.size() > 0 && optimize) {
                 if (elements.get(i).position.distance(players.get(0).position) < 1000) {
                     if (elements.get(i).position.distance(players.get(0).position) < 1000) {
                         elements.get(i).render();
                     }
                 }
+            }else{
+                elements.get(i).render();
             }
         }
         for (int i = npc.size() - 1; i >= 0; i--) {

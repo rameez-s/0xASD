@@ -48,6 +48,12 @@ public class Map {
                         case 16776961://Blue
                             mapData[x][y] = 4;
                             break;
+                        case -16249442:
+                            mapData[x][y] = 4;
+                            break;
+                        case -4914913:
+                            mapData[x][y] = 3;
+                            break;
                         default:
                             mapData[x][y] = 1;
                             break;
@@ -60,9 +66,9 @@ public class Map {
     }
 
     public static void main(String args[]){
-        int red = 255;
-        int green = 0;
-        int blue = 0;
+        int red = 181;
+        int green = 1;
+        int blue = 31;
         int rgb = red;
         rgb = (rgb << 8) + green;
         rgb = (rgb << 8) + blue;

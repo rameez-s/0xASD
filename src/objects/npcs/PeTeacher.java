@@ -16,4 +16,13 @@ public class PeTeacher extends NPC {
         super(128);
         setTexture("characterSheet.png");
     }
+
+    public void update(){
+        super.update();
+        if(position.x < -900){
+            velocity.set(10, 0, 0);
+        }else{
+            velocity.set(-10, 0, 0);
+        }
+    }
 }
