@@ -29,6 +29,7 @@ public class Player extends Sprite
     private long previousFireTime;
     private boolean useArrowKeys = false;
     public Character direction = 'D';
+    public boolean sideMoveOnly = false;
     //Test
     public Player(){
         super(128f, 0f);
@@ -43,7 +44,6 @@ public class Player extends Sprite
 
     public boolean controllable = true;
     long window = Engine.instance.getWindow();
-
     public void update(){
         super.update();
         if(controllable) {
@@ -58,13 +58,16 @@ public class Player extends Sprite
                     animationManager.run("RunLeft");
                     facingRight = false;
                 }
-                if (glfwGetKey(window, GLFW_KEY_UP) == GL_TRUE) {
-                    velocity.y += 2.8444f;
-                    animationManager.run("RunUp");
-                }
-                if (glfwGetKey(window, GLFW_KEY_DOWN) == GL_TRUE) {
-                    velocity.y -= 2.8444f;
-                    animationManager.run("RunDown");
+
+                if(!sideMoveOnly) {
+                    if (glfwGetKey(window, GLFW_KEY_UP) == GL_TRUE) {
+                        velocity.y += 2.8444f;
+                        animationManager.run("RunUp");
+                    }
+                    if (glfwGetKey(window, GLFW_KEY_DOWN) == GL_TRUE) {
+                        velocity.y -= 2.8444f;
+                        animationManager.run("RunDown");
+                    }
                 }
                 if (glfwGetKey(window, GLFW_KEY_DOWN) == GL_FALSE && glfwGetKey(window, GLFW_KEY_UP) == GL_FALSE && glfwGetKey(window, GLFW_KEY_RIGHT) == GL_FALSE && glfwGetKey(window, GLFW_KEY_LEFT) == GL_FALSE) {
                     animationManager.stop();
@@ -82,15 +85,18 @@ public class Player extends Sprite
                     direction = 'L';
                     facingRight = false;
                 }
-                if (glfwGetKey(window, GLFW_KEY_W) == GL_TRUE) {
-                    velocity.y += 2.8444f;
-                    animationManager.run("RunUp");
-                    direction = 'U';
-                }
-                if (glfwGetKey(window, GLFW_KEY_S) == GL_TRUE) {
-                    velocity.y -= 2.8444f;
-                    animationManager.run("RunDown");
-                    direction = 'D';
+
+                if(!sideMoveOnly) {
+                    if (glfwGetKey(window, GLFW_KEY_W) == GL_TRUE) {
+                        velocity.y += 2.8444f;
+                        animationManager.run("RunUp");
+                        direction = 'U';
+                    }
+                    if (glfwGetKey(window, GLFW_KEY_S) == GL_TRUE) {
+                        velocity.y -= 2.8444f;
+                        animationManager.run("RunDown");
+                        direction = 'D';
+                    }
                 }
                 if (glfwGetKey(window, GLFW_KEY_S) == GL_FALSE && glfwGetKey(window, GLFW_KEY_W) == GL_FALSE && glfwGetKey(window, GLFW_KEY_D) == GL_FALSE && glfwGetKey(window, GLFW_KEY_A) == GL_FALSE) {
                     animationManager.stop();

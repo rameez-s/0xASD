@@ -15,6 +15,7 @@ import org.lwjgl.openal.ALC;
 import org.lwjgl.openal.ALCCapabilities;
 import org.lwjgl.opengl.GL;
 import scenes.English;
+import scenes.Geography;
 import scenes.Gym;
 import scenes.Hallway;
 
@@ -118,8 +119,6 @@ public class Engine {
                 glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
         });
         currentScene = 0;
-        Scene english = new English();
-        scenes.add(english);
         //Start
         Scene startMenu = new StartMenuScene();
         StartMenuSprite startMenuSprite = new StartMenuSprite();
@@ -129,12 +128,20 @@ public class Engine {
         Scene s = new Hallway();
         Player thisPlayer = new Player();
         thisPlayer.setTexture("characterSheet.png");
-        english.add(thisPlayer, 3);
+        s.add(thisPlayer, 3);
         scenes.add(s);
-        Scene s2 = new ExampleScene();
-        scenes.add(s2);
-/*        Scene gym = new Gym();
-        scenes.add(gym);*/
+//        Scene s2 = new ExampleScene();
+//        scenes.add(s2);
+        Scene gym = new Gym();
+//        thisPlayer.position = new Vector3f(0, 100, 0);
+//        gym.add(thisPlayer, 3);
+        scenes.add(gym);
+
+        Scene english = new English();
+        scenes.add(english);
+
+        Scene geography = new Geography();
+        scenes.add(geography);
         //s2.add(thisPlayer, 3);
         long lastTime = System.nanoTime();
         long updateTime = 1000000000/updateRate;

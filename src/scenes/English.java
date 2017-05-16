@@ -176,6 +176,7 @@ public class English extends Scene {
         hasCopiedAnswers = false;
         currentCheatingProgress = 0;
         currentPersonToCheat = -1;
+        sittingInChair = true;
         players.get(0).position = new Vector3f();
         mrDiamond.position = new Vector3f(0, 1000, 0);
         projection.setPosition(new Vector3f());

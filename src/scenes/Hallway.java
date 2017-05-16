@@ -73,6 +73,7 @@ public class Hallway extends Scene{
     public static int switchToScene(int scene){
         if(Engine.instance.scenes.size() > scene) {
             Player p = (Player)Engine.instance.scenes.get(Engine.instance.currentScene).players.get(0);
+            p.sideMoveOnly = false;
             Engine.instance.currentScene = scene;
             Engine.instance.scenes.get(Engine.instance.currentScene).add(p, 3);
             p.currentScene = Engine.instance.scenes.get(Engine.instance.currentScene);

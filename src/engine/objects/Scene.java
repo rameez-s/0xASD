@@ -18,7 +18,7 @@ public abstract class Scene {
     public ArrayList<Projectile> projectiles = new ArrayList<>();
     public ArrayList<Sprite> collidables = new ArrayList<>();
 
-    boolean optimize = true;
+    public boolean optimize = true;
     Map map;
 
     public Matrix4f projection = new Matrix4f().orthographic(-512, 512, -512, 512, 10, -10);
@@ -104,10 +104,12 @@ public abstract class Scene {
 
     public void update(){
         for (int i = elements.size() - 1; i >= 0; i--) {
-            if(players.size() > 0) {
+            if(players.size() > 0 && optimize) {
                 if (elements.get(i).position.distance(players.get(0).position) < 1000) {
                     elements.get(i).update(true);
                 }
+            }else{
+                elements.get(i).update(true);
             }
         }
         for (int i = npc.size() - 1; i >= 0; i--) {
