@@ -14,6 +14,7 @@ import java.nio.ByteBuffer;
 /**
  * Created by ISAKPC on 2/13/2017.
  */
+//ISAK SUCKS
 public class Texture {
     private int id, width, height;
     public static void init(){
