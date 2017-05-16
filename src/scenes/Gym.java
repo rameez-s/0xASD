@@ -37,7 +37,7 @@ public class Gym extends Scene {
         }
     }
     public void win(){
-        Hallway.switchToScene(2);
+        Hallway.switchToScene(1);
     }
     public void lose(){
         pe.position = new Vector3f((int) (Math.random() * 600 - 300), 900, 0);

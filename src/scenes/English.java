@@ -68,7 +68,7 @@ public class English extends Scene {
         }
         if(timesCheated > 4){
             //Win
-            Hallway.switchToScene(2);
+            Hallway.switchToScene(1);
         }
         if(currentCheatingProgress == 100) {
             arrow.position = new Vector3f(emptyChair.position.x + 10, emptyChair.position.y + 120, emptyChair.position.z);

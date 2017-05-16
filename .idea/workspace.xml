@@ -2,18 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d0de517f-13aa-4b2c-83cd-a4e117f9a8a2" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/scenes/Geography.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/characterSheet.png" afterPath="$PROJECT_DIR$/res/characterSheet.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine/Engine.java" afterPath="$PROJECT_DIR$/src/engine/Engine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine/objects/Scene.java" afterPath="$PROJECT_DIR$/src/engine/objects/Scene.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine/rendering/Texture.java" afterPath="$PROJECT_DIR$/src/engine/rendering/Texture.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/objects/Player.java" afterPath="$PROJECT_DIR$/src/objects/Player.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/objects/npcs/PeTeacher.java" afterPath="$PROJECT_DIR$/src/objects/npcs/PeTeacher.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/scenes/English.java" afterPath="$PROJECT_DIR$/src/scenes/English.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/scenes/Gym.java" afterPath="$PROJECT_DIR$/src/scenes/Gym.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/scenes/Hallway.java" afterPath="$PROJECT_DIR$/src/scenes/Hallway.java" />
     </list>
     <ignored path="JavaCS game.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -50,11 +41,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="English.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="English.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/scenes/English.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3608">
-              <caret line="178" column="30" selection-start-line="178" selection-start-column="30" selection-end-line="178" selection-end-column="30" />
+            <state relative-caret-position="131">
+              <caret line="70" column="35" selection-start-line="70" selection-start-column="35" selection-end-line="70" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -63,13 +54,9 @@
       <file leaf-file-name="MrDiamond.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/objects/npcs/MrDiamond.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2266">
+            <state relative-caret-position="2173">
               <caret line="110" column="48" selection-start-line="110" selection-start-column="48" selection-end-line="110" selection-end-column="48" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#6354#6355#0" expanded="false" />
-                <element signature="e#6394#6395#0" expanded="false" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -77,9 +64,12 @@
       <file leaf-file-name="Gym.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/scenes/Gym.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="19" column="53" selection-start-line="19" selection-start-column="53" selection-end-line="19" selection-end-column="53" />
-              <folding />
+            <state relative-caret-position="211">
+              <caret line="39" column="31" selection-start-line="39" selection-start-column="31" selection-end-line="39" selection-end-column="31" />
+              <folding>
+                <element signature="e#976#977#0" expanded="true" />
+                <element signature="e#1016#1017#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -126,7 +116,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Geography.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Geography.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/scenes/Geography.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="233">
@@ -218,13 +208,13 @@
         <option value="$PROJECT_DIR$/src/engine/objects/Scene.java" />
         <option value="$PROJECT_DIR$/src/objects/Player.java" />
         <option value="$PROJECT_DIR$/t.iml" />
-        <option value="$PROJECT_DIR$/src/scenes/English.java" />
         <option value="$PROJECT_DIR$/src/objects/npcs/PeTeacher.java" />
-        <option value="$PROJECT_DIR$/src/scenes/Gym.java" />
         <option value="$PROJECT_DIR$/src/scenes/Hallway.java" />
         <option value="$PROJECT_DIR$/src/engine/Engine.java" />
         <option value="$PROJECT_DIR$/src/engine/rendering/Texture.java" />
         <option value="$PROJECT_DIR$/src/scenes/Geography.java" />
+        <option value="$PROJECT_DIR$/src/scenes/Gym.java" />
+        <option value="$PROJECT_DIR$/src/scenes/English.java" />
       </list>
     </option>
   </component>
@@ -1096,7 +1086,14 @@
       <option name="project" value="LOCAL" />
       <updated>1494739937835</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="Finished Dodgeball">
+      <created>1494923641358</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1494923641358</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1181,7 +1178,8 @@
     <MESSAGE value="Added hallway to lead to the different rooms&#10;Just test for now" />
     <MESSAGE value="Fixed scene switcher" />
     <MESSAGE value="Finished English" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished English" />
+    <MESSAGE value="Finished Dodgeball" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished Dodgeball" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1469,26 +1467,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/scenes/English.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3608">
-          <caret line="178" column="30" selection-start-line="178" selection-start-column="30" selection-end-line="178" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/objects/npcs/MrDiamond.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2266">
-          <caret line="110" column="48" selection-start-line="110" selection-start-column="48" selection-end-line="110" selection-end-column="48" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#6354#6355#0" expanded="false" />
-            <element signature="e#6394#6395#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/objects/npcs/PeTeacher.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
@@ -1541,14 +1519,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/scenes/Gym.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="19" column="53" selection-start-line="19" selection-start-column="53" selection-end-line="19" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/scenes/Geography.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="233">
@@ -1556,6 +1526,33 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scenes/Gym.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="39" column="31" selection-start-line="39" selection-start-column="31" selection-end-line="39" selection-end-column="31" />
+          <folding>
+            <element signature="e#976#977#0" expanded="true" />
+            <element signature="e#1016#1017#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/objects/npcs/MrDiamond.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2173">
+          <caret line="110" column="48" selection-start-line="110" selection-start-column="48" selection-end-line="110" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scenes/English.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="70" column="35" selection-start-line="70" selection-start-column="35" selection-end-line="70" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>
