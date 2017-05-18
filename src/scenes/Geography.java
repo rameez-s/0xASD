@@ -23,6 +23,14 @@ public class Geography extends Scene {
     public Geography(){
         hasMap = false;
         for(int i = 0; i < 20; i++){
+            if(i % 15 == 0){
+                Sprite l = new Sprite(128, 0);
+                l.position = new Vector3f(400 +(float)(400.0 * Math.random()) + 800 * (i+1), -200, 0);
+                l.currentScene = this;
+                l.setTexture("characterSheet.png");
+                l.animationManager.textureCoord = new Vector2f(0, 1-0.25f);
+                npc.add(l);
+            }
             Sprite s = new Sprite(128, 0);
             s.position = new Vector3f(200 + (float)(400.0 * Math.random()) + 800 * (i+1), -200, 0);
             s.currentScene = this;
@@ -68,6 +76,7 @@ public class Geography extends Scene {
         if(((Player)players.get(0)).controllable)
         {
             ((Player)players.get(0)).controllable = false;
+            players.get(0).velocity.x += 0.00000001f;
         }
         for(Sprite backdrop : backdrops){
             backdrop.update();

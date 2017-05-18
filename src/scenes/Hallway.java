@@ -76,7 +76,7 @@ public class Hallway extends Scene{
             Player p = (Player)Engine.instance.scenes.get(Engine.instance.currentScene).players.get(0);
             p.sideMoveOnly = false;
             Engine.instance.currentScene = scene;
-            Engine.instance.scenes.get(Engine.instance.currentScene).add(p, 3);
+            Engine.instance.scenes.get(Engine.instance.currentScene).set(p, 3, 0);
             p.currentScene = Engine.instance.scenes.get(Engine.instance.currentScene);
             p.position = new Vector3f(0, 0, 0);
             if(scene == 1) {

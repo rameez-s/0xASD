@@ -57,16 +57,32 @@ public abstract class Scene {
     public void set(Quad element, int array, int pos){
         switch (array){
             case 0:
-                elements.set(pos,(Sprite) element);
+                if(elements.size() > pos) {
+                    elements.set(pos, (Sprite) element);
+                }else{
+                    elements.add((Sprite) element);
+                }
                 break;
             case 1:
-                npc.set(pos, (Sprite) element);
+                if(npc.size() > pos) {
+                    npc.set(pos, (Sprite) element);
+                }else{
+                    npc.add((Sprite) element);
+                }
                 break;
             case 2:
-                projectiles.set(pos, (Projectile) element);
+                if(projectiles.size() > pos) {
+                    projectiles.set(pos, (Projectile) element);
+                }else{
+                    projectiles.add((Projectile) element);
+                }
                 break;
             case 3:
-                players.set(pos, (Sprite) element);
+                if(players.size() > pos) {
+                    players.set(pos, (Sprite) element);
+                }else{
+                    players.add((Sprite) element);
+                }
                 break;
             default:
                 throw new UnknownError();
