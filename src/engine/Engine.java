@@ -35,7 +35,11 @@ import static sun.audio.AudioDevice.device;
  * Created by Isak Wahlqvist
  */
 public class Engine {
-    //Test
+    //TODO complete introduction
+    //TODO complete controls help
+    //TODO finish music game
+    //TODO populate hallway
+    //TODO
     private long window, audioDevice, context;
 
     private int width = 1280, height = 720;
@@ -130,11 +134,7 @@ public class Engine {
         thisPlayer.setTexture("characterSheet.png");
         s.add(thisPlayer, 3);
         scenes.add(s);
-//        Scene s2 = new ExampleScene();
-//        scenes.add(s2);
         Scene gym = new Gym();
-//        thisPlayer.position = new Vector3f(0, 100, 0);
-//        gym.add(thisPlayer, 3);
         scenes.add(gym);
 
         Scene english = new English();

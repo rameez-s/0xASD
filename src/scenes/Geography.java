@@ -23,7 +23,7 @@ public class Geography extends Scene {
     public Geography(){
         hasMap = false;
         for(int i = 0; i < 20; i++){
-            if(i % 15 == 0){
+            if((i) % 15 == 1){
                 Sprite l = new Sprite(128, 0);
                 l.position = new Vector3f(400 +(float)(400.0 * Math.random()) + 800 * (i+1), -200, 0);
                 l.currentScene = this;
@@ -95,6 +95,13 @@ public class Geography extends Scene {
                 for(Sprite object2 : npc){
                     object2.position.x += 1024;
                 }
+
+                backdrops[0].position = new Vector3f(-512,  128, 0);
+                backdrops[1].position = new Vector3f(0,     128, 0);
+                backdrops[2].position = new Vector3f(512,   128, 0);
+                backdrops[3].position = new Vector3f(512*2, 128, 0);
+                backdrops[4].position = new Vector3f(512*3, 128, 0);
+                backdrops[5].position = new Vector3f(512*4, 128, 0);
             }
             object.velocity.x = -speed;
             if(object.position.x < -512){
