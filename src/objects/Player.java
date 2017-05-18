@@ -47,7 +47,7 @@ public class Player extends Sprite
     public void update(){
         super.update();
         if(controllable) {
-            if(useArrowKeys) {
+            if (useArrowKeys) {
                 if (glfwGetKey(window, GLFW_KEY_RIGHT) == GL_TRUE) {
                     velocity.x += 1.6f;
                     animationManager.run("RunRight");
@@ -59,7 +59,7 @@ public class Player extends Sprite
                     facingRight = false;
                 }
 
-                if(!sideMoveOnly) {
+                if (!sideMoveOnly) {
                     if (glfwGetKey(window, GLFW_KEY_UP) == GL_TRUE) {
                         velocity.y += 2.8444f;
                         animationManager.run("RunUp");
@@ -72,7 +72,7 @@ public class Player extends Sprite
                 if (glfwGetKey(window, GLFW_KEY_DOWN) == GL_FALSE && glfwGetKey(window, GLFW_KEY_UP) == GL_FALSE && glfwGetKey(window, GLFW_KEY_RIGHT) == GL_FALSE && glfwGetKey(window, GLFW_KEY_LEFT) == GL_FALSE) {
                     animationManager.stop();
                 }
-            }else{
+            } else {
                 if (glfwGetKey(window, GLFW_KEY_D) == GL_TRUE) {
                     velocity.x += 1.6f;
                     animationManager.run("RunRight");
@@ -86,7 +86,7 @@ public class Player extends Sprite
                     facingRight = false;
                 }
 
-                if(!sideMoveOnly) {
+                if (!sideMoveOnly) {
                     if (glfwGetKey(window, GLFW_KEY_W) == GL_TRUE) {
                         velocity.y += 2.8444f;
                         animationManager.run("RunUp");
@@ -102,13 +102,13 @@ public class Player extends Sprite
                     animationManager.stop();
                 }
             }
-            if (collidesWithColor())
-            {
+            if (collidesWithColor()) {
                 velocity.x = 0;
                 velocity.y = 0;
             }
-            currentScene.projection.move(new Vector3f(velocity.x/640, velocity.y/640, 0));
+            currentScene.projection.move(new Vector3f(velocity.x / 640, velocity.y / 640, 0));
+
+            velocity.set(velocity.x * 0.8f, velocity.y * 0.8f, 0);
         }
-        velocity.set(velocity.x * 0.8f, velocity.y * 0.8f, 0);
     }
 }

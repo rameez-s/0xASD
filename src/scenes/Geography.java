@@ -1,6 +1,9 @@
 package scenes;
 
 import engine.Engine;
+import engine.math.Matrix4f;
+import engine.math.Vector2f;
+import engine.math.Vector3f;
 import engine.objects.Scene;
 import engine.objects.Sprite;
 import objects.Player;
@@ -10,58 +13,111 @@ import static org.lwjgl.glfw.GLFW.GLFW_TRUE;
 import static org.lwjgl.glfw.GLFW.glfwGetKey;
 
 /**
- * Created by 18iwahlqvist on 5/16/2017.
+ * Created by 17ajamal on 5/16/2017.
  */
 public class Geography extends Scene {
-    public Sprite[] backdrops = new Sprite[3];
+    public Sprite[] backdrops = new Sprite[6];
     public float progress = 0;
     public float speed = 1;
 
     public Geography(){
+        hasMap = false;
+        for(int i = 0; i < 20; i++){
+            Sprite s = new Sprite(128, 0);
+            s.position = new Vector3f(200 + (float)(400.0 * Math.random()) + 800 * (i+1), -200, 0);
+            s.currentScene = this;
+            s.setTexture("npcSheet.png");
+            s.animationManager.textureCoord = new Vector2f(0, 0.125f);
+            npc.add(s);
+        }
         backdrops[0] = new Sprite(512, 0);
         backdrops[1] = new Sprite(512, 0);
         backdrops[2] = new Sprite(512, 0);
+        backdrops[3] = new Sprite(512, 0);
+        backdrops[4] = new Sprite(512, 0);
+        backdrops[5] = new Sprite(512, 0);
+        backdrops[0].position = new Vector3f(-512,  128, 0);
+        backdrops[1].position = new Vector3f(0,     128, 0);
+        backdrops[2].position = new Vector3f(512,   128, 0);
+        backdrops[3].position = new Vector3f(512*2, 128, 0);
+        backdrops[4].position = new Vector3f(512*3, 128, 0);
+        backdrops[5].position = new Vector3f(512*4, 128, 0);
         backdrops[0].currentScene = this;
         backdrops[1].currentScene = this;
         backdrops[2].currentScene = this;
-        backdrops[0].animationManager.setTexture("npcSheet.png");
-        backdrops[1].animationManager.setTexture("npcSheet.png");
-        backdrops[2].animationManager.setTexture("npcSheet.png");
+        backdrops[3].currentScene = this;
+        backdrops[4].currentScene = this;
+        backdrops[5].currentScene = this;
+        projection = new Matrix4f().orthographic(-384, 640, -512, 512, 10, -10);
+//        projection = new Matrix4f().orthographic(-1024, 16000, -8512, 8512, 10, -10);
+        backdrops[0].setTexture("npcSheet.png");
+        backdrops[0].animationManager.textureCoord = new Vector2f(0f, 0.25f);
+        backdrops[1].setTexture("npcSheet.png");
+        backdrops[1].animationManager.textureCoord = new Vector2f(0.25f, 0.25f);
+        backdrops[2].setTexture("npcSheet.png");
+        backdrops[2].animationManager.textureCoord = new Vector2f(0.125f, 0.25f);
+        backdrops[3].setTexture("npcSheet.png");
+        backdrops[3].animationManager.textureCoord = new Vector2f(0f, 0.25f);
+        backdrops[4].setTexture("npcSheet.png");
+        backdrops[4].animationManager.textureCoord = new Vector2f(0.25f, 0.25f);
+        backdrops[5].setTexture("npcSheet.png");
+        backdrops[5].animationManager.textureCoord = new Vector2f(0.125f, 0.25f);
 
     }
     public void update(){
         if(((Player)players.get(0)).controllable)
+        {
+            ((Player)players.get(0)).controllable = false;
+        }
         for(Sprite backdrop : backdrops){
             backdrop.update();
             backdrop.velocity.x = -speed;
-            if(backdrop.position.x < -500){
-                backdrop.position.x += 1000;
+            if(backdrop.position.x < -1024){
+                backdrop.position.x += 512*6;
             }
         }
         for(Sprite object : npc){
             object.update();
-            if(object.collidesWith(players.get(0))){
+            if(object.collidesHypotheticalWith(players.get(0), new Vector2f(-100, -50))){
                 //Lose
+                System.out.println(progress);
+                progress = 0;
                 speed = 1;
+                for(Sprite object2 : npc){
+                    object2.position.x += 1024;
+                }
             }
             object.velocity.x = -speed;
+            if(object.position.x < -512){
+                object.position.x += 16000;
+            }
         }
         if(speed < 20) {
             speed += 0.01;
         }
-        if(progress < 100){
+        if(progress < 4){
             progress += 0.001;
         }else{
             //Win
+            Hallway.switchToScene(1);
         }
 
-        if(players.get(0).position.x < 100){
+        if(players.get(0).position.y < -200){
+            players.get(0).velocity.y = 0;
+            players.get(0).animationManager.run("RunRight");
             if(glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_SPACE) == GLFW_TRUE){
-                players.get(0).velocity.y = 20;
+                players.get(0).velocity.y = 25;
+                players.get(0).animationManager.stop();
             }
 
+        }else{
+            if(glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_SPACE) == GLFW_TRUE) {
+                players.get(0).velocity.y -= 1;
+            }else{
+                players.get(0).velocity.y -= 2;
+            }
         }
-
+        players.get(0).update();
     }
 
     public void render(){
@@ -69,10 +125,10 @@ public class Geography extends Scene {
             backdrop.render();
         }
 
-        players.get(0).render();
-
         for(Sprite object : npc){
             object.render();
         }
+
+        players.get(0).render();
     }
 }

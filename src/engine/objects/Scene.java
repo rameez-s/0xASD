@@ -17,6 +17,7 @@ public abstract class Scene {
     public ArrayList<Sprite> players = new ArrayList<>();
     public ArrayList<Projectile> projectiles = new ArrayList<>();
     public ArrayList<Sprite> collidables = new ArrayList<>();
+    public boolean hasMap=true;
 
     public boolean optimize = true;
     Map map;
@@ -46,6 +47,26 @@ public abstract class Scene {
                 break;
             case 3:
                 players.add((Sprite) element);
+                break;
+            default:
+                throw new UnknownError();
+        }
+        element.currentScene = this;
+    }
+
+    public void set(Quad element, int array, int pos){
+        switch (array){
+            case 0:
+                elements.set(pos,(Sprite) element);
+                break;
+            case 1:
+                npc.set(pos, (Sprite) element);
+                break;
+            case 2:
+                projectiles.set(pos, (Projectile) element);
+                break;
+            case 3:
+                players.set(pos, (Sprite) element);
                 break;
             default:
                 throw new UnknownError();

@@ -105,11 +105,13 @@ public class Sprite extends Quad {
 
     protected boolean collidesWithColor()
     {
-        Vector3f hypotheticalPosition = new Vector3f(position.x, position.y, position.z);
-        hypotheticalPosition.add(velocity);
-        for(Sprite c: currentScene.map.collidablePixels) {
-            if(collidesWith(c, hypotheticalPosition, new Vector2f(-50, 85))){
-                return true;
+        if(currentScene.hasMap) {
+            Vector3f hypotheticalPosition = new Vector3f(position.x, position.y, position.z);
+            hypotheticalPosition.add(velocity);
+            for (Sprite c : currentScene.map.collidablePixels) {
+                if (collidesWith(c, hypotheticalPosition, new Vector2f(-50, 85))) {
+                    return true;
+                }
             }
         }
         return false;

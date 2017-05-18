@@ -1,6 +1,7 @@
 package scenes;
 
 import engine.Engine;
+import engine.math.Matrix4f;
 import engine.math.Vector3f;
 import engine.objects.Scene;
 import engine.objects.Sprite;
@@ -78,6 +79,11 @@ public class Hallway extends Scene{
             Engine.instance.scenes.get(Engine.instance.currentScene).add(p, 3);
             p.currentScene = Engine.instance.scenes.get(Engine.instance.currentScene);
             p.position = new Vector3f(0, 0, 0);
+            if(scene == 1) {
+                p.controllable = true;
+                p.sideMoveOnly = false;
+                Engine.instance.scenes.get(Engine.instance.currentScene).projection = new Matrix4f().orthographic(-512, 512, -512, 512, -10, 10);
+            }
             return 0;
         }else{
             System.out.println("Scene does not works");

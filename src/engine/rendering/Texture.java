@@ -19,11 +19,11 @@ public class Texture {
     private int id, width, height;
     public static void init(){
         defaultSheet = new Texture("default.png");
-//        characterSheet = new Texture("default.png");
-//        npcSheet = new Texture("default.png");
         characterSheet = new Texture("characterSheet.png");
         tileSheet = new Texture("tileSheet.png");
         npcSheet = new Texture("npcSheet.png");
+//        characterSheet = new Texture("default.png");
+//        npcSheet = new Texture("default.png");
     }
     //Test
     public static Texture defaultSheet, characterSheet, tileSheet, npcSheet;
