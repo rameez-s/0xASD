@@ -11,7 +11,7 @@ import objects.npcs.PeTeacher;
 
 import java.util.ArrayList;
 /**
- * Created by 18iwahlqvist on 4/20/2017.
+ * Created by Isak Wahlqvist on 4/20/2017.
  */
 public class Gym extends Scene {
     public int currentProgress = 0;

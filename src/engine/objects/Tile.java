@@ -1,7 +1,7 @@
 package engine.objects;
 
 /**
- * Created by 18iwahlqvist on 3/1/2017.
+ * Created by Isak Wahlqvist on 3/1/2017.
  */
 public class Tile extends Sprite {
     public boolean wall = false;
@@ -30,4 +30,4 @@ public class Tile extends Sprite {
         }
     }
 }
-//isak sux
+//Alex sux

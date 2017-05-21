@@ -12,7 +12,7 @@ import java.io.FileReader;
 import static org.lwjgl.opengl.GL20.*;
 
 /**
- * Created by 18iwahlqvist on 2/12/2017.
+ * Created by Isak Wahlqvist on 2/12/2017.
  */
 public class Shader {
     public int program, vertShader, fragShader;

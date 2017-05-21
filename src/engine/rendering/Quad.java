@@ -14,7 +14,7 @@ import static org.lwjgl.opengl.GL20.glEnableVertexAttribArray;
 import static org.lwjgl.opengl.GL20.glVertexAttribPointer;
 
 /**
- * Created by 18iwahlqvist on 2/12/2017.
+ * Created by Isak Wahlqvist on 2/12/2017.
  */
 public class Quad {
     //Test

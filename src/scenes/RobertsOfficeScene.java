@@ -8,7 +8,7 @@ import engine.rendering.*;
 
 
 /**
- * Created by 18iwahlqvist on 3/27/2017.
+ * Created by Isak Wahlqvist on 3/27/2017.
  */
 public class RobertsOfficeScene extends Scene {
     //Test

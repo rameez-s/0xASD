@@ -6,7 +6,7 @@ import engine.rendering.Texture;
 import java.util.ArrayList;
 
 /**
- * Created by 18iwahlqvist on 3/29/2017.
+ * Created by Isak Wahlqvist on 3/29/2017.
  */
 public class AnimationManager {
     //Test

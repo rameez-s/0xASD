@@ -17,7 +17,7 @@ import static org.lwjgl.stb.STBVorbis.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
 /**
- * Created by 18iwahlqvist on 4/30/2017.
+ * Created by Isak Wahlqvist on 4/30/2017.
  */
 public class Sound {
     public String name;

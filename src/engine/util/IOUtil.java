@@ -15,7 +15,7 @@ import java.nio.file.Paths;
 import static org.lwjgl.BufferUtils.createByteBuffer;
 
 /**
- * Created by 18iwahlqvist on 4/30/2017.
+ * Created by Isak Wahlqvist on 4/30/2017.
  */
 public class IOUtil {
 

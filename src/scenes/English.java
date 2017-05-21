@@ -17,7 +17,8 @@ import static org.lwjgl.glfw.GLFW.glfwGetKey;
 import static org.lwjgl.opengl.GL11.GL_TRUE;
 
 /**
- * Created by 18iwahlqvist on 4/26/2017.
+ * Created by Isak Wahlqvist on 4/26/2017.
+ * At least I know that I can comment in multi-line comments and I do not have to create a separate comment Alex.
  */ // isak is idiot
 public class English extends Scene {
     //Test

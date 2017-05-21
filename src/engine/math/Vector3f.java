@@ -2,7 +2,7 @@ package engine.math;
 
 
 /**
- * Created by ISAKPC on 2/13/2017.
+ * Created by Isak Wahlqvist on 2/13/2017.
  */
 public class Vector3f {
     public float x, y, z;

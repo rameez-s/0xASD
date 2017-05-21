@@ -1,7 +1,7 @@
 package engine.math;
 
 /**
- * Created by 18iwahlqvist on 2/27/2017.
+ * Created by Isak Wahlqvist on 2/27/2017.
  */
 public class Vector2f {
     public float x, y;

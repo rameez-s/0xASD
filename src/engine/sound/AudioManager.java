@@ -3,7 +3,7 @@ package engine.sound;
 import java.util.ArrayList;
 
 /**
- * Created by 18iwahlqvist on 4/30/2017.
+ * Created by Isak Wahlqvist on 4/30/2017.
  */
 public class AudioManager {
     //Test

@@ -5,19 +5,21 @@ import engine.math.Vector2f;
 import engine.math.Vector3f;
 import engine.objects.Sprite;
 import objects.NPC;
+import objects.Path;
+import objects.PathPoint;
 import scenes.English;
 
 import java.util.ArrayList;
 
 /**
- * Created by 18iwahlqvist on 4/26/2017.
+ * Created by Isak Wahlqvist on 4/26/2017.
  */
 public class MrDiamond extends NPC {
-    ArrayList<Vector2f> positions = new ArrayList<>();
-    private int atPosition = -1;
+    ArrayList<PathPoint> positions = new ArrayList<>();
     private Vector2f sideA, sideB, sideC;
     char facing;
     Sprite visionCone, n1, n2;
+    Path p;
     public MrDiamond(){
         super(128);
         setTexture("characterSheet.png");
@@ -36,15 +38,7 @@ public class MrDiamond extends NPC {
         animationManager.add(new Animation("Left", new Vector2f((0.125f * 2), 0.375f), 0.2f, 1));
         animationManager.add(new Animation("Right", new Vector2f((0.125f * 3), 0.375f), 0.2f, 1));
 
-        //Test
-        positions.add(new Vector2f(0, 0));
-        positions.add(new Vector2f(0, 1000));
-        positions.add(new Vector2f(500, 1000));
-        positions.add(new Vector2f(500, 0));
-        positions.add(new Vector2f(0, 0));
-        positions.add(new Vector2f(0, 1000));
-        positions.add(new Vector2f(-500, 1000));
-        positions.add(new Vector2f(-500, 0));
+        p = new Path();
     }
 
     public void update(){
@@ -102,7 +96,8 @@ public class MrDiamond extends NPC {
         Vector2f v = new Vector2f((sideA.x + sideB.x + sideC.x)/3, (sideA.y + sideB.y + sideC.y)/3);
         visionCone.position = new Vector3f((sideB.x*0.25f + sideC.x*0.25f + sideA.x*0.5f), (sideB.y*0.25f + sideC.y*0.25f + sideA.y*0.5f), 0);
         visionCone.update();
-        if(position.distance(currentScene.players.get(0).position) < 600){
+        Vector3f v3 = new Vector3f(v.x, v.y, 0);
+        if(v3.distance(currentScene.players.get(0).position) < 600){
             if(triangularCollision(currentScene.players.get(0))){
                 //Here is collision with player
                 if(((English)currentScene).sittingInChair){
@@ -114,16 +109,16 @@ public class MrDiamond extends NPC {
         }
         n1.position.set(sideB.x, sideB.y, 0);
         n2.position.set(sideC.x, sideC.y, 0);
-        if(positions.size() > atPosition + 1) {
-            if (this.position.distance(positions.get(atPosition + 1)) > 0.1) {
-                Vector2f v2 = position.pointTowards(positions.get(atPosition + 1));
+        if(p.current != null) {
+            if (this.position.distance(p.current.position) > 0.1) {
+                Vector2f v2 = position.pointTowards(new Vector2f(p.current.position.x, p.current.position.y));
                 this.velocity = new Vector3f(v2.x * 3f, v2.y * 3f, velocity.z);
             }else{
-                atPosition++;
+                p.chooseNextPath();
                 velocity.x = 0;velocity.y = 0;
             }
         }else{
-            atPosition = -1;
+            new Exception("Current path point is null");
         }
         n1.update();
         n2.update();
@@ -157,4 +152,4 @@ public class MrDiamond extends NPC {
     }
 
 }
-//isak is dumbo
+//Isak is dumbo
