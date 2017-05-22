@@ -11,7 +11,7 @@ import engine.rendering.*;
  * Created by Isak Wahlqvist on 3/27/2017.
  */
 public class RobertsOfficeScene extends Scene {
-    //Test
+    //TestHej
     public RobertsOfficeScene(){
         setMap("robertsOffice.png");
         genMap();
