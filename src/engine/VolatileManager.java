@@ -8,7 +8,7 @@ import engine.sound.Sound;
 public class VolatileManager {
     //For AudioManager
     public static volatile Sound soundToPlay;
-    public static volatile boolean play;
+    public static volatile boolean play = false;
     public static volatile String location;
     public static volatile boolean create;
 }

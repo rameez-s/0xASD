@@ -94,10 +94,9 @@ public class AudioManager {
                     } else {
                         Thread.sleep(4000);
                     }
-                    System.out.println("started");
+                    System.out.println("started: " + VolatileManager.soundToPlay.fileName);
                     alSourceStop(VolatileManager.soundToPlay.source);
                 }else{
-                    System.out.println("stopped");
                 }
             }
         }catch(Exception e){} finally {

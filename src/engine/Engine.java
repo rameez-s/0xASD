@@ -5,6 +5,8 @@ import engine.objects.*;
 import engine.objects.Scene;
 import engine.objects.StartMenuSprite;
 import engine.rendering.Texture;
+import engine.sound.AudioManager;
+import engine.sound.Sound;
 import example.ExampleScene;
 import example.StartMenuScene;
 import objects.Player;
@@ -104,15 +106,16 @@ public class Engine {
         glfwMakeContextCurrent(window);
         GL.createCapabilities();
 
-        audioDevice = alcOpenDevice((ByteBuffer) null);
-        if(audioDevice == NULL)
-            throw new Error("Device not found");
-
-        ALCCapabilities deviceCaps = ALC.createCapabilities(audioDevice);
-
-        context = alcCreateContext(audioDevice, (IntBuffer)null);
-        alcSetThreadContext(context);
-        AL.createCapabilities(deviceCaps);
+        Thread audioManager = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                AudioManager am = new AudioManager();
+            }
+        });
+        audioManager.start();
+        VolatileManager.play = false;
+        VolatileManager.soundToPlay = new Sound("Example.ogg");
+        VolatileManager.play = true;
 
         Texture.init();
     }
@@ -175,10 +178,6 @@ public class Engine {
                 oneSecondTime += 1000000000;
             }
         }
-
-        alcMakeContextCurrent(NULL);
-        alcDestroyContext(context);
-        alcCloseDevice(audioDevice);
 
     }
 
