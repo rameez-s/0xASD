@@ -8,9 +8,7 @@ import engine.objects.Scene;
 import engine.objects.Sprite;
 import objects.Player;
 
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_SPACE;
-import static org.lwjgl.glfw.GLFW.GLFW_TRUE;
-import static org.lwjgl.glfw.GLFW.glfwGetKey;
+import static org.lwjgl.glfw.GLFW.*;
 
 /**
  * Created by 17ajamal on 5/16/2017.
@@ -20,8 +18,14 @@ public class Geography extends Scene {
     public float progress = 0;
     public float speed = 1;
 
+    Sprite instructions;
     public Geography(){
+        instructionsShown=true;
         hasMap = false;
+        instructions = new Sprite(1024*0.283203125f, 1024*0.458984375f, 0, 0.283203125f, 0.458984375f);
+        instructions.setTexture("textSheet.png");
+        instructions.currentScene = this;
+        instructions.animationManager.textureCoord = new Vector2f(0f, 0f);
         for(int i = 0; i < 20; i++){
             if((i) % 15 == 1){
                 Sprite l = new Sprite(128, 0);
@@ -73,78 +77,90 @@ public class Geography extends Scene {
 
     }
     public void update(){
-        if(((Player)players.get(0)).controllable)
-        {
-            ((Player)players.get(0)).controllable = false;
-            players.get(0).velocity.x += 0.00000001f;
-        }
-        for(Sprite backdrop : backdrops){
-            backdrop.update();
-            backdrop.velocity.x = -speed;
-            if(backdrop.position.x < -1024){
-                backdrop.position.x += 512*6;
+        if(instructionsShown){
+            if(glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_A)==GLFW_TRUE){
+                instructions.position = new Vector3f(40000, 0, 0);
+                instructionsShown = false;
+                instructions.render();
             }
-        }
-        for(Sprite object : npc){
-            object.update();
-            if(object.collidesHypotheticalWith(players.get(0), new Vector2f(-100, -50))){
-                //Lose
-                System.out.println(progress);
-                progress = 0;
-                speed = 1;
-                for(Sprite object2 : npc){
-                    object2.position.x += 1024;
+            instructions.update();
+        }else {
+            if (((Player) players.get(0)).controllable) {
+                ((Player) players.get(0)).controllable = false;
+                players.get(0).velocity.x += 0.00000001f;
+            }
+            for (Sprite backdrop : backdrops) {
+                backdrop.update();
+                backdrop.velocity.x = -speed;
+                if (backdrop.position.x < -1024) {
+                    backdrop.position.x += 512 * 6;
+                }
+            }
+            for (Sprite object : npc) {
+                object.update();
+                if (object.collidesHypotheticalWith(players.get(0), new Vector2f(-100, -50))) {
+                    //Lose
+                    System.out.println(progress);
+                    progress = 0;
+                    speed = 1;
+                    for (Sprite object2 : npc) {
+                        object2.position.x += 1024;
+                    }
+
+                    backdrops[0].position = new Vector3f(-512, 128, 0);
+                    backdrops[1].position = new Vector3f(0, 128, 0);
+                    backdrops[2].position = new Vector3f(512, 128, 0);
+                    backdrops[3].position = new Vector3f(512 * 2, 128, 0);
+                    backdrops[4].position = new Vector3f(512 * 3, 128, 0);
+                    backdrops[5].position = new Vector3f(512 * 4, 128, 0);
+                }
+                object.velocity.x = -speed;
+                if (object.position.x < -512) {
+                    object.position.x += 16000;
+                }
+            }
+            if (speed < 20) {
+                speed += 0.01;
+            }
+            if (progress < 4) {
+                progress += 0.001;
+            } else {
+                //Win
+                Hallway.switchToScene(1);
+            }
+
+            if (players.get(0).position.y < -200) {
+                players.get(0).velocity.y = 0;
+                players.get(0).animationManager.run("RunRight");
+                if (glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_SPACE) == GLFW_TRUE) {
+                    players.get(0).velocity.y = 25;
+                    players.get(0).animationManager.stop();
                 }
 
-                backdrops[0].position = new Vector3f(-512,  128, 0);
-                backdrops[1].position = new Vector3f(0,     128, 0);
-                backdrops[2].position = new Vector3f(512,   128, 0);
-                backdrops[3].position = new Vector3f(512*2, 128, 0);
-                backdrops[4].position = new Vector3f(512*3, 128, 0);
-                backdrops[5].position = new Vector3f(512*4, 128, 0);
+            } else {
+                if (glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_SPACE) == GLFW_TRUE) {
+                    players.get(0).velocity.y -= 1;
+                } else {
+                    players.get(0).velocity.y -= 2;
+                }
             }
-            object.velocity.x = -speed;
-            if(object.position.x < -512){
-                object.position.x += 16000;
-            }
+            players.get(0).update();
         }
-        if(speed < 20) {
-            speed += 0.01;
-        }
-        if(progress < 4){
-            progress += 0.001;
-        }else{
-            //Win
-            Hallway.switchToScene(1);
-        }
-
-        if(players.get(0).position.y < -200){
-            players.get(0).velocity.y = 0;
-            players.get(0).animationManager.run("RunRight");
-            if(glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_SPACE) == GLFW_TRUE){
-                players.get(0).velocity.y = 25;
-                players.get(0).animationManager.stop();
-            }
-
-        }else{
-            if(glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_SPACE) == GLFW_TRUE) {
-                players.get(0).velocity.y -= 1;
-            }else{
-                players.get(0).velocity.y -= 2;
-            }
-        }
-        players.get(0).update();
     }
 
     public void render(){
-        for(Sprite backdrop : backdrops){
-            backdrop.render();
-        }
+        if(instructionsShown){
+            instructions.render();
+        }else {
+            for (Sprite backdrop : backdrops) {
+                backdrop.render();
+            }
 
-        for(Sprite object : npc){
-            object.render();
-        }
+            for (Sprite object : npc) {
+                object.render();
+            }
 
-        players.get(0).render();
+            players.get(0).render();
+        }
     }
 }

@@ -17,7 +17,7 @@ public class AnimationManager {
     private long lastTime;
 
     public AnimationManager(){
-        texture = Texture.defaultSheet;
+        texture = Texture.textSheet;
         textureCoord = new Vector2f(0, 0);
         lastTime = System.nanoTime();
     }
@@ -29,6 +29,8 @@ public class AnimationManager {
             texture = Texture.tileSheet;
         }else if(textureFile.equals("npcSheet.png")){
             texture = Texture.npcSheet;
+        }else if(textureFile.equals("textSheet.png")){
+            texture = Texture.textSheet;
         }else {
             texture = new Texture("" + textureFile);
         }

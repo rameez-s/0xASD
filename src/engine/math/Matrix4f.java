@@ -7,7 +7,6 @@ public class Matrix4f {
     public float[] elements = new float[SIZE];
 
     public Matrix4f() {
-
     }
 
     public static Matrix4f identity() {
@@ -40,7 +39,6 @@ public class Matrix4f {
     }
 
     public void move(Vector3f vector3f){
-
         elements[0 + 3 * 4] -= vector3f.x;
         elements[1 + 3 * 4] -= vector3f.y;
         elements[2 + 3 * 4] += vector3f.z;

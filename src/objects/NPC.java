@@ -11,7 +11,6 @@ public class NPC extends Sprite {
     //Test
     public NPC(){
         super();
-
     }
 
     public NPC(int size){

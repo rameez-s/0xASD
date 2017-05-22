@@ -23,11 +23,6 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class AudioManager {
     //Test
-
-
-
-
-
     public static long audioDevice, context;
     private ArrayList<Sound> sounds = new ArrayList<>();
 
@@ -38,7 +33,6 @@ public class AudioManager {
         }
 
         ALCCapabilities deviceCaps = ALC.createCapabilities(device);
-
 
         System.out.println("OpenALC10: " + deviceCaps.OpenALC10);
         System.out.println("OpenALC11: " + deviceCaps.OpenALC11);
@@ -77,14 +71,12 @@ public class AudioManager {
                     if(VolatileManager.soundToPlay.source == -1 || VolatileManager.soundToPlay.buffer == -1){
                         VolatileManager.soundToPlay.buffer = alGenBuffers();
                         VolatileManager.soundToPlay.source = alGenSources();
-
                         try (STBVorbisInfo info = STBVorbisInfo.malloc()) {
                             ShortBuffer pcm = AudioManager.readVorbis("res/audio/" + VolatileManager.soundToPlay.fileName, 32 * 1024, info);
 
                             //copy to buffer
                             alBufferData(VolatileManager.soundToPlay.buffer, info.channels() == 1 ? AL_FORMAT_MONO16 : AL_FORMAT_STEREO16, pcm, info.sample_rate());
                         }
-
                         alSourcei(VolatileManager.soundToPlay.source, AL_BUFFER, VolatileManager.soundToPlay.buffer);
                         alSourcei(VolatileManager.soundToPlay.source, AL_LOOPING, AL_TRUE);
                     }
@@ -96,7 +88,6 @@ public class AudioManager {
                     }
                     System.out.println("started: " + VolatileManager.soundToPlay.fileName);
                     alSourceStop(VolatileManager.soundToPlay.source);
-                }else{
                 }
             }
         }catch(Exception e){} finally {
@@ -118,10 +109,6 @@ public class AudioManager {
         VolatileManager.play = true;
         t.start();
     }
-
-
-
-
 
     static ShortBuffer readVorbis(String resource, int bufferSize, STBVorbisInfo info) {
         ByteBuffer vorbis;
@@ -150,5 +137,4 @@ public class AudioManager {
 
         return pcm;
     }
-
 }

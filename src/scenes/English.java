@@ -11,9 +11,7 @@ import objects.npcs.MrDiamond;
 
 import java.util.ArrayList;
 
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_SPACE;
-import static org.lwjgl.glfw.GLFW.glfwGetKey;
+import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.GL_TRUE;
 
 /**
@@ -32,9 +30,15 @@ public class English extends Scene {
     int currentCheatingProgress = 0;
     Sprite arrow;
     int timesCheated = -1;
+    Sprite instructions;
     public English(){
+        instructionsShown = true;
         setMap("hallway.png");
         genMap();
+        instructions = new Sprite(1024*0.2880859375f, 1024*0.4345703125f, 0, 0.2880859375f, 0.4345703125f);
+        instructions.setTexture("textSheet.png");
+        instructions.currentScene = this;
+        instructions.animationManager.textureCoord = new Vector2f(0.5f, 0.5f);
         for (int x = 0; x < 5; x++) {
             for (int y = 0; y < 3; y++) {
                 tables.add(new Sprite(128, 0));
@@ -61,115 +65,128 @@ public class English extends Scene {
     long spaceTimer = 0;
 
     public void update(){
-        if((currentCheatingProgress == 100 && hasCopiedAnswers) || currentPersonToCheat == -1){
-            currentPersonToCheat = (int)(Math.random() * 15);
-            currentCheatingProgress = 0;
-            hasCopiedAnswers = false;
-            timesCheated++;
-        }
-        if(timesCheated > 4){
-            //Win
-            Hallway.switchToScene(1);
-        }
-        if(currentCheatingProgress == 100) {
-            arrow.position = new Vector3f(emptyChair.position.x + 10, emptyChair.position.y + 120, emptyChair.position.z);
-        }else{
-            arrow.position = new Vector3f(chairs.get(currentPersonToCheat).position.x + 10, chairs.get(currentPersonToCheat).position.y + 150, chairs.get(currentPersonToCheat).position.z);
-        }
-        arrow.update();
-
-        if (glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_SPACE) == GL_TRUE) {
-            if(players.get(0).position.distance(emptyChair.position) < 75) {
-                if (spaceTimer < System.nanoTime()) {
-                    if(currentCheatingProgress == 100){
-                        hasCopiedAnswers = true;
-                    }
-                    sittingInChair = !sittingInChair;
-                    spaceTimer = System.nanoTime() + 150000000;
-                }
-            }else if(players.get(0).position.distance(chairs.get(currentPersonToCheat).position)< 75){
-                if (spaceTimer < System.nanoTime()) {
-                    if(currentCheatingProgress <= 90) {
-                        currentCheatingProgress += 10;
-                    }
-                    spaceTimer = System.nanoTime() + 500000000;
-                    System.out.println(currentCheatingProgress);
-                }
+        if(instructionsShown){
+            if(glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_A) == GL_TRUE){
+                instructions.position = new Vector3f(40000, 0, 0);
+                instructionsShown = false;
+                instructions.render();
             }
-        }
-
-
-        if(sittingInChair){
-            for (int i = elements.size() - 1; i >= 0; i--) {
-                if(players.size() > 0) {
-                    if (elements.get(i).position.distance(players.get(0).position) < 1000) {
-                        elements.get(i).update(true);
-                    }
-                }
-            }
-            for (int i = npc.size() - 1; i >= 0; i--) {
-                npc.get(i).update();
-            }
-            for (int i = projectiles.size() - 1; i >= 0; i--) {
-                projectiles.get(i).update();
-            }
+            instructions.update();
         }else {
-            super.update();
-        }
-        emptyChair.update();
-        for(Sprite table : tables){
-            if(table.currentScene != null) {
-                table.update();
-            }else{
-                table.currentScene = this;
-                System.out.println("still not working if continues");
+            if ((currentCheatingProgress == 100 && hasCopiedAnswers) || currentPersonToCheat == -1) {
+                currentPersonToCheat = (int) (Math.random() * 15);
+                currentCheatingProgress = 0;
+                hasCopiedAnswers = false;
+                timesCheated++;
             }
-        }
-        for(Sprite chair : chairs) {
-            if(chair.currentScene != null) {
-                chair.update();
-            }else{
-                chair.currentScene = this;
-                System.out.println("still not working if continues");
+            if (timesCheated > 4) {
+                //Win
+                Hallway.switchToScene(1);
             }
-        }
-        if(sittingInChair){
-            emptyChair.animationManager.run("full");
-        }else {
-            emptyChair.animationManager.run("empty");
-        }
-        mrDiamond.update();
-    }
+            if (currentCheatingProgress == 100) {
+                arrow.position = new Vector3f(emptyChair.position.x + 10, emptyChair.position.y + 120, emptyChair.position.z);
+            } else {
+                arrow.position = new Vector3f(chairs.get(currentPersonToCheat).position.x + 10, chairs.get(currentPersonToCheat).position.y + 150, chairs.get(currentPersonToCheat).position.z);
+            }
+            arrow.update();
 
-    public void render(){
-        if(sittingInChair){
-            for (int i = elements.size() - 1; i >= 0; i--) {
-                if(players.size() > 0) {
-                    if (elements.get(i).position.distance(players.get(0).position) < 1000) {
+            if (glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_SPACE) == GL_TRUE) {
+                if (players.get(0).position.distance(emptyChair.position) < 75) {
+                    if (spaceTimer < System.nanoTime()) {
+                        if (currentCheatingProgress == 100) {
+                            hasCopiedAnswers = true;
+                        }
+                        sittingInChair = !sittingInChair;
+                        spaceTimer = System.nanoTime() + 150000000;
+                    }
+                } else if (players.get(0).position.distance(chairs.get(currentPersonToCheat).position) < 75) {
+                    if (spaceTimer < System.nanoTime()) {
+                        if (currentCheatingProgress <= 90) {
+                            currentCheatingProgress += 10;
+                        }
+                        spaceTimer = System.nanoTime() + 500000000;
+                        System.out.println(currentCheatingProgress);
+                    }
+                }
+            }
+
+
+            if (sittingInChair) {
+                for (int i = elements.size() - 1; i >= 0; i--) {
+                    if (players.size() > 0) {
                         if (elements.get(i).position.distance(players.get(0).position) < 1000) {
-                            elements.get(i).render();
+                            elements.get(i).update(true);
                         }
                     }
                 }
+                for (int i = npc.size() - 1; i >= 0; i--) {
+                    npc.get(i).update();
+                }
+                for (int i = projectiles.size() - 1; i >= 0; i--) {
+                    projectiles.get(i).update();
+                }
+            } else {
+                super.update();
             }
-            for (int i = npc.size() - 1; i >= 0; i--) {
-                npc.get(i).render();
+            emptyChair.update();
+            for (Sprite table : tables) {
+                if (table.currentScene != null) {
+                    table.update();
+                } else {
+                    table.currentScene = this;
+                    System.out.println("still not working if continues");
+                }
             }
-            for (int i = projectiles.size() - 1; i >= 0; i--) {
-                projectiles.get(i).render();
+            for (Sprite chair : chairs) {
+                if (chair.currentScene != null) {
+                    chair.update();
+                } else {
+                    chair.currentScene = this;
+                    System.out.println("still not working if continues");
+                }
             }
+            if (sittingInChair) {
+                emptyChair.animationManager.run("full");
+            } else {
+                emptyChair.animationManager.run("empty");
+            }
+            mrDiamond.update();
+        }
+    }
+
+    public void render(){
+        if(instructionsShown){
+            instructions.render();
         }else {
-            super.render();
+            if (sittingInChair) {
+                for (int i = elements.size() - 1; i >= 0; i--) {
+                    if (players.size() > 0) {
+                        if (elements.get(i).position.distance(players.get(0).position) < 1000) {
+                            if (elements.get(i).position.distance(players.get(0).position) < 1000) {
+                                elements.get(i).render();
+                            }
+                        }
+                    }
+                }
+                for (int i = npc.size() - 1; i >= 0; i--) {
+                    npc.get(i).render();
+                }
+                for (int i = projectiles.size() - 1; i >= 0; i--) {
+                    projectiles.get(i).render();
+                }
+            } else {
+                super.render();
+            }
+            for (Sprite chair : chairs) {
+                chair.render();
+            }
+            for (Sprite table : tables) {
+                table.render();
+            }
+            emptyChair.render();
+            mrDiamond.render();
+            arrow.render();
         }
-        for(Sprite chair : chairs) {
-            chair.render();
-        }
-        for(Sprite table : tables){
-            table.render();
-        }
-        emptyChair.render();
-        mrDiamond.render();
-        arrow.render();
     }
 
     public void reset(){

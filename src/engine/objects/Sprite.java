@@ -37,6 +37,15 @@ public class Sprite extends Quad {
         textureCoords = new Vector2f(0, 0);
     }
 
+    public Sprite(float xSize, float ySize, float z, float xTextureSize, float yTextureSize){
+        super(xSize, ySize, z, xTextureSize, yTextureSize);
+        position = new Vector3f();
+        velocity = new Vector3f();
+        shader = new Shader("default");
+        texture = animationManager.texture;
+        textureCoords = new Vector2f(0, 0);
+    }
+
     public void setTexture(String textureFile){
         animationManager.setTexture(textureFile);
         texture = animationManager.texture;

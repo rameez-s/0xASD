@@ -18,7 +18,7 @@ import java.nio.ByteBuffer;
 public class Texture {
     private int id, width, height;
     public static void init(){
-        defaultSheet = new Texture("default.png");
+        textSheet = new Texture("textSheet.png");
         characterSheet = new Texture("characterSheet.png");
         tileSheet = new Texture("tileSheet.png");
         npcSheet = new Texture("npcSheet.png");
@@ -26,7 +26,7 @@ public class Texture {
 //        npcSheet = new Texture("default.png");
     }
     //Test
-    public static Texture defaultSheet, characterSheet, tileSheet, npcSheet;
+    public static Texture textSheet, characterSheet, tileSheet, npcSheet;
     public Texture(String filename){
         BufferedImage bi;
         try {

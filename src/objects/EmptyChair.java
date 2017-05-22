@@ -19,5 +19,4 @@ public class EmptyChair extends Sprite {
         animationManager.add(new Animation("full", new Vector2f(0, 1-0.125f), 1f, 0));
         animationManager.run("empty");
     }
-
 }

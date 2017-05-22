@@ -12,6 +12,7 @@ import java.util.ArrayList;
  */
 //Test
 public abstract class Scene {
+    public boolean instructionsShown = false;
     public ArrayList<Sprite> elements = new ArrayList<>();
     public ArrayList<Sprite> npc = new ArrayList<>();
     public ArrayList<Sprite> players = new ArrayList<>();

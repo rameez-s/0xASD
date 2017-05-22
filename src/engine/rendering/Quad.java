@@ -27,18 +27,34 @@ public class Quad {
     }
     float[] tcs = {
             0.125f, 0,
-            0, 0,
-            0, 0.125f,
+            0,      0,
+            0,      0.125f,
             0.125f, 0.125f
     };
+
+    public Quad(float xSize, float ySize, float z, float xTextureSize, float yTextureSize){
+        this.size = xSize;
+        float[] vertices = {
+                -xSize / 2,  ySize * (16.0f/9) / 2, z,
+                xSize / 2,   ySize * (16.0f/9) / 2, z,
+                xSize / 2,   -ySize * (16.0f/9) / 2, z,
+                -xSize / 2,  -ySize * (16.0f/9) / 2, z
+        };
+        tcs = new float[]{
+                xTextureSize,  0,
+                0,      0,
+                0,      yTextureSize,
+                xTextureSize,  yTextureSize
+        };
+    }
 
     public Quad(float size, float z){
         this.size = size;
         float[] vertices = {
-                -size / 2, size * (16.0f/9) / 2, z,
-                size / 2, size * (16.0f/9) / 2, z,
-                size / 2, -size * (16.0f/9) / 2, z,
-                -size / 2, -size * (16.0f/9) / 2, z
+                -size / 2,  size * (16.0f/9) / 2, z,
+                size / 2,   size * (16.0f/9) / 2, z,
+                size / 2,   -size * (16.0f/9) / 2, z,
+                -size / 2,  -size * (16.0f/9) / 2, z
         };
 
 

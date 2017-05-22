@@ -37,12 +37,11 @@ import static sun.audio.AudioDevice.device;
  * Created by Isak Wahlqvist
  */
 public class Engine {
-    //TODO complete introduction
     //TODO complete controls help
     //TODO finish music game
     //TODO populate hallway
-    //TODO
-    private long window, audioDevice, context;
+
+    private long window;
 
     private int width = 1280, height = 720;
     private boolean fullscreen = false;
@@ -164,15 +163,6 @@ public class Engine {
             fps++;
             if(System.nanoTime() > oneSecondTime){
                 System.out.println("Frames per second: " + fps + "\tUpdates per second: " + ups);
-//                float pixelsDistance;
-//                float minimum = Float.MAX_VALUE;
-//                for(int i=0; i<Map.collidablePixels.size(); i++)
-//                {
-//                    pixelsDistance = thisPlayer.position.distance(Map.collidablePixels.get(i));
-//                    if(pixelsDistance < minimum)
-//                        minimum = pixelsDistance;
-//                }
-//                System.out.println(minimum);
                 ups = 0;
                 fps = 0;
                 oneSecondTime += 1000000000;
