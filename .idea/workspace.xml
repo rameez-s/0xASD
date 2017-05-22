@@ -1,22 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d0de517f-13aa-4b2c-83cd-a4e117f9a8a2" name="Default" comment="Finished sound">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/textSheet.png" />
+    <list default="true" id="d0de517f-13aa-4b2c-83cd-a4e117f9a8a2" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/res/npcSheet.png" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine/Engine.java" afterPath="$PROJECT_DIR$/src/engine/Engine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine/VolatileManager.java" afterPath="$PROJECT_DIR$/src/engine/VolatileManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine/animation/AnimationManager.java" afterPath="$PROJECT_DIR$/src/engine/animation/AnimationManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine/math/Matrix4f.java" afterPath="$PROJECT_DIR$/src/engine/math/Matrix4f.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine/objects/Scene.java" afterPath="$PROJECT_DIR$/src/engine/objects/Scene.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine/objects/Sprite.java" afterPath="$PROJECT_DIR$/src/engine/objects/Sprite.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine/rendering/Quad.java" afterPath="$PROJECT_DIR$/src/engine/rendering/Quad.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine/rendering/Texture.java" afterPath="$PROJECT_DIR$/src/engine/rendering/Texture.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine/sound/AudioManager.java" afterPath="$PROJECT_DIR$/src/engine/sound/AudioManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/objects/EmptyChair.java" afterPath="$PROJECT_DIR$/src/objects/EmptyChair.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/objects/NPC.java" afterPath="$PROJECT_DIR$/src/objects/NPC.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/objects/Path.java" afterPath="$PROJECT_DIR$/src/objects/Path.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/scenes/English.java" afterPath="$PROJECT_DIR$/src/scenes/English.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/scenes/Geography.java" afterPath="$PROJECT_DIR$/src/scenes/Geography.java" />
     </list>
     <ignored path="JavaCS game.iws" />
@@ -52,11 +39,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Geography.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Geography.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/scenes/Geography.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="145" column="13" selection-start-line="145" selection-start-column="13" selection-end-line="145" selection-end-column="13" />
+            <state relative-caret-position="176">
+              <caret line="62" column="15" selection-start-line="62" selection-start-column="15" selection-end-line="62" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -66,21 +53,8 @@
         <entry file="file://$PROJECT_DIR$/src/objects/Player.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="176">
-              <caret line="46" column="25" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="25" />
+              <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NPC.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/objects/NPC.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-              <folding>
-                <element signature="e#223#224#0" expanded="true" />
-                <element signature="e#246#247#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -89,7 +63,7 @@
         <entry file="file://$PROJECT_DIR$/src/engine/math/Matrix4f.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="176">
-              <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+              <caret line="40" column="20" selection-start-line="40" selection-start-column="16" selection-end-line="40" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -125,11 +99,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VolatileManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/engine/VolatileManager.java">
+      <file leaf-file-name="Scene.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/engine/objects/Scene.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+            <state relative-caret-position="199">
+              <caret line="25" column="15" selection-start-line="25" selection-start-column="15" selection-end-line="25" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -905,13 +879,6 @@
       <option name="presentableId" value="Default" />
       <updated>1486879302560</updated>
     </task>
-    <task id="LOCAL-00009" summary="projectile.png">
-      <created>1487667982223</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1487667982223</updated>
-    </task>
     <task id="LOCAL-00010" summary="projectile.png">
       <created>1487668024170</created>
       <option name="number" value="00010" />
@@ -1248,7 +1215,14 @@
       <option name="project" value="LOCAL" />
       <updated>1495434573794</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="Finished sound">
+      <created>1495451459083</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1495451459086</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1577,19 +1551,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/npcSheet.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/engine/objects/Scene.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="14" column="44" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/scenes/Hallway.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
@@ -1661,14 +1622,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/engine/math/Matrix4f.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/engine/objects/Sprite.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
@@ -1709,18 +1662,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/objects/Player.java">
+    <entry file="file://$PROJECT_DIR$/src/scenes/Geography.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
-          <caret line="46" column="25" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="25" />
+          <caret line="62" column="15" selection-start-line="62" selection-start-column="15" selection-end-line="62" selection-end-column="15" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/scenes/Geography.java">
+    <entry file="file://$PROJECT_DIR$/src/engine/math/Matrix4f.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="145" column="13" selection-start-line="145" selection-start-column="13" selection-end-line="145" selection-end-column="13" />
+        <state relative-caret-position="176">
+          <caret line="40" column="20" selection-start-line="40" selection-start-column="16" selection-end-line="40" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/objects/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/npcSheet.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/engine/objects/Scene.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="25" column="15" selection-start-line="25" selection-start-column="15" selection-end-line="25" selection-end-column="15" />
           <folding />
         </state>
       </provider>
