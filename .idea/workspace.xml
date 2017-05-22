@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d0de517f-13aa-4b2c-83cd-a4e117f9a8a2" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/npcSheet.png" afterPath="$PROJECT_DIR$/res/npcSheet.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="JavaCS game.iws" />
@@ -746,13 +745,6 @@
       <option name="presentableId" value="Default" />
       <updated>1486879302560</updated>
     </task>
-    <task id="LOCAL-00001" summary="Changed Readme.md to something more helpful">
-      <created>1486999533902</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1486999533902</updated>
-    </task>
     <task id="LOCAL-00002" summary="Changed Readme.md to something more helpful">
       <created>1486999654114</created>
       <option name="number" value="00002" />
@@ -1089,7 +1081,14 @@
       <option name="project" value="LOCAL" />
       <updated>1494926095398</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Finished English">
+      <created>1495433205826</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1495433205827</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="ToolWindowManager">
