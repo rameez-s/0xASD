@@ -11,4 +11,5 @@ public class VolatileManager {
     public static volatile boolean play = false;
     public static volatile String location;
     public static volatile boolean create;
+    public static volatile boolean shouldStop = false;
 }

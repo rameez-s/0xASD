@@ -62,7 +62,7 @@ public class AudioManager {
         System.out.println("ALC_STEREO_SOURCES: " + alcGetInteger(device, ALC_STEREO_SOURCES));
 
         try {
-            while (true) {
+            while (!VolatileManager.shouldStop) {
                 if(VolatileManager.create){
                     VolatileManager.soundToPlay = new Sound(VolatileManager.location);
                     VolatileManager.create = false;

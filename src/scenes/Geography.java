@@ -22,7 +22,7 @@ public class Geography extends Scene {
     public Geography(){
         instructionsShown=true;
         hasMap = false;
-        instructions = new Sprite(1024*0.283203125f, 1024*0.458984375f, 0, 0.283203125f, 0.458984375f);
+        instructions = new Sprite(1024, 2048, 0, 0.283203125f, 0.458984375f);
         instructions.setTexture("textSheet.png");
         instructions.currentScene = this;
         instructions.animationManager.textureCoord = new Vector2f(0f, 0f);
@@ -84,6 +84,7 @@ public class Geography extends Scene {
                 instructions.render();
             }
             instructions.update();
+            System.out.println(instructions.position);
         }else {
             if (((Player) players.get(0)).controllable) {
                 ((Player) players.get(0)).controllable = false;
@@ -99,7 +100,6 @@ public class Geography extends Scene {
             for (Sprite object : npc) {
                 object.update();
                 if (object.collidesHypotheticalWith(players.get(0), new Vector2f(-100, -50))) {
-                    //Lose
                     System.out.println(progress);
                     progress = 0;
                     speed = 1;
@@ -126,10 +126,12 @@ public class Geography extends Scene {
                 progress += 0.001;
             } else {
                 //Win
+                Engine.instance.save.completedSocialStudies = true;
                 Hallway.switchToScene(1);
             }
 
             if (players.get(0).position.y < -200) {
+                players.get(0).velocity.x = 0;
                 players.get(0).velocity.y = 0;
                 players.get(0).animationManager.run("RunRight");
                 if (glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_SPACE) == GLFW_TRUE) {
