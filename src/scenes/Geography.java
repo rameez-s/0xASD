@@ -6,6 +6,7 @@ import engine.math.Vector2f;
 import engine.math.Vector3f;
 import engine.objects.Scene;
 import engine.objects.Sprite;
+import objects.EmptyChair;
 import objects.Player;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -17,9 +18,15 @@ public class Geography extends Scene {
     public Sprite[] backdrops = new Sprite[6];
     public float progress = 0;
     public float speed = 1;
-
+    public Sprite progressBar;
     Sprite instructions;
     public Geography(){
+
+        progressBar = new Sprite(128, 0);
+        progressBar.setTexture("npcSheet.png");
+        progressBar.animationManager.textureCoord = new Vector2f(0, 0.5f);
+        progressBar.currentScene = this;
+
         instructionsShown=true;
         hasMap = false;
         instructions = new Sprite(1024, 2048, 0, 0.283203125f, 0.458984375f);
@@ -121,7 +128,19 @@ public class Geography extends Scene {
             }
             if (speed < 20) {
                 speed += 0.01;
+            }if(progress < 1){
+                progressBar.animationManager.textureCoord = new Vector2f(0, 0.5f);
+            }else if(progress < 2){
+                progressBar.animationManager.textureCoord = new Vector2f(0.125f*0, 0.5f - 0.125f);
+            }else if(progress < 2.8){
+                progressBar.animationManager.textureCoord = new Vector2f(0.125f*1, 0.5f - 0.125f);
+            }else if(progress < 3.6){
+                progressBar.animationManager.textureCoord = new Vector2f(0.125f*2, 0.5f - 0.125f);
+            }else{
+                progressBar.animationManager.textureCoord = new Vector2f(0.125f*3, 0.5f - 0.125f);
             }
+            progressBar.update();
+
             if (progress < 4) {
                 progress += 0.001;
             } else {
@@ -164,5 +183,6 @@ public class Geography extends Scene {
 
             players.get(0).render();
         }
+        progressBar.render();
     }
 }

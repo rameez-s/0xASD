@@ -21,7 +21,7 @@ public class MrDiamond extends NPC {
     Sprite visionCone, n1, n2;
     Path p;
 
-    float speedMultiplier = 0.5f;
+    float speedMultiplier = 2f;
     public MrDiamond(){
         super(128);
         setTexture("characterSheet.png");
@@ -110,7 +110,7 @@ public class MrDiamond extends NPC {
 
         if(waitingToCalmDown){
             if(waitTimer == -1){
-                waitTimer = System.nanoTime() + 5000000000L;
+                waitTimer = System.nanoTime() + 10000000000L;
             }else{
                 if(System.nanoTime() > waitTimer){
                     speedMultiplier = 2;

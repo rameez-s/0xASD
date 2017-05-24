@@ -29,6 +29,7 @@ public class English extends Scene {
     int currentPersonToCheat = -1;
     int currentCheatingProgress = 0;
     Sprite arrow;
+    Sprite progressBar;
     int timesCheated = -1;
     Sprite instructions;
     public English(){
@@ -58,6 +59,10 @@ public class English extends Scene {
         arrow.setTexture("characterSheet.png");
         arrow.animationManager.textureCoord = new Vector2f(0.125f*2, 1-0.125f*2);
         arrow.currentScene = this;
+        progressBar = new Sprite(128, 0);
+        progressBar.setTexture("npcSheet.png");
+        progressBar.animationManager.textureCoord = new Vector2f(0.125f*2, 1-0.125f*2);
+        progressBar.currentScene = this;
         emptyChair = new EmptyChair();
         emptyChair.currentScene = this;
 
@@ -88,16 +93,20 @@ public class English extends Scene {
             }
             if (currentCheatingProgress == 100) {
                 arrow.position = new Vector3f(emptyChair.position.x + 10, emptyChair.position.y + 120, emptyChair.position.z);
+                progressBar.position = new Vector3f(emptyChair.position.x - 25, emptyChair.position.y + 120, emptyChair.position.z);
+                progressBar.animationManager.textureCoord = new Vector2f(0, 0.5f);
             } else {
                 arrow.position = new Vector3f(chairs.get(currentPersonToCheat).position.x + 10, chairs.get(currentPersonToCheat).position.y + 150, chairs.get(currentPersonToCheat).position.z);
+                progressBar.position = new Vector3f(chairs.get(currentPersonToCheat).position.x - 25, chairs.get(currentPersonToCheat).position.y + 150, chairs.get(currentPersonToCheat).position.z);
             }
             arrow.update();
-
+            progressBar.update();
             if (glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_SPACE) == GL_TRUE) {
                 if (players.get(0).position.distance(emptyChair.position) < 75) {
                     if (spaceTimer < System.nanoTime()) {
                         if (currentCheatingProgress == 100) {
                             hasCopiedAnswers = true;
+                            progressBar.animationManager.textureCoord = new Vector2f(0, 0.5f);
                         }
                         sittingInChair = !sittingInChair;
                         spaceTimer = System.nanoTime() + 150000000;
@@ -106,6 +115,18 @@ public class English extends Scene {
                     if (spaceTimer < System.nanoTime()) {
                         if (currentCheatingProgress <= 90) {
                             currentCheatingProgress += 10;
+
+                            if(currentCheatingProgress < 10){
+                                progressBar.animationManager.textureCoord = new Vector2f(0, 0.5f);
+                            }else if(currentCheatingProgress < 25){
+                                progressBar.animationManager.textureCoord = new Vector2f(0, 0.5f-0.125f);
+                            }else if (currentCheatingProgress < 50){
+                                progressBar.animationManager.textureCoord = new Vector2f(0.125f*1, 0.5f - 0.125f);
+                            }else if (currentCheatingProgress < 70){
+                                progressBar.animationManager.textureCoord = new Vector2f(0.125f*2, 0.5f - 0.125f);
+                            }else if (currentCheatingProgress < 85){
+                                progressBar.animationManager.textureCoord = new Vector2f(0.125f*3, 0.5f - 0.125f);
+                            }
                         }
                         spaceTimer = System.nanoTime() + 500000000;
                         System.out.println(currentCheatingProgress);
@@ -189,10 +210,12 @@ public class English extends Scene {
             emptyChair.render();
             mrDiamond.render();
             arrow.render();
+            progressBar.render();
         }
     }
 
     public void reset(){
+        progressBar.animationManager.textureCoord = new Vector2f(0, 0.5f);
         timesCheated = -1;
         hasCopiedAnswers = false;
         currentCheatingProgress = 0;
