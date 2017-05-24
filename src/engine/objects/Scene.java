@@ -17,15 +17,13 @@ public abstract class Scene {
     public ArrayList<Sprite> npc = new ArrayList<>();
     public ArrayList<Sprite> players = new ArrayList<>();
     public ArrayList<Projectile> projectiles = new ArrayList<>();
-    public ArrayList<Sprite> collidables = new ArrayList<>();
+
     public boolean hasMap=true;
 
     public boolean optimize = true;
     Map map;
 
     public Matrix4f projection = new Matrix4f().orthographic(-512, 512, -512, 512, 10, -10);
-
-    public boolean backgroundUpdate = true;
 
     public Scene(){
         projection = new Matrix4f().orthographic(-512, 512, -512, 512, 10, -10);

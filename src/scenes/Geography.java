@@ -126,6 +126,7 @@ public class Geography extends Scene {
                 progress += 0.001;
             } else {
                 //Win
+                Engine.instance.save.completedSocialStudies = true;
                 Hallway.switchToScene(1);
             }
 

@@ -7,6 +7,7 @@ import engine.objects.StartMenuSprite;
 import engine.rendering.Texture;
 import engine.sound.AudioManager;
 import engine.sound.Sound;
+import engine.util.Save;
 import example.ExampleScene;
 import example.StartMenuScene;
 import objects.Player;
@@ -42,9 +43,11 @@ public class Engine {
     //TODO populate hallway
 
     private long window;
-
+    Thread audioManager;
     private int width = 1280, height = 720;
     private boolean fullscreen = false;
+
+    public Save save = new Save();
 
     public static Engine instance;
 
@@ -105,7 +108,7 @@ public class Engine {
         glfwMakeContextCurrent(window);
         GL.createCapabilities();
 
-        Thread audioManager = new Thread(new Runnable() {
+        audioManager = new Thread(new Runnable() {
             @Override
             public void run() {
                 AudioManager am = new AudioManager();
@@ -121,8 +124,16 @@ public class Engine {
 
     private void loop(){
         glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
-            if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
-                glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
+            if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE ) {
+                try {
+                    System.out.println(audioManager.getState());
+                    VolatileManager.shouldStop = true;
+                    System.out.println(audioManager.getState());
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+                glfwSetWindowShouldClose(window, true);
+            }
         });
         currentScene = 0;
         //Start

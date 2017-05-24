@@ -1,5 +1,6 @@
 package scenes;
 
+import engine.Engine;
 import engine.math.Matrix4f;
 import engine.math.Vector3f;
 import engine.objects.Scene;
@@ -37,6 +38,7 @@ public class Gym extends Scene {
         }
     }
     public void win(){
+        Engine.instance.save.completedGym = true;
         Hallway.switchToScene(1);
     }
     public void lose(){

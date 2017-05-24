@@ -35,10 +35,10 @@ public class Quad {
     public Quad(float xSize, float ySize, float z, float xTextureSize, float yTextureSize){
         this.size = xSize;
         float[] vertices = {
-                -xSize / 2,  ySize * (16.0f/9) / 2, z,
-                xSize / 2,   ySize * (16.0f/9) / 2, z,
-                xSize / 2,   -ySize * (16.0f/9) / 2, z,
-                -xSize / 2,  -ySize * (16.0f/9) / 2, z
+                xSize / 2,  ySize * (16.0f/9) / 2, z,
+                -xSize / 2,   ySize * (16.0f/9) / 2, z,
+                -xSize / 2,   -ySize * (16.0f/9) / 2, z,
+                xSize / 2,  -ySize * (16.0f/9) / 2, z
         };
         tcs = new float[]{
                 xTextureSize,  0,
@@ -46,6 +46,27 @@ public class Quad {
                 0,      yTextureSize,
                 xTextureSize,  yTextureSize
         };
+
+        int[] indices = {
+                0, 1, 2,
+                2, 3, 0
+        };
+        draw_count = indices.length;
+
+        v_id = glGenBuffers();
+        glBindBuffer(GL_ARRAY_BUFFER, v_id);
+        glBufferData(GL_ARRAY_BUFFER, engine.util.BufferUtil.createFloatBuffer(vertices), GL_STATIC_DRAW);
+
+        t_id = glGenBuffers();
+        glBindBuffer(GL_ARRAY_BUFFER, t_id);
+        glBufferData(GL_ARRAY_BUFFER, engine.util.BufferUtil.createFloatBuffer(tcs), GL_STATIC_DRAW);
+
+        i_id = glGenBuffers();
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, i_id);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, engine.util.BufferUtil.createIntBuffer(indices), GL_STATIC_DRAW);
+
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
 
     public Quad(float size, float z){

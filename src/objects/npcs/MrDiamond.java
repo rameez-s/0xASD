@@ -20,6 +20,8 @@ public class MrDiamond extends NPC {
     char facing;
     Sprite visionCone, n1, n2;
     Path p;
+
+    float speedMultiplier = 0.5f;
     public MrDiamond(){
         super(128);
         setTexture("characterSheet.png");
@@ -41,6 +43,8 @@ public class MrDiamond extends NPC {
         p = new Path();
     }
 
+    boolean waitingToCalmDown = false;
+    long waitTimer = -1;
     public void update(){
         if(visionCone.currentScene == null){
             visionCone.currentScene = currentScene;
@@ -97,6 +101,24 @@ public class MrDiamond extends NPC {
         visionCone.position = new Vector3f((sideB.x*0.25f + sideC.x*0.25f + sideA.x*0.5f), (sideB.y*0.25f + sideC.y*0.25f + sideA.y*0.5f), 0);
         visionCone.update();
         Vector3f v3 = new Vector3f(v.x, v.y, 0);
+        if(!((English)currentScene).sittingInChair)
+        if(v3. distance(((English) currentScene).emptyChair.position) < 200){
+            System.out.println("Sees Chair");
+            speedMultiplier = 4;
+            waitingToCalmDown = true;
+        }
+
+        if(waitingToCalmDown){
+            if(waitTimer == -1){
+                waitTimer = System.nanoTime() + 5000000000L;
+            }else{
+                if(System.nanoTime() > waitTimer){
+                    speedMultiplier = 2;
+                    waitingToCalmDown = false;
+                    waitTimer = -1;
+                }
+            }
+        }
         if(v3.distance(currentScene.players.get(0).position) < 600){
             if(triangularCollision(currentScene.players.get(0))){
                 //Here is collision with player
@@ -112,7 +134,7 @@ public class MrDiamond extends NPC {
         if(p.current != null) {
             if (this.position.distance(p.current.position) > 0.1) {
                 Vector2f v2 = position.pointTowards(new Vector2f(p.current.position.x, p.current.position.y));
-                this.velocity = new Vector3f(v2.x * 3f, v2.y * 3f, velocity.z);
+                this.velocity = new Vector3f(v2.x * speedMultiplier, v2.y * speedMultiplier, velocity.z);
             }else{
                 p.chooseNextPath();
                 velocity.x = 0;velocity.y = 0;

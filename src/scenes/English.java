@@ -23,7 +23,7 @@ public class English extends Scene {
     private boolean hasCopiedAnswers;
     public boolean sittingInChair;
     MrDiamond mrDiamond;
-    EmptyChair emptyChair;
+    public EmptyChair emptyChair;
     ArrayList<Sprite> chairs = new ArrayList<>();
     ArrayList<Sprite> tables = new ArrayList<>();
     int currentPersonToCheat = -1;
@@ -35,10 +35,12 @@ public class English extends Scene {
         instructionsShown = true;
         setMap("hallway.png");
         genMap();
-        instructions = new Sprite(1024*0.2880859375f, 1024*0.4345703125f, 0, 0.2880859375f, 0.4345703125f);
+        instructions = new Sprite(1024, 512, 0, 0.4345703125f, 0.2880859375f);
         instructions.setTexture("textSheet.png");
         instructions.currentScene = this;
         instructions.animationManager.textureCoord = new Vector2f(0.5f, 0.5f);
+        instructions.animationManager.add(new Animation("idle", new Vector2f(0.5f, 0.5f),0, 0));
+        instructions.animationManager.run("idle");
         for (int x = 0; x < 5; x++) {
             for (int y = 0; y < 3; y++) {
                 tables.add(new Sprite(128, 0));
@@ -81,6 +83,7 @@ public class English extends Scene {
             }
             if (timesCheated > 4) {
                 //Win
+                Engine.instance.save.completedEnglish = true;
                 Hallway.switchToScene(1);
             }
             if (currentCheatingProgress == 100) {
