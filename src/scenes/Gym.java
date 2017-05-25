@@ -16,6 +16,7 @@ import java.util.ArrayList;
  */
 public class Gym extends Scene {
     public int currentProgress = 0;
+    Sprite progressBar;
     PeTeacher pe, pe2;
     public Gym(){
         projection = new Matrix4f().orthographic(-512, 512, 0, 1024, 10, -10);
@@ -27,14 +28,35 @@ public class Gym extends Scene {
         pe2 = new PeTeacher();
         this.add(pe2, 1);
 
+        progressBar = new Sprite(128, 0);
+        progressBar.setTexture("npcSheet.png");
+        progressBar.animationManager.textureCoord = new Vector2f(0, 0.5f);
+        progressBar.currentScene = this;
+        progressBar.position.set(200, 100, 0);
+
     }
 
     public void update(){
         if(players.get(0).position.y < 100) players.get(0).position.y = 100;
         ((Player)players.get(0)).sideMoveOnly = true;
         super.update();
+        progressBar.position.add(players.get(0).velocity);
         if(currentProgress > 250){
             win();
+        }
+
+        progressBar.update();
+
+        if(currentProgress < 62){
+            progressBar.animationManager.textureCoord = new Vector2f(0, 0.5f);
+        }else if(currentProgress < 125){
+            progressBar.animationManager.textureCoord = new Vector2f(0.125f*0, 0.5f - 0.125f);
+        }else if(currentProgress < 175){
+            progressBar.animationManager.textureCoord = new Vector2f(0.125f*1, 0.5f - 0.125f);
+        }else if(currentProgress < 225){
+            progressBar.animationManager.textureCoord = new Vector2f(0.125f*2, 0.5f - 0.125f);
+        }else{
+            progressBar.animationManager.textureCoord = new Vector2f(0.125f*3, 0.5f - 0.125f);
         }
     }
     public void win(){
@@ -54,5 +76,6 @@ public class Gym extends Scene {
 
     public void render(){
         super.render();
+        progressBar.render();
     }
 }

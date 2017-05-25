@@ -92,12 +92,12 @@ public class English extends Scene {
                 Hallway.switchToScene(1);
             }
             if (currentCheatingProgress == 100) {
-                arrow.position = new Vector3f(emptyChair.position.x + 10, emptyChair.position.y + 120, emptyChair.position.z);
-                progressBar.position = new Vector3f(emptyChair.position.x - 25, emptyChair.position.y + 120, emptyChair.position.z);
+                arrow.position = new Vector3f(emptyChair.position.x - 10, emptyChair.position.y + 120, emptyChair.position.z);
+                progressBar.position = new Vector3f(emptyChair.position.x + 25, emptyChair.position.y + 120, emptyChair.position.z);
                 progressBar.animationManager.textureCoord = new Vector2f(0, 0.5f);
             } else {
-                arrow.position = new Vector3f(chairs.get(currentPersonToCheat).position.x + 10, chairs.get(currentPersonToCheat).position.y + 150, chairs.get(currentPersonToCheat).position.z);
-                progressBar.position = new Vector3f(chairs.get(currentPersonToCheat).position.x - 25, chairs.get(currentPersonToCheat).position.y + 150, chairs.get(currentPersonToCheat).position.z);
+                arrow.position = new Vector3f(chairs.get(currentPersonToCheat).position.x - 10, chairs.get(currentPersonToCheat).position.y + 150, chairs.get(currentPersonToCheat).position.z);
+                progressBar.position = new Vector3f(chairs.get(currentPersonToCheat).position.x + 25, chairs.get(currentPersonToCheat).position.y + 150, chairs.get(currentPersonToCheat).position.z);
             }
             arrow.update();
             progressBar.update();
