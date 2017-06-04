@@ -9,13 +9,14 @@ public class Sound {
     public static Sound hit, song;
     public String fileName;
     public static void init(){
-        hit = new Sound("hit.ogg");
-        song = new Sound("song.ogg");
+        hit = new Sound("hit.ogg", 183000);
+        song = new Sound("song.ogg", 183000);
         hit.length = 100;
         song.length = 5000;
     }
-    public Sound(String fileName){
+    public Sound(String fileName, int length){
         this.fileName = fileName;
+        this.length = length;
     }
 
 }

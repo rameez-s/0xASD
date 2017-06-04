@@ -48,10 +48,13 @@ public class Hallway extends Scene{
             if(elem.isClose()){
                 if(glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_SPACE) == GL_TRUE){
                     if(elem.equals(doorTo1)){
+                        if(!Engine.instance.save.completedGym)
                         switchToScene(2);
                     }else if(elem.equals(doorTo2)){
+                        if(!Engine.instance.save.completedEnglish)
                         switchToScene(3);
                     }else if(elem.equals(doorTo3)){
+                        if(!Engine.instance.save.completedSocialStudies)
                         switchToScene(4);
                     }else if(elem.equals(doorTo4)){
                         switchToScene(5);
@@ -68,6 +71,7 @@ public class Hallway extends Scene{
     public void render(){
         super.render();
         door.forEach(Sprite::render);
+        players.get(0).render();
     }
 
     //Test

@@ -32,7 +32,7 @@ public class Gym extends Scene {
         progressBar.setTexture("npcSheet.png");
         progressBar.animationManager.textureCoord = new Vector2f(0, 0.5f);
         progressBar.currentScene = this;
-        progressBar.position.set(200, 100, 0);
+        progressBar.position.set(75, 150, 0);
 
     }
 

@@ -1,38 +1,24 @@
 package engine;
 
-import engine.math.Vector3f;
-import engine.objects.*;
 import engine.objects.Scene;
 import engine.objects.StartMenuSprite;
 import engine.rendering.Texture;
 import engine.sound.AudioManager;
 import engine.sound.Sound;
 import engine.util.Save;
-import example.ExampleScene;
 import example.StartMenuScene;
 import objects.Player;
 import org.lwjgl.glfw.GLFWFramebufferSizeCallback;
 import org.lwjgl.glfw.GLFWVidMode;
-import org.lwjgl.openal.AL;
-import org.lwjgl.openal.ALC;
-import org.lwjgl.openal.ALCCapabilities;
 import org.lwjgl.opengl.GL;
-import scenes.English;
-import scenes.Geography;
-import scenes.Gym;
-import scenes.Hallway;
+import scenes.*;
 
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
+import java.io.*;
 import java.util.ArrayList;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.openal.ALC10.*;
-import static org.lwjgl.openal.EXTThreadLocalContext.alcSetThreadContext;
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.system.MemoryUtil.NULL;
-import static sun.audio.AudioDevice.device;
 
 /**
  * Created by Isak Wahlqvist
@@ -46,6 +32,8 @@ public class Engine {
     Thread audioManager;
     private int width = 1280, height = 720;
     private boolean fullscreen = false;
+
+    private boolean loadData = true;
 
     public Save save = new Save();
 
@@ -71,6 +59,17 @@ public class Engine {
         glfwFreeCallbacks(window);
         glfwDestroyWindow(window);
         glfwTerminate();
+        saveData();
+    }
+
+    private void saveData(){
+        try {
+            FileOutputStream outputStream = new FileOutputStream("save.dat");
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+            objectOutputStream.writeObject(save);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
 
@@ -115,9 +114,22 @@ public class Engine {
             }
         });
         audioManager.start();
-        VolatileManager.play = false;
-        VolatileManager.soundToPlay = new Sound("Example.ogg");
-        VolatileManager.play = true;
+        ThreadManager.play = false;
+        ThreadManager.soundToPlay = new Sound("XO Tour Llif3 [8 Bit Tribute to Lil Uzi Vert] - 8 Bit Universe.ogg", 187000);
+        ThreadManager.play = true;
+
+        if(loadData){
+            try {
+                FileInputStream inputStream = new FileInputStream("save.dat");
+                ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+                save = (Save) objectInputStream.readObject();
+                System.out.println(save.completedGym);
+            } catch (java.io.IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
 
         Texture.init();
     }
@@ -127,7 +139,7 @@ public class Engine {
             if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE ) {
                 try {
                     System.out.println(audioManager.getState());
-                    VolatileManager.shouldStop = true;
+                    ThreadManager.shouldStop = true;
                     System.out.println(audioManager.getState());
                 }catch(Exception e){
                     e.printStackTrace();
@@ -137,11 +149,12 @@ public class Engine {
         });
         currentScene = 0;
         //Start
-        Scene startMenu = new StartMenuScene();
-        StartMenuSprite startMenuSprite = new StartMenuSprite();
-        startMenu.add(startMenuSprite, 1);
-        scenes.add(startMenu);
-
+//        Scene startMenu = new StartMenuScene();
+//        StartMenuSprite startMenuSprite = new StartMenuSprite();
+//        startMenu.add(startMenuSprite, 1);
+//        scenes.add(startMenu);
+        Scene intro = new Intro();
+        scenes.add(intro);
         Scene s = new Hallway();
         Player thisPlayer = new Player();
         thisPlayer.setTexture("characterSheet.png");
@@ -155,6 +168,12 @@ public class Engine {
 
         Scene geography = new Geography();
         scenes.add(geography);
+
+        Scene music = new Music();
+        scenes.add(music);
+
+        Scene robertsOffice = new RobertsOfficeScene();
+        scenes.add(robertsOffice);
         //s2.add(thisPlayer, 3);
         long lastTime = System.nanoTime();
         long updateTime = 1000000000/updateRate;

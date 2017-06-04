@@ -1,6 +1,6 @@
 package engine.sound;
 //
-import engine.VolatileManager;
+import engine.ThreadManager;
 import org.lwjgl.*;
 import org.lwjgl.openal.*;
 import org.lwjgl.stb.*;
@@ -22,10 +22,6 @@ import static org.lwjgl.system.MemoryUtil.*;
  * Created by Isak Wahlqvist on 4/30/2017.
  */
 public class AudioManager {
-    //Test
-    public static long audioDevice, context;
-    private ArrayList<Sound> sounds = new ArrayList<>();
-
     public AudioManager() {
         long device = alcOpenDevice((ByteBuffer)null);
         if (device == NULL) {
@@ -62,32 +58,44 @@ public class AudioManager {
         System.out.println("ALC_STEREO_SOURCES: " + alcGetInteger(device, ALC_STEREO_SOURCES));
 
         try {
-            while (!VolatileManager.shouldStop) {
-                if(VolatileManager.create){
-                    VolatileManager.soundToPlay = new Sound(VolatileManager.location);
-                    VolatileManager.create = false;
+            while (!ThreadManager.shouldStop) {
+                if(ThreadManager.create){
+                    ThreadManager.soundToPlay = new Sound(ThreadManager.location, 10000);
+                    ThreadManager.create = false;
                 }
-                if(VolatileManager.play) {
-                    if(VolatileManager.soundToPlay.source == -1 || VolatileManager.soundToPlay.buffer == -1){
-                        VolatileManager.soundToPlay.buffer = alGenBuffers();
-                        VolatileManager.soundToPlay.source = alGenSources();
+                if(ThreadManager.play) {
+                    if(ThreadManager.soundToPlay.source == -1 || ThreadManager.soundToPlay.buffer == -1){
+                        ThreadManager.soundToPlay.buffer = alGenBuffers();
+                        ThreadManager.soundToPlay.source = alGenSources();
                         try (STBVorbisInfo info = STBVorbisInfo.malloc()) {
-                            ShortBuffer pcm = AudioManager.readVorbis("res/audio/" + VolatileManager.soundToPlay.fileName, 32 * 1024, info);
+                            ShortBuffer pcm = AudioManager.readVorbis("res/audio/" + ThreadManager.soundToPlay.fileName, 32 * 1024, info);
 
-                            //copy to buffer
-                            alBufferData(VolatileManager.soundToPlay.buffer, info.channels() == 1 ? AL_FORMAT_MONO16 : AL_FORMAT_STEREO16, pcm, info.sample_rate());
+                            alBufferData(ThreadManager.soundToPlay.buffer, info.channels() == 1 ? AL_FORMAT_MONO16 : AL_FORMAT_STEREO16, pcm, info.sample_rate());
                         }
-                        alSourcei(VolatileManager.soundToPlay.source, AL_BUFFER, VolatileManager.soundToPlay.buffer);
-                        alSourcei(VolatileManager.soundToPlay.source, AL_LOOPING, AL_TRUE);
+                        alSourcei(ThreadManager.soundToPlay.source, AL_BUFFER, ThreadManager.soundToPlay.buffer);
+                        alSourcei(ThreadManager.soundToPlay.source, AL_LOOPING, AL_TRUE);
                     }
-                    alSourcePlay(VolatileManager.soundToPlay.source);
-                    if (VolatileManager.soundToPlay.length != -1) {
-                        Thread.sleep(VolatileManager.soundToPlay.length);
+                    alSourcePlay(ThreadManager.soundToPlay.source);
+                    System.out.println("started: " + ThreadManager.soundToPlay.fileName);
+                    int sleepAmount;
+                    ThreadManager.musicFinished = false;
+                    if (ThreadManager.soundToPlay.length != -1) {
+                        sleepAmount = ThreadManager.soundToPlay.length;
                     } else {
-                        Thread.sleep(4000);
+                        sleepAmount = 4000;
                     }
-                    System.out.println("started: " + VolatileManager.soundToPlay.fileName);
-                    alSourceStop(VolatileManager.soundToPlay.source);
+
+                    for(int i = 0; i < 1000; i++) {
+                        Thread.sleep(sleepAmount/1000);
+                        if(ThreadManager.shouldStop){
+                            break;
+                        }
+                    }
+                    if(!ThreadManager.shouldLoop){
+                        ThreadManager.play = false;
+                    }
+                    ThreadManager.musicFinished = true;
+                    alSourceStop(ThreadManager.soundToPlay.source);
                 }
             }
         }catch(Exception e){} finally {
@@ -95,19 +103,6 @@ public class AudioManager {
             alcDestroyContext(context);
             alcCloseDevice(device);
         }
-    }
-
-    public static void main(String args[]){
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                AudioManager am = new AudioManager();
-            }
-        });
-        VolatileManager.play = false;
-        VolatileManager.soundToPlay = new Sound("Example.ogg");
-        VolatileManager.play = true;
-        t.start();
     }
 
     static ShortBuffer readVorbis(String resource, int bufferSize, STBVorbisInfo info) {

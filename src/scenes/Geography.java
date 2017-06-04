@@ -6,7 +6,6 @@ import engine.math.Vector2f;
 import engine.math.Vector3f;
 import engine.objects.Scene;
 import engine.objects.Sprite;
-import objects.EmptyChair;
 import objects.Player;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -23,6 +22,7 @@ public class Geography extends Scene {
     public Geography(){
 
         progressBar = new Sprite(128, 0);
+        progressBar.position = new Vector3f(-200, 400, 0);
         progressBar.setTexture("npcSheet.png");
         progressBar.animationManager.textureCoord = new Vector2f(0, 0.5f);
         progressBar.currentScene = this;
@@ -34,14 +34,6 @@ public class Geography extends Scene {
         instructions.currentScene = this;
         instructions.animationManager.textureCoord = new Vector2f(0f, 0f);
         for(int i = 0; i < 20; i++){
-            if((i) % 15 == 1){
-                Sprite l = new Sprite(128, 0);
-                l.position = new Vector3f(400 +(float)(400.0 * Math.random()) + 800 * (i+1), -200, 0);
-                l.currentScene = this;
-                l.setTexture("characterSheet.png");
-                l.animationManager.textureCoord = new Vector2f(0, 1-0.25f);
-                npc.add(l);
-            }
             Sprite s = new Sprite(128, 0);
             s.position = new Vector3f(200 + (float)(400.0 * Math.random()) + 800 * (i+1), -200, 0);
             s.currentScene = this;

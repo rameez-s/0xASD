@@ -11,13 +11,13 @@ import engine.rendering.*;
  * Created by Isak Wahlqvist on 3/27/2017.
  */
 public class RobertsOfficeScene extends Scene {
-    //TestHejHej
+    Sprite door;
     public RobertsOfficeScene(){
         setMap("robertsOffice.png");
         genMap();
-        Sprite introPicture = new Sprite();
-        introPicture.texture = new Texture("Roberts.png");
-        introPicture.setTextureCoords(0.125f, 0);
+        door.currentScene = this;
+        door.position = new Vector3f(0, 0, 0);
+        door.setTexture("Door Spritesheet.png");
     }
 //w
     public void update() {
