@@ -19,6 +19,7 @@ import static org.lwjgl.opengl.GL11.GL_TRUE;
 public class Door extends Sprite {
     private Character direction;
     private Vector2f hypotheticalSize;
+    public boolean completed;
     //Test
     public Door()
     {
@@ -47,13 +48,14 @@ public class Door extends Sprite {
     public void update()
     {
         super.update();
-        if(isClose())
-        {
-            setTextureCoords(0.125f, 0);
-        }
-        else
-        {
-            setTextureCoords(0, 0);
+        if(!completed) {
+            if (isClose()) {
+                setTextureCoords(0.125f, 0);
+            } else {
+                setTextureCoords(0, 0);
+            }
+        }else{
+            setTextureCoords(0.25f, 0);
         }
     }
     public void setHypotheticalSize()

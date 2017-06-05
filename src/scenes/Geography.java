@@ -75,12 +75,25 @@ public class Geography extends Scene {
         backdrops[5].animationManager.textureCoord = new Vector2f(0.125f, 0.25f);
 
     }
+    private boolean hasSetTimer = false;
+    long timer = 0;
     public void update(){
+        if(!hasSetTimer){
+            timer = System.nanoTime() + 1000000000;
+            hasSetTimer = true;
+            System.out.println("HEJEASHDAS");
+        }
+
+        if(glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_BACKSPACE) == GLFW_TRUE){
+            Hallway.switchToScene(1);
+        }
         if(instructionsShown){
-            if(glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_A)==GLFW_TRUE){
-                instructions.position = new Vector3f(40000, 0, 0);
-                instructionsShown = false;
-                instructions.render();
+            if(glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_SPACE)==GLFW_TRUE){
+                if(timer < System.nanoTime()) {
+                    instructions.position = new Vector3f(40000, 0, 0);
+                    instructionsShown = false;
+                    instructions.render();
+                }
             }
             instructions.update();
             System.out.println(instructions.position);

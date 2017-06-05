@@ -70,13 +70,23 @@ public class English extends Scene {
         mrDiamond.currentScene = this;
     }
     long spaceTimer = 0;
-
+    boolean hasSetTimer = false;
+    long timer;
     public void update(){
+        if(!hasSetTimer) {
+            timer = System.nanoTime() + 1000000000;
+            hasSetTimer = true;
+        }
+        if(glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_BACKSPACE) == GLFW_TRUE){
+            Hallway.switchToScene(1);
+        }
         if(instructionsShown){
-            if(glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_A) == GL_TRUE){
-                instructions.position = new Vector3f(40000, 0, 0);
-                instructionsShown = false;
-                instructions.render();
+            if(timer < System.nanoTime()) {
+                if (glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_SPACE) == GL_TRUE) {
+                    instructions.position = new Vector3f(40000, 0, 0);
+                    instructionsShown = false;
+                    instructions.render();
+                }
             }
             instructions.update();
         }else {
@@ -86,7 +96,7 @@ public class English extends Scene {
                 hasCopiedAnswers = false;
                 timesCheated++;
             }
-            if (timesCheated > 4) {
+            if (timesCheated > 3) {
                 //Win
                 Engine.instance.save.completedEnglish = true;
                 Hallway.switchToScene(1);
@@ -102,7 +112,7 @@ public class English extends Scene {
             arrow.update();
             progressBar.update();
             if (glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_SPACE) == GL_TRUE) {
-                if (players.get(0).position.distance(emptyChair.position) < 75) {
+                if (players.get(0).position.distance(emptyChair.position) < 100) {
                     if (spaceTimer < System.nanoTime()) {
                         if (currentCheatingProgress == 100) {
                             hasCopiedAnswers = true;

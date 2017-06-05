@@ -1,8 +1,14 @@
 package scenes;
 
 import engine.Engine;
+import engine.ThreadManager;
 import engine.objects.Scene;
 import engine.objects.Sprite;
+import engine.sound.Sound;
+
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_SPACE;
+import static org.lwjgl.glfw.GLFW.glfwGetKey;
+import static org.lwjgl.opengl.GL11.GL_TRUE;
 
 /**
  * Created by 18iwahlqvist on 5/31/2017.
@@ -51,6 +57,12 @@ public class Intro extends Scene {
     long startTimer = switchTimer;
     int currentStage = 0;
     public void update(){
+        if(glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_SPACE) == GL_TRUE) {
+            Engine.instance.currentScene = 1;
+            Hallway.switchToScene(Engine.instance.scenes.size() - 1);
+            ThreadManager.soundToPlay = new Sound("XO Tour Llif3 [8 Bit Tribute to Lil Uzi Vert] - 8 Bit Universe.ogg", 187000);
+            ThreadManager.play = true;
+        }
         blackBar1.update();
         blackBar2.update();
         if(currentStage == 0) {
@@ -100,6 +112,9 @@ public class Intro extends Scene {
             shouldRenderText = true;
             if(startTimer < System.nanoTime()){
                 Engine.instance.currentScene = 1;
+                Hallway.switchToScene(Engine.instance.scenes.size() - 1);
+                ThreadManager.soundToPlay = new Sound("XO Tour Llif3 [8 Bit Tribute to Lil Uzi Vert] - 8 Bit Universe.ogg", 187000);
+                ThreadManager.play = true;
             }
         }
         roberts1.update();

@@ -43,6 +43,12 @@ public class Hallway extends Scene{
 
     public void update(){
         super.update();
+        if(!((Player)players.get(0)).controllable){
+            ((Player)players.get(0)).controllable = true;
+        }
+        if(((Player)players.get(0)).sideMoveOnly){
+            ((Player)players.get(0)).sideMoveOnly = false;
+        }
         for(Door elem : door){
             elem.update();
             if(elem.isClose()){
@@ -50,14 +56,23 @@ public class Hallway extends Scene{
                     if(elem.equals(doorTo1)){
                         if(!Engine.instance.save.completedGym)
                         switchToScene(2);
+                        else
+                            elem.completed = true;
                     }else if(elem.equals(doorTo2)){
                         if(!Engine.instance.save.completedEnglish)
                         switchToScene(3);
+                        else
+                            elem.completed = true;
                     }else if(elem.equals(doorTo3)){
                         if(!Engine.instance.save.completedSocialStudies)
                         switchToScene(4);
+                        else
+                            elem.completed = true;
                     }else if(elem.equals(doorTo4)){
+                        if(!Engine.instance.save.completedMusic)
                         switchToScene(5);
+                        else
+                        elem.completed = true;
                     }else if(elem.equals(doorTo5)){
                         switchToScene(6);
                     }else{
@@ -85,7 +100,8 @@ public class Hallway extends Scene{
             p.position = new Vector3f(0, 0, 0);
             if(scene == 1) {
                 p.controllable = true;
-                p.sideMoveOnly = false;
+                System.out.println(p.controllable + "\t" + p.sideMoveOnly);
+                p.velocity = new Vector3f(0, 0, 0);
                 Engine.instance.scenes.get(Engine.instance.currentScene).projection = new Matrix4f().orthographic(-512, 512, -512, 512, -10, 10);
             }
             return 0;

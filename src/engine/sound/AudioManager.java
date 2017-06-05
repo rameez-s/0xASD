@@ -77,6 +77,7 @@ public class AudioManager {
                     }
                     alSourcePlay(ThreadManager.soundToPlay.source);
                     System.out.println("started: " + ThreadManager.soundToPlay.fileName);
+                    Sound s = ThreadManager.soundToPlay;
                     int sleepAmount;
                     ThreadManager.musicFinished = false;
                     if (ThreadManager.soundToPlay.length != -1) {
@@ -85,9 +86,10 @@ public class AudioManager {
                         sleepAmount = 4000;
                     }
 
-                    for(int i = 0; i < 1000; i++) {
-                        Thread.sleep(sleepAmount/1000);
-                        if(ThreadManager.shouldStop){
+                    for(int i = 0; i < 10000; i++) {
+                        Thread.sleep((int)Math.ceil(sleepAmount/10000.0));
+                        if(ThreadManager.shouldStop || !s.equals(ThreadManager.soundToPlay)){
+                            alSourceStop(s.source);
                             break;
                         }
                     }

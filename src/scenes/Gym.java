@@ -11,6 +11,11 @@ import objects.Player;
 import objects.npcs.PeTeacher;
 
 import java.util.ArrayList;
+
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_BACKSPACE;
+import static org.lwjgl.glfw.GLFW.GLFW_TRUE;
+import static org.lwjgl.glfw.GLFW.glfwGetKey;
+
 /**
  * Created by Isak Wahlqvist on 4/20/2017.
  */
@@ -37,6 +42,9 @@ public class Gym extends Scene {
     }
 
     public void update(){
+        if(glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_BACKSPACE) == GLFW_TRUE){
+            Hallway.switchToScene(1);
+        }
         if(players.get(0).position.y < 100) players.get(0).position.y = 100;
         ((Player)players.get(0)).sideMoveOnly = true;
         super.update();

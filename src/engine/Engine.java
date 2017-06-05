@@ -33,7 +33,7 @@ public class Engine {
     private int width = 1280, height = 720;
     private boolean fullscreen = false;
 
-    private boolean loadData = true;
+    private boolean loadData = false;
 
     public Save save = new Save();
 
@@ -115,8 +115,6 @@ public class Engine {
         });
         audioManager.start();
         ThreadManager.play = false;
-        ThreadManager.soundToPlay = new Sound("XO Tour Llif3 [8 Bit Tribute to Lil Uzi Vert] - 8 Bit Universe.ogg", 187000);
-        ThreadManager.play = true;
 
         if(loadData){
             try {
@@ -149,10 +147,6 @@ public class Engine {
         });
         currentScene = 0;
         //Start
-//        Scene startMenu = new StartMenuScene();
-//        StartMenuSprite startMenuSprite = new StartMenuSprite();
-//        startMenu.add(startMenuSprite, 1);
-//        scenes.add(startMenu);
         Scene intro = new Intro();
         scenes.add(intro);
         Scene s = new Hallway();
