@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  * Created by Isak Wahlqvist
  */
-//Test
+
 public abstract class Scene {
     public boolean instructionsShown = false;
     public ArrayList<Sprite> elements = new ArrayList<>();
@@ -103,8 +103,6 @@ public abstract class Scene {
 
     public void genMap(){
         Vector3f position = new Vector3f(-map.mapData.length/2 * 128, -map.mapData[0].length/2 * 128, 0f);
-//        for(byte[] r : map.mapData){
-//            for(byte data : r){
         System.out.println(map.mapData.length + "\t" + map.mapData[0].length);
         for(int x = 0; x < map.mapData.length; x++){
             for(int y = 0; y < map.mapData[0].length; y++){

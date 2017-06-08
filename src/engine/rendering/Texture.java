@@ -14,19 +14,20 @@ import java.nio.ByteBuffer;
 /**
  * Created by ISAKPC on 2/13/2017.
  */
-//ISAK SUCKS
 public class Texture {
+    //Define the variables
     private int id, width, height;
+
+    public static Texture textSheet, characterSheet, tileSheet, npcSheet;
+    //initialize the static textures
     public static void init(){
         textSheet = new Texture("textSheet.png");
         characterSheet = new Texture("characterSheet.png");
         tileSheet = new Texture("tileSheet.png");
         npcSheet = new Texture("npcSheet.png");
-//        characterSheet = new Texture("default.png");
-//        npcSheet = new Texture("default.png");
     }
-    //Test
-    public static Texture textSheet, characterSheet, tileSheet, npcSheet;
+
+    //Constructor
     public Texture(String filename){
         BufferedImage bi;
         try {
@@ -61,6 +62,7 @@ public class Texture {
         }
     }
 
+    //Bind the texture for use
     public void bind(int sampler){
         glActiveTexture(GL_TEXTURE0 + sampler);
         glBindTexture(GL_TEXTURE_2D, id);

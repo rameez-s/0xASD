@@ -24,16 +24,9 @@ import static org.lwjgl.opengl.GL11.*;
  * Created by Isak Wahlqvist
  */
 public class Engine {
-    //TODO complete controls help
-    //TODO finish music game
-    //TODO populate hallway
-
+    //Define the variables
     private long window;
     Thread audioManager;
-    private int width = 1280, height = 720;
-    private boolean fullscreen = false;
-
-    private boolean loadData = false;
 
     public Save save = new Save();
 
@@ -41,11 +34,6 @@ public class Engine {
 
     public int currentScene;
     public ArrayList<Scene> scenes = new ArrayList<>();
-
-    private boolean vSync = false;
-
-    GLFWFramebufferSizeCallback fsCallback;
-    private int updateRate = 60;
 
     public long getWindow() {
         return window;
@@ -62,6 +50,7 @@ public class Engine {
         saveData();
     }
 
+    //Save the game data
     private void saveData(){
         try {
             FileOutputStream outputStream = new FileOutputStream("save.dat");
@@ -73,7 +62,7 @@ public class Engine {
     }
 
 
-
+    //Set up everything for use
     private void init(){
         if(!glfwInit()){
             System.out.println("GLHF");
@@ -82,6 +71,7 @@ public class Engine {
 
         GLFWVidMode vidMode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
+        boolean fullscreen = false;
         if(fullscreen) {
             glfwWindowHint(GLFW_RED_BITS, vidMode.redBits());
             glfwWindowHint(GLFW_GREEN_BITS, vidMode.greenBits());
@@ -91,11 +81,14 @@ public class Engine {
             window = glfwCreateWindow(vidMode.width(), vidMode.height(), "Game", glfwGetPrimaryMonitor(), 0);
         }else {
             glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+            int height = 720;
+            int width = 1280;
             window = glfwCreateWindow(width, height, "Game", 0, 0);
             glfwSetWindowPos(window, (vidMode.width() - width) / 2, (vidMode.height() - height) / 2);
 
         }
 
+        boolean vSync = false;
         if (vSync) {
             glfwSwapInterval(1);
         }else{
@@ -116,6 +109,7 @@ public class Engine {
         audioManager.start();
         ThreadManager.play = false;
 
+        boolean loadData = false;
         if(loadData){
             try {
                 FileInputStream inputStream = new FileInputStream("save.dat");
@@ -145,8 +139,8 @@ public class Engine {
                 glfwSetWindowShouldClose(window, true);
             }
         });
+        //Add the scenes to the Engine
         currentScene = 0;
-        //Start
         Scene intro = new Intro();
         scenes.add(intro);
         Scene s = new Hallway();
@@ -168,9 +162,11 @@ public class Engine {
 
         Scene robertsOffice = new RobertsOfficeScene();
         scenes.add(robertsOffice);
-        //s2.add(thisPlayer, 3);
+
+        //Set up the main loop
         long lastTime = System.nanoTime();
-        long updateTime = 1000000000/updateRate;
+        int updateRate = 60;
+        long updateTime = 1000000000/ updateRate;
         long oneSecondTime = lastTime + 1000000000;
         update();
         int fps = 0;
@@ -195,6 +191,16 @@ public class Engine {
 
     }
 
+    //Remove the save
+    public void clearSave(){
+        save = new Save();
+        File f = new File("save.dat");
+        System.out.println(f.getAbsolutePath());
+        boolean b = f.delete();
+        System.out.println(b);
+    }
+
+    //Update the currentScene
     private void update(){
         if((currentScene < scenes.size())) {
             scenes.get(currentScene).update();
@@ -202,6 +208,7 @@ public class Engine {
         glfwPollEvents();
     }
 
+    //Render the currentScene
     private void render(){
         glClear(GL_COLOR_BUFFER_BIT);
         if((currentScene < scenes.size())) {
@@ -209,8 +216,8 @@ public class Engine {
         }
         glfwSwapBuffers(window);
     }
+
     public static void main(String[] args){
         new Engine().start();
     }
 }
-//Isak is lame

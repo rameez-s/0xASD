@@ -19,7 +19,7 @@ import static org.lwjgl.BufferUtils.createByteBuffer;
  */
 public class IOUtil {
 
-    //Test
+
     private static ByteBuffer resizeBuffer(ByteBuffer buffer, int newCapacity) {
         ByteBuffer newBuffer = BufferUtils.createByteBuffer(newCapacity);
         buffer.flip();

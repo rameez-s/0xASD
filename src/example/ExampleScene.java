@@ -8,7 +8,7 @@ import engine.objects.Scene;
  */
 public class ExampleScene extends Scene {
 
-    //Test
+
     public ExampleScene(){
         super();
         setMap("robertsOffice.png");

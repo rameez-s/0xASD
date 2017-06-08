@@ -8,9 +8,8 @@ import java.util.ArrayList;
 /**
  * Created by Isak Wahlqvist
  */
-//Test
+
 //and alex
-//mostly Isak
 public class Map {
     public byte[][] mapData;
     public ArrayList<Sprite> collidablePixels = new ArrayList<Sprite>();

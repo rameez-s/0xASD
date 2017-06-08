@@ -17,20 +17,22 @@ import static org.lwjgl.opengl.GL20.glVertexAttribPointer;
  * Created by Isak Wahlqvist on 2/12/2017.
  */
 public class Quad {
-    //Test
+    //Define the variables
     private int v_id, t_id, i_id;
     private int draw_count;
     public Scene currentScene;
     public float size;
-    public Quad(){
-        this(32f, 0.0f);
-    }
     float[] tcs = {
             0.125f, 0,
             0,      0,
             0,      0.125f,
             0.125f, 0.125f
     };
+
+    //Constructors
+    public Quad(){
+        this(32f, 0.0f);
+    }
 
     public Quad(float xSize, float ySize, float z, float xTextureSize, float yTextureSize){
         this.size = xSize;
@@ -51,6 +53,7 @@ public class Quad {
                 0, 1, 2,
                 2, 3, 0
         };
+        //Set the data for the quad
         draw_count = indices.length;
 
         v_id = glGenBuffers();
@@ -84,6 +87,7 @@ public class Quad {
                 0, 1, 2,
                 2, 3, 0
         };
+        //Set the data for the quad
 
         draw_count = indices.length;
 
@@ -109,6 +113,7 @@ public class Quad {
     }
 
     public void render(){
+        //Render the data of the quad
         glEnableVertexAttribArray(0);
         glEnableVertexAttribArray(1);
 

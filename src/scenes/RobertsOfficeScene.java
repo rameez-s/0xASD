@@ -35,7 +35,6 @@ public class RobertsOfficeScene extends Scene {
         door.position = new Vector3f(-200, 0, 0);
         door.setTexture("Door Spritesheet.png");
     }
-//w
     long timer = System.nanoTime();
     public void update() {
         if(glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_BACKSPACE) == GLFW_TRUE){

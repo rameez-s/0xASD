@@ -18,9 +18,7 @@ import static org.lwjgl.opengl.GL11.GL_TRUE;
  */
 public class Door extends Sprite {
     private Character direction;
-    private Vector2f hypotheticalSize;
     public boolean completed;
-    //Test
     public Door()
     {
         super(160, 1);
@@ -60,6 +58,6 @@ public class Door extends Sprite {
     }
     public void setHypotheticalSize()
     {
-        hypotheticalSize = new Vector2f (-100, -60);
+        Vector2f hypotheticalSize = new Vector2f(-100, -60);
     }
 }

@@ -1,5 +1,4 @@
 package engine.sound;
-//
 import engine.ThreadManager;
 import org.lwjgl.*;
 import org.lwjgl.openal.*;
@@ -22,6 +21,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * Created by Isak Wahlqvist on 4/30/2017.
  */
 public class AudioManager {
+    //Constructor
     public AudioManager() {
         long device = alcOpenDevice((ByteBuffer)null);
         if (device == NULL) {
@@ -29,10 +29,6 @@ public class AudioManager {
         }
 
         ALCCapabilities deviceCaps = ALC.createCapabilities(device);
-
-        System.out.println("OpenALC10: " + deviceCaps.OpenALC10);
-        System.out.println("OpenALC11: " + deviceCaps.OpenALC11);
-        System.out.println("caps.ALC_EXT_EFX = " + deviceCaps.ALC_EXT_EFX);
 
         if (deviceCaps.OpenALC11) {
             List<String> devices = ALUtil.getStringList(NULL, ALC_ALL_DEVICES_SPECIFIER);
@@ -50,12 +46,6 @@ public class AudioManager {
         long context = alcCreateContext(device, (IntBuffer)null);
         alcSetThreadContext(context);
         AL.createCapabilities(deviceCaps);
-
-        System.out.println("ALC_FREQUENCY: " + alcGetInteger(device, ALC_FREQUENCY) + "Hz");
-        System.out.println("ALC_REFRESH: " + alcGetInteger(device, ALC_REFRESH) + "Hz");
-        System.out.println("ALC_SYNC: " + (alcGetInteger(device, ALC_SYNC) == ALC_TRUE));
-        System.out.println("ALC_MONO_SOURCES: " + alcGetInteger(device, ALC_MONO_SOURCES));
-        System.out.println("ALC_STEREO_SOURCES: " + alcGetInteger(device, ALC_STEREO_SOURCES));
 
         try {
             while (!ThreadManager.shouldStop) {

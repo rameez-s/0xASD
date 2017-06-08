@@ -16,7 +16,7 @@ import static org.lwjgl.glfw.GLFW.*;
  */
 public class Music extends Scene {
     Beat[] beats = new Beat[10];
-    Sprite musicBar, fill, great, perfect, miss;
+    Sprite musicBar, fill, great, perfect, miss, progressBar;
     int progress = 500;
     public Music(){
         hasMap = false;
@@ -29,6 +29,12 @@ public class Music extends Scene {
         musicBar.setTexture("characterSheet.png");
         musicBar.animationManager.textureCoord = new Vector2f(1-0.25f, 1-0.125f);
         musicBar.currentScene = this;
+
+        progressBar = new Sprite(128, 0);
+        progressBar.position = new Vector3f(-200, -400, 0);
+        progressBar.setTexture("npcSheet.png");
+        progressBar.animationManager.textureCoord = new Vector2f(0, 0.5f);
+        progressBar.currentScene = this;
 
         fill.setTexture("characterSheet.png");
         fill.animationManager.textureCoord = new Vector2f(1-0.125f, 1-0.125f);
@@ -89,6 +95,7 @@ public class Music extends Scene {
         for(Beat beat : beats){
             if(!beat.missed && !beat.hit) {
                 float distance = beat.position.distance(fill.position);
+                beat.update();
                 if (beat.position.x > fill.position.x - 100 && distance < 800) {
                     if (timer < System.nanoTime()) {
                         if (glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_SPACE) == GLFW_TRUE) {
@@ -102,7 +109,7 @@ public class Music extends Scene {
                                 System.out.println("GREAT");
                                 hitType = 1;
                             } else {
-                                System.out.println("MISSED");
+                                System.out.println("MISS");
                                 hitType = 0;
                                 progress -= 50;
                             }
@@ -111,7 +118,6 @@ public class Music extends Scene {
                         }
                     }
                 }
-                beat.update();
             }
             if(!beat.missed && !beat.hit && beat.position.x < -600){
                 beat.missed = true;
@@ -136,6 +142,18 @@ public class Music extends Scene {
             }
             progress = 500;
             hitType = -1;
+        }
+
+        if(progress < 250){
+            progressBar.animationManager.textureCoord = new Vector2f(0, 0.5f);
+        }else if(progress < 500){
+            progressBar.animationManager.textureCoord = new Vector2f(0.125f*0, 0.5f - 0.125f);
+        }else if(progress < 700){
+            progressBar.animationManager.textureCoord = new Vector2f(0.125f*1, 0.5f - 0.125f);
+        }else if(progress < 900){
+            progressBar.animationManager.textureCoord = new Vector2f(0.125f*2, 0.5f - 0.125f);
+        }else{
+            progressBar.animationManager.textureCoord = new Vector2f(0.125f*3, 0.5f - 0.125f);
         }
         musicBar.update();
         fill.update();

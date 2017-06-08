@@ -8,6 +8,7 @@ import engine.sound.Sound;
 
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_SPACE;
 import static org.lwjgl.glfw.GLFW.glfwGetKey;
+import static org.lwjgl.glfw.GLFW.glfwSetWindowShouldClose;
 import static org.lwjgl.opengl.GL11.GL_TRUE;
 
 /**
@@ -16,7 +17,7 @@ import static org.lwjgl.opengl.GL11.GL_TRUE;
 public class Intro extends Scene {
     int currentRoberts = 0;
     private Sprite roberts1, roberts2, roberts3, roberts4;
-    private Sprite blackBar1, blackBar2, passText;
+    private Sprite blackBar1, blackBar2, passText, winText;
     private boolean shouldRenderText = false;
     public Intro(){
         hasMap = false;
@@ -24,6 +25,12 @@ public class Intro extends Scene {
         passText = new Sprite(1024, 576, 0, 1, 1);
         passText.setTexture("text.png");
         passText.currentScene = this;
+
+
+        winText = new Sprite(1024, 576, 0, 1, 1);
+        winText.setTexture("winText.png");
+        winText.currentScene = this;
+
         blackBar1 = new Sprite(1024, 300, 0, 1, 1);
         blackBar1.setTexture("blackBar.png");
         blackBar2 = new Sprite(1024, 300, 0, 1, 1);
@@ -56,6 +63,7 @@ public class Intro extends Scene {
     long switchTimer = System.nanoTime();
     long startTimer = switchTimer;
     int currentStage = 0;
+    int textToRender = 0;
     public void update(){
         if(glfwGetKey(Engine.instance.getWindow(), GLFW_KEY_SPACE) == GL_TRUE) {
             Engine.instance.currentScene = 1;
@@ -110,11 +118,35 @@ public class Intro extends Scene {
             }
         }else if(currentStage == 4){
             shouldRenderText = true;
+            textToRender = 0;
             if(startTimer < System.nanoTime()){
                 Engine.instance.currentScene = 1;
                 Hallway.switchToScene(Engine.instance.scenes.size() - 1);
                 ThreadManager.soundToPlay = new Sound("XO Tour Llif3 [8 Bit Tribute to Lil Uzi Vert] - 8 Bit Universe.ogg", 187000);
                 ThreadManager.play = true;
+                currentStage = 5;
+            }
+        }else if(currentStage == 5){
+            if(startTimer < System.nanoTime() - 5000000000l){
+                startTimer = System.nanoTime() + 1000000000;
+            }
+            if(startTimer > System.nanoTime()) {
+                if (switchTimer < System.nanoTime()) {
+                    if (currentRoberts == 0) currentRoberts = 1;
+                    else currentRoberts = 0;
+                    switchTimer = System.nanoTime() + 125000000;
+                }
+            }else{
+                currentStage = 6;
+                startTimer += 2000000000;
+            }
+        }else if (currentStage == 6){
+            shouldRenderText = true;
+            textToRender = 1;
+            if(startTimer < System.nanoTime()){
+                ThreadManager.shouldStop = true;
+                Engine.instance.clearSave();
+                glfwSetWindowShouldClose(Engine.instance.getWindow(), true);
             }
         }
         roberts1.update();
@@ -122,6 +154,7 @@ public class Intro extends Scene {
         roberts3.update();
         roberts4.update();
         passText.update();
+        winText.update();
     }
 
     public void render(){
@@ -142,7 +175,14 @@ public class Intro extends Scene {
         blackBar1.render();
         blackBar2.render();
         if(shouldRenderText) {
-            passText.render();
+            switch (textToRender) {
+                case 0:
+                    passText.render();
+                    break;
+                case 1:
+                    winText.render();
+                    break;
+            }
         }
     }
 

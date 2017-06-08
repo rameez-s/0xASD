@@ -60,7 +60,6 @@ public class Geography extends Scene {
         backdrops[4].currentScene = this;
         backdrops[5].currentScene = this;
         projection = new Matrix4f().orthographic(-384, 640, -512, 512, 10, -10);
-//        projection = new Matrix4f().orthographic(-1024, 16000, -8512, 8512, 10, -10);
         backdrops[0].setTexture("npcSheet.png");
         backdrops[0].animationManager.textureCoord = new Vector2f(0f, 0.25f);
         backdrops[1].setTexture("npcSheet.png");

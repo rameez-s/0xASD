@@ -17,7 +17,6 @@ import static org.lwjgl.opengl.GL11.GL_TRUE;
 public class ControlScheme2 extends Sprite {
     public boolean facingRight = true;
     private boolean fireReady = true;
-    private long fireTime = 250000000;
     private long previousFireTime;
 
     public boolean controllable = true;
@@ -25,7 +24,7 @@ public class ControlScheme2 extends Sprite {
     public void update(){
         super.update();
         if(controllable) {
-            //Test
+
             if (glfwGetKey(window, GLFW_KEY_RIGHT) == GL_TRUE) {
                 velocity.x += 0.8f;
                 facingRight = true;
@@ -53,6 +52,7 @@ public class ControlScheme2 extends Sprite {
                     previousFireTime = System.nanoTime();
                 }
             } else {
+                long fireTime = 250000000;
                 if ((previousFireTime + fireTime) < System.nanoTime()) {
                     fireReady = true;
                 }

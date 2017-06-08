@@ -1,6 +1,7 @@
 package engine.math;
 import java.nio.FloatBuffer;
 
+//Class for the camera
 public class Matrix4f {
 
     public static final int SIZE = 4 * 4;
@@ -22,6 +23,7 @@ public class Matrix4f {
         return result;
     }
 
+    //Set the Matrix4f
     public static Matrix4f orthographic(float left, float right, float bottom, float top, float near, float far) {
         Matrix4f result = identity();
 
@@ -43,48 +45,11 @@ public class Matrix4f {
         elements[1 + 3 * 4] -= vector3f.y;
         elements[2 + 3 * 4] += vector3f.z;
     }
-    //Test
+
     public void setPosition(Vector3f vector3f){
         elements[0 + 3 * 4] = vector3f.x/-512f;
         elements[1 + 3 * 4] = vector3f.y/-512f;
         elements[2 + 3 * 4] = 1;
-    }
-
-    public static Matrix4f translate(Vector3f vector) {
-        Matrix4f result = identity();
-        result.elements[0 + 3 * 4] = vector.x;
-        result.elements[1 + 3 * 4] = vector.y;
-        result.elements[2 + 3 * 4] = vector.z;
-        return result;
-    }
-
-    public static Matrix4f rotate(float angle) {
-        Matrix4f result = identity();
-        float r = (float) Math.toRadians(angle);
-        float cos = (float) Math.cos(r);
-        float sin = (float) Math.sin(r);
-
-        result.elements[0 + 0 * 4] = cos;
-        result.elements[1 + 0 * 4] = sin;
-
-        result.elements[0 + 1 * 4] = -sin;
-        result.elements[1 + 1 * 4] = cos;
-
-        return result;
-    }
-
-    public Matrix4f multiply(Matrix4f matrix) {
-        Matrix4f result = new Matrix4f();
-        for (int y = 0; y < 4; y++) {
-            for (int x = 0; x < 4; x++) {
-                float sum = 0.0f;
-                for (int e = 0; e < 4; e++) {
-                    sum += this.elements[x + e * 4] * matrix.elements[e + y * 4];
-                }
-                result.elements[x + y * 4] = sum;
-            }
-        }
-        return result;
     }
 
     public FloatBuffer toFloatBuffer() {

@@ -15,9 +15,12 @@ import static org.lwjgl.opengl.GL20.*;
  * Created by Isak Wahlqvist on 2/12/2017.
  */
 public class Shader {
+    //Define the variables
     public int program, vertShader, fragShader;
 
+    //Constructors
     public Shader(String filename){
+        //Set up the shader
         program = glCreateProgram();
 
         vertShader = glCreateShader(GL_VERTEX_SHADER);
@@ -59,7 +62,8 @@ public class Shader {
         glDeleteShader(fragShader);
         glDeleteShader(vertShader);
     }
-    //Test
+
+    //Set uniforms for the shader
     public void setUniform(String name, int value){
         int location = glGetUniformLocation(program, name);
         if(location != -1){
@@ -88,10 +92,13 @@ public class Shader {
         }
     }
 
+    //Bind the shader to use it
     public void bind(){
         glUseProgram(program);
     }
 
+
+    //Basic readFile for finding the shaders
     private String readFile(String filename){
         StringBuilder stringBuilder = new StringBuilder();
         BufferedReader br;

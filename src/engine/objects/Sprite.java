@@ -18,7 +18,7 @@ public class Sprite extends Quad {
     public Vector2f textureCoords;
     public boolean isPlayer = false;
     public AnimationManager animationManager = new AnimationManager();
-    //Test
+
     public Sprite(){
         super();
         position = new Vector3f();

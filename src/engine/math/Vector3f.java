@@ -37,22 +37,11 @@ public class Vector3f {
         z -= vector3f.z;
     }
 
-    public void subtract(Vector2f vector3f){
-        x -= vector3f.x;
-        y -= vector3f.y;
-    }
-
     public float distance(Vector3f other){
         Vector3f v = new Vector3f(x, y, z);
         v.subtract(other);
         return (float) Math.sqrt(Math.pow(v.x, 2) + Math.pow(v.y, 2));
     }
-    public float distance(Vector2f other){
-        Vector3f v = new Vector3f(x, y, z);
-        v.subtract(other);
-        return (float) Math.sqrt(Math.pow(v.x, 2) + Math.pow(v.y, 2));
-    }
-    //Test
 
     public Vector2f pointTowards(Vector2f other){
         Vector2f v = new Vector2f(x, y);

@@ -9,19 +9,21 @@ import java.util.ArrayList;
  * Created by Isak Wahlqvist on 3/29/2017.
  */
 public class AnimationManager {
-    //Test
+    //Define the variables
     ArrayList<Animation> animations = new ArrayList<>();
     public Texture texture;
     public Vector2f textureCoord;
     Animation currentAnimation;
     private long lastTime;
 
+    //Constructor
     public AnimationManager(){
         texture = Texture.textSheet;
         textureCoord = new Vector2f(0, 0);
         lastTime = System.nanoTime();
     }
 
+    //Set the texture of the animation
     public void setTexture(String textureFile){
         if(textureFile.equals("characterSheet.png")){
             texture = Texture.characterSheet;
@@ -36,10 +38,12 @@ public class AnimationManager {
         }
     }
 
+    //Add an animation to the animations
     public void add(Animation animation){
         animations.add(animation);
     }
 
+    //Remove an animation from the animations
     public void remove(String animName){
         for (Animation a : animations) {
             if(a.name.equals(animName)){
@@ -48,6 +52,7 @@ public class AnimationManager {
         }
     }
 
+    //Run the specified animation
     public void run(String animName){
         for(Animation a : animations){
             if(a.name.equals(animName)) {
@@ -57,11 +62,13 @@ public class AnimationManager {
         }
     }
 
+    //Stop the current animation
     public void stop(){
         currentAnimation.stopped = true;
     }
 
 
+    //Update used to switch the animation frames
     public void update(){
         if(currentAnimation == null){
         }else {

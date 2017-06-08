@@ -20,17 +20,15 @@ import static org.lwjgl.opengl.GL11.GL_TRUE;
  * Created by Isak Wahlqvist on 2/16/2017.
  */
 //and alex
-//mostly Isak
 public class Player extends Sprite
 {
     public boolean facingRight = true;
     private boolean fireReady = true;
     private long fireTime = 250000000;
     private long previousFireTime;
-    private boolean useArrowKeys = false;
     public Character direction = 'D';
     public boolean sideMoveOnly = false;
-    //Test
+
     public Player(){
         super(128f, 0f);
         isPlayer = true;
@@ -47,6 +45,7 @@ public class Player extends Sprite
     public void update(){
         super.update();
         if(controllable) {
+            boolean useArrowKeys = false;
             if (useArrowKeys) {
                 if (glfwGetKey(window, GLFW_KEY_RIGHT) == GL_TRUE) {
                     velocity.x += 1.6f;

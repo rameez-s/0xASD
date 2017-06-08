@@ -10,7 +10,6 @@ import objects.Player;
 
 import java.util.ArrayList;
 
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_F;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_SPACE;
 import static org.lwjgl.glfw.GLFW.glfwGetKey;
 import static org.lwjgl.opengl.GL11.GL_TRUE;
@@ -42,6 +41,9 @@ public class Hallway extends Scene{
     }
 
     public void update(){
+        if(Engine.instance.save.completedGym && Engine.instance.save.completedMusic && Engine.instance.save.completedEnglish && Engine.instance.save.completedSocialStudies){
+            switchToScene(0);
+        }
         super.update();
         if(!((Player)players.get(0)).controllable){
             ((Player)players.get(0)).controllable = true;
@@ -89,7 +91,7 @@ public class Hallway extends Scene{
         players.get(0).render();
     }
 
-    //Test
+
     public static int switchToScene(int scene){
         if(Engine.instance.scenes.size() > scene) {
             Player p = (Player)Engine.instance.scenes.get(Engine.instance.currentScene).players.get(0);

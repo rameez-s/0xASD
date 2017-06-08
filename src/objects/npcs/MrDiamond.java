@@ -121,7 +121,7 @@ public class MrDiamond extends NPC {
         }
         if(v3.distance(currentScene.players.get(0).position) < 600){
             if(triangularCollision(currentScene.players.get(0))){
-                //Here is collision with player
+                //Collision with player
                 if(((English)currentScene).sittingInChair){
 
                 }else{
@@ -174,4 +174,3 @@ public class MrDiamond extends NPC {
     }
 
 }
-//Isak is dumbo
