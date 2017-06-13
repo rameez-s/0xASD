@@ -15,7 +15,7 @@ import static org.lwjgl.glfw.GLFW.*;
  * Created by 18iwahlqvist on 5/31/2017.
  */
 public class Music extends Scene {
-    Beat[] beats = new Beat[10];
+    Beat[] beats = new Beat[100];
     Sprite musicBar, fill, great, perfect, miss, progressBar;
     int progress = 500;
     public Music(){

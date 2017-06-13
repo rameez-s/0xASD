@@ -42,10 +42,10 @@ public class Player extends Sprite
 
     public boolean controllable = true;
     long window = Engine.instance.getWindow();
+    boolean useArrowKeys = true;
     public void update(){
         super.update();
         if(controllable) {
-            boolean useArrowKeys = false;
             if (useArrowKeys) {
                 if (glfwGetKey(window, GLFW_KEY_RIGHT) == GL_TRUE) {
                     velocity.x += 1.6f;

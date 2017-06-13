@@ -64,6 +64,7 @@ public class Engine {
 
     //Set up everything for use
     private void init(){
+
         if(!glfwInit()){
             System.out.println("GLHF");
             System.exit(1);

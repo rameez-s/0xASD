@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Game">
+    <output-path>$PROJECT_DIR$/out/artifacts/Game</output-path>
+    <root id="archive" name="Game.jar">
+      <element id="module-output" name="t" />
+      <element id="library" level="project" name="natives" />
+      <element id="directory" name="libs">
+        <element id="library" level="project" name="natives" />
+        <element id="library" level="project" name="lwjgl" />
+      </element>
+      <element id="directory" name="natives">
+        <element id="library" level="project" name="natives" />
+      </element>
+    </root>
+  </artifact>
+</component>
